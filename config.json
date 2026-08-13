@@ -1,0 +1,42 @@
+{
+  "ads": {
+    "page1": {
+      "enabled": true,
+      "code": "",
+      "label": "Big Ad"
+    },
+    "page2": {
+      "enabled": true,
+      "code": "",
+      "label": "Big Ad Page2"
+    },
+    "modal": {
+      "enabled": true,
+      "code": "",
+      "height_4k": 320,
+      "height_720": 260
+    }
+  },
+  "site": {
+    "logo": "TikTok 4K Downloader.com",
+    "pill": "No watermark \u2022 Fast \u2022 HD 4K",
+    "headline": "Download TikTok Videos in 4K",
+    "sub": "Paste link below and save HD videos without watermark",
+    "footer": "Trusted by 10M+ downloads worldwide"
+  },
+  "downloads": {
+    "btn4k_label": "Download 4K HD \u2022 10s ad",
+    "btn720_label": "Download 720p \u2022 5s ad",
+    "countdown_4k": 10,
+    "countdown_720": 5
+  },
+  "greetings": {
+    "PH": "Kumusta kaibigan",
+    "US": "How are you, friend"
+  },
+  "admin": {
+    "email": "admin@admin.com",
+    "password": "admin123"
+  },
+  "logs": []
+}
