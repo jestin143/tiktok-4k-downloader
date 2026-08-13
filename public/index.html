@@ -1,85 +1,67 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TikTok 4K Downloader</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok 4K Downloader - Save HD Videos Without Watermark Free</title>
+<meta name="description" content="Download TikTok videos in 4K HD without watermark. Free, fast, no login. Save TikTok videos worldwide.">
+<meta name="keywords" content="tiktok downloader, tiktok 4k, save tiktok without watermark, tiktok hd downloader">
+<link rel="canonical" href="https://tiktok-4k-downloader.vercel.app/">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#fefcff;min-height:100vh;overflow-x:hidden;position:relative}
-.blob{position:fixed;border-radius:50%;filter:blur(100px);opacity:0.38;z-index:0;pointer-events:none;animation:float 20s ease-in-out infinite alternate}
-.b1{width:320px;height:320px;background:#c084fc;left:10%;top:8%}.b2{width:280px;height:280px;background:#f9a8d4;right:10%;top:5%}.b3{width:260px;height:260px;background:#93c5fd;left:5%;top:40%}.b4{width:300px;height:300px;background:#c084fc;right:15%;top:45%}.b5{width:280px;height:280px;background:#f9a8d4;left:20%;bottom:10%}.b6{width:260px;height:260px;background:#93c5fd;left:45%;bottom:5%}
-@keyframes float{0%{transform:translate(0,0)}100%{transform:translate(20px,-20px)}}
-.container{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:16px 16px 40px}
-.header{display:flex;justify-content:space-between;align-items:center;padding:12px 4px}
-.logo{font-weight:700;font-size:14px;color:#0a0a0a}
-.pill{padding:6px 14px;background:rgba(255,255,255,.7);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);box-shadow:0 8px 32px rgba(0,0,0,.06),0 20px 60px rgba(168,85,247,.1),inset 0 0 0 1px rgba(255,255,255,.8);border-radius:9999px;font-size:11px;font-weight:500}
-.headline{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0a0a0a;text-align:center;margin-top:48px}
-@media(max-width:600px){.headline{font-size:28px}}
-.sub{font-size:13px;color:#6b7280;text-align:center;margin-top:12px}
-.greet-wrap{display:flex;justify-content:center;margin-top:24px}
-#greeting{padding:6px 16px;background:rgba(255,255,255,.7);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);border-radius:9999px;font-size:12px;font-weight:500;color:#1f2937}
-.paste-wrap{margin-top:20px;display:flex;flex-direction:column;align-items:center;width:100%}
-.paste-bar{width:100%;max-width:380px;height:54px;padding:0 6px 0 20px;background:rgba(255,255,255,.75);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,.7);box-shadow:0 12px 40px rgba(168,85,247,.15),inset 0 1px 0 rgba(255,255,255,.9);border-radius:9999px;display:flex;align-items:center}
-.paste-bar input{flex:1;border:none;outline:none;background:transparent;font-size:14px;color:#111}
-.paste-bar input::placeholder{color:#9ca3af}
-.save-btn{width:100%;max-width:380px;margin-top:16px;padding:16px;background:#0a0a0a;color:#fff;font-size:14px;font-weight:700;border:none;border-radius:9999px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.12);transition:.2s}
-.save-btn:hover{transform:scale(1.02)}
-.ad-big{margin:32px auto 0;max-width:680px;width:100%;height:280px;background:rgba(255,255,255,.45);backdrop-filter:blur(16px);border:2px dashed rgba(255,255,255,.7);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.ad-big-page2{height:360px;max-width:680px}
-.ad-label{font-size:10px;letter-spacing:.18em;color:#9ca3af;text-transform:uppercase}
-.ad-prev{font-size:11px;color:#6b7280;margin-top:4px}
-.footer{text-align:center;margin-top:40px;font-size:11px;color:#9ca3af}
-#page2{display:none}
-.video-card{max-width:380px;margin:32px auto 0;background:rgba(255,255,255,.72);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.6);box-shadow:0 20px 60px rgba(168,85,247,.12);border-radius:16px;padding:16px}
-.cover{height:160px;border-radius:12px;background:linear-gradient(135deg,#ddd6fe,#fbcfe8);display:flex;align-items:center;justify-content:center;font-size:36px;overflow:hidden}
-.cover img{width:100%;height:100%;object-fit:cover;border-radius:12px}
-.v-title{font-size:13px;font-weight:700;margin-top:12px}
-.v-creator{font-size:11px;color:#6b7280;margin-top:4px}
-.dl-wrap{max-width:380px;margin:24px auto 0;display:flex;flex-direction:column;gap:12px}
-.btn-gold{width:100%;background:linear-gradient(90deg,#fcd34d,#facc15);color:#000;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:15px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.1)}
-.btn-white{width:100%;background:rgba(255,255,255,.7);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.6);color:#374151;font-size:13px;font-weight:700;border-radius:9999px;padding:15px;cursor:pointer}
-.ads-col{max-width:680px;margin:32px auto 0}
-#modal{display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.2);backdrop-filter:blur(16px);align-items:center;justify-content:center;padding:16px}
-#modal.active{display:flex}
-.modal-card{background:rgba(255,255,255,.85);backdrop-filter:blur(32px);border:1px solid rgba(255,255,255,.6);box-shadow:0 24px 80px rgba(0,0,0,.12);border-radius:28px;max-width:440px;width:100%;padding:24px;position:relative}
-.close{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:9999px;background:rgba(255,255,255,.6);border:none;cursor:pointer}
-.modal-ad-big{height:260px !important;width:100%;margin-top:8px;transition:height .3s ease}
-.count{font-size:24px;font-weight:700;color:#f59e0b;text-align:center;margin-top:16px}
-.progress{height:4px;background:#e5e7eb;border-radius:9999px;margin-top:8px;overflow:hidden}
-.progress-inner{height:100%;background:linear-gradient(90deg,#fcd34d,#facc15);width:100%;transition:width 1s linear}
-.dl-now{width:100%;background:#0a0a0a;color:#fff;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:14px;margin-top:16px;cursor:pointer}
-.dl-now:disabled{background:rgba(10,10,10,.5)}
-@media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px !important}}
-</style></head><body>
-<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><div class="blob b6"></div>
-<div class="container">
-<div id="page1">
-<div class="header"><div class="logo">TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
-<div class="headline">Download TikTok Videos in 4K</div>
-<div class="sub">Paste link below and save HD videos without watermark</div>
-<div class="greet-wrap"><div id="greeting">How are you, friend</div></div>
-<div class="paste-wrap"><div class="paste-bar"><input id="urlInput" placeholder="Paste TikTok link here..."></div><button class="save-btn" onclick="doSave()">Save HD Video</button></div>
-<div class="ad-big"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Your ad here — Big Card</div></div>
-<div class="footer">Trusted by 10M+ downloads worldwide</div>
-</div>
-<div id="page2">
-<div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
-<div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
-<div class="dl-wrap"><button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button><button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button></div>
-<div class="ads-col"><div class="ad-big ad-big-page2"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Big Ad Card — Page 2</div></div></div>
-<div class="footer">Trusted by 10M+ downloads worldwide</div>
-</div>
-</div>
-<div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
+/* KEEP YOUR OLD CSS HERE - wag burahin yung luma mong CSS sa taas */
+</style>
+</head>
+<body>
+
+<!-- YUNG OLD BODY MO MANANATILI, ETO LANG BABAGUHIN NATIN SA GREETING -->
+
 <script>
-let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null;
-const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸',text:'How are you, friend'},JP:{flag:'🇯🇵',text:'Genki, tomodachi?'},KR:{flag:'🇰🇷',text:'Annyeong, chingu'},ES:{flag:'🇪🇸',text:'¿Cómo estás, amigo?'},FR:{flag:'🇫🇷',text:'Comment ça va, ami?'},DE:{flag:'🇩🇪',text:"Wie geht's, Freund?"},ID:{flag:'🇮🇩',text:'Apa kabar, teman'},IN:{flag:'🇮🇳',text:'Kaise ho, dost?'},BR:{flag:'🇧🇷',text:'Como vai, amigo?'}};
-async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country_code||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){document.getElementById('greeting').textContent='🇵🇭 Kumusta kaibigan'}}
-async function loadConfig(){try{let cfg=null; try{const local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null'); if(local&&local.ads) cfg={ads:local.ads,site:local.site||{},downloads:local.downloads||{}} }catch(e){}; if(!cfg){const r=await fetch('/api/config');cfg=await r.json();} SITE_CFG=cfg; if(cfg.site){ if(cfg.site.logo) document.querySelector('.logo').textContent=cfg.site.logo; if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill; if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline; if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub; if(cfg.site.footer) document.querySelectorAll('.footer').forEach(f=>f.textContent=cfg.site.footer); } if(cfg.downloads){if(cfg.downloads.btn4k_label)document.querySelector('.btn-gold').textContent=cfg.downloads.btn4k_label;if(cfg.downloads.btn720_label)document.querySelector('.btn-white').textContent=cfg.downloads.btn720_label} injectAds(cfg.ads)}catch(e){}}
-function injectAds(ads){let local=null;try{local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null')}catch(e){};if(local&&local.ads) ads=local.ads; if(!ads)return;const p1=document.querySelector('#page1 .ad-big');if(p1&&ads.page1&&ads.page1.code)p1.innerHTML=ads.page1.code;const p2=document.querySelector('.ad-big-page2');if(p2&&ads.page2&&ads.page2.code)p2.innerHTML=ads.page2.code;const m=document.querySelector('.modal-ad-big');if(m&&ads.modal&&ads.modal.code)m.innerHTML=ads.modal.code; const modalAd=document.querySelector('.modal-ad-big'); if(modalAd&&ads.modal){ if(ads.modal.height_4k) modalAd.dataset.h4k=ads.modal.height_4k; if(ads.modal.height_720) modalAd.dataset.h720=ads.modal.height_720; }}
-initGreeting();loadConfig();
-async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
-function showPage1(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='block';}
-function openModal(type){currentType=type;const modalAd=document.querySelector('.modal-ad-big');if(modalAd){const h4k=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_4k)||320;const h720=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_720)||260;modalAd.style.height=(type==='4k'?h4k:h720)+'px';}
-const secs=(SITE_CFG&&SITE_CFG.downloads)?(type==='4k'?(SITE_CFG.downloads.countdown_4k||10):(SITE_CFG.downloads.countdown_720||5)):(type==='4k'?10:5);
-document.getElementById('modal').classList.add('active');let s=secs;document.getElementById('countText').textContent=s+'s';document.getElementById('progress').style.width='100%';document.getElementById('dlBtn').disabled=true;document.getElementById('dlBtn').textContent=`Wait ${s}s...`;clearInterval(countdownInt);countdownInt=setInterval(()=>{s--;document.getElementById('countText').textContent=s>0?s+'s':'Ready!';document.getElementById('progress').style.width=(s/secs*100)+'%';document.getElementById('dlBtn').textContent=s>0?`Wait ${s}s...`:'Download Now';if(s<=0){clearInterval(countdownInt);document.getElementById('dlBtn').disabled=false;document.getElementById('progress').style.width='0%';}},1000);}
-function closeModal(){document.getElementById('modal').classList.remove('active');clearInterval(countdownInt);}
-async function forceDownload(){if(!videoData)return;let fileUrl=currentType==='4k'?(videoData.hdplay||videoData.play):videoData.play;const btn=document.getElementById('dlBtn');btn.textContent='Downloading...';btn.disabled=true;try{const res=await fetch(fileUrl);const blob=await res.blob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`tiktok-4k-${Date.now()}-${currentType}.mp4`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);btn.textContent='Downloaded!';}catch(e){window.location.href=`/api/force-download?url=${encodeURIComponent(fileUrl)}`;}finally{setTimeout(()=>{btn.textContent='Download Now';btn.disabled=false;},1500);}}
-</script></body></html>
+// ===== UPGRADED GREETMAP - IP BASED + 12 LANGUAGES =====
+const greetMap={
+ PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},
+ US:{flag:'🇺🇸',text:'How are you, friend'},
+ GB:{flag:'🇬🇧',text:'How are you, friend'},
+ JP:{flag:'🇯🇵',text:'こんにちは友達'},
+ KR:{flag:'🇰🇷',text:'안녕 친구'},
+ ES:{flag:'🇪🇸',text:'¡Hola amigo!'},
+ MX:{flag:'🇲🇽',text:'¡Hola amigo!'},
+ BR:{flag:'🇧🇷',text:'Olá amigo!'},
+ PT:{flag:'🇵🇹',text:'Olá amigo!'},
+ FR:{flag:'🇫🇷',text:'Bonjour ami!'},
+ DE:{flag:'🇩🇪',text:'Hallo Freund!'},
+ IN:{flag:'🇮🇳',text:'नमस्ते दोस्त!'},
+ SA:{flag:'🇸🇦',text:'مرحبا صديقي!'},
+ AE:{flag:'🇦🇪',text:'مرحبا صديقي!'}
+};
+async function initGreeting(){
+ try{
+  const r=await fetch('/api/geo');
+  const j=await r.json();
+  let country=(j.country||'US').toUpperCase();
+  let g=greetMap[country]||greetMap['US'];
+  document.getElementById('greeting').innerHTML=g.flag+' '+g.text;
+ }catch(e){
+  document.getElementById('greeting').innerHTML='🇺🇸 How are you, friend';
+ }
+}
+</script>
+
+<!-- DAGDAG SA BABA BEFORE </body> PARA SA ADSENSE -->
+<div class="seo-footer" style="max-width:900px;margin:50px auto;padding:20px;color:#aaa;font-size:14px;line-height:1.6">
+<h2 style="color:#fff">Why Use Our TikTok Downloader?</h2>
+<p>Free 4K HD TikTok downloader without watermark. No login, no limits, works on all devices. Trusted by 10M+ users worldwide.</p>
+
+<h3>How to Download?</h3>
+<p>1. Copy TikTok link 2. Paste above 3. Click Download 4K HD - 10s wait for HD processing</p>
+
+<div class="footer-links" style="margin-top:40px;padding:20px;text-align:center;border-top:1px solid #333">
+<a href="/about.html" style="color:#FFD700;margin:0 10px">About</a> |
+<a href="/privacy.html" style="color:#FFD700;margin:0 10px">Privacy Policy</a> |
+<a href="/contact.html" style="color:#FFD700;margin:0 10px">Contact</a> |
+<a href="/terms.html" style="color:#FFD700;margin:0 10px">Terms</a>
+<p style="margin-top:15px">© 2026 TikTok 4K Downloader - For personal use only. We don't store videos. Respect creator rights.</p>
+</div>
+</div>
+
+</body>
+</html>
