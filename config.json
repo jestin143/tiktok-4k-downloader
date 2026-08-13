@@ -2,7 +2,7 @@
   "ads": {
     "page1": {
       "enabled": true,
-      "code": "",
+      "code": "test txt kumusta",
       "label": "Big Ad"
     },
     "page2": {
