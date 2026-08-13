@@ -149,5 +149,32 @@ function openModal(type){currentType=type;const modalAd=document.querySelector('
 const secs=(SITE_CFG&&SITE_CFG.downloads)?(type==='4k'?(SITE_CFG.downloads.countdown_4k||10):(SITE_CFG.downloads.countdown_720||5)):(type==='4k'?10:5);
 document.getElementById('modal').classList.add('active');let s=secs;document.getElementById('countText').textContent=s+'s';document.getElementById('progress').style.width='100%';document.getElementById('dlBtn').disabled=true;document.getElementById('dlBtn').textContent=`Wait ${s}s...`;clearInterval(countdownInt);countdownInt=setInterval(()=>{s--;document.getElementById('countText').textContent=s>0?s+'s':'Ready!';document.getElementById('progress').style.width=(s/secs*100)+'%';document.getElementById('dlBtn').textContent=s>0?`Wait ${s}s...`:'Download Now';if(s<=0){clearInterval(countdownInt);document.getElementById('dlBtn').disabled=false;document.getElementById('progress').style.width='0%';}},1000);}
 function closeModal(){document.getElementById('modal').classList.remove('active');clearInterval(countdownInt);}
-async function forceDownload(){if(!videoData)return;let fileUrl=currentType==='4k'?(videoData.hdplay||videoData.play):videoData.play;const btn=document.getElementById('dlBtn');btn.textContent='Downloading...';btn.disabled=true;try{const res=await fetch(fileUrl);const blob=await res.blob();const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`tiktok-4k-${Date.now()}-${currentType}.mp4`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);btn.textContent='Downloaded!';}catch(e){window.location.href=`/api/force-download?url=${encodeURIComponent(fileUrl)}`;}finally{setTimeout(()=>{btn.textContent='Download Now';btn.disabled=false;},1500);}}
+async function forceDownload(){
+  if(!videoData) return;
+  let fileUrl = currentType==='4k' ? (videoData.hdplay||videoData.play) : videoData.play;
+  const btn=document.getElementById('dlBtn');
+  btn.textContent='Downloading...';
+  btn.disabled=true;
+  try{
+    // DITO - Hindi na lilipat ng page, blob lang!
+    const res=await fetch(fileUrl);
+    const blob=await res.blob();
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download=`tiktok-${Date.now()}-${currentType}.mp4`;
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    btn.textContent='Downloaded!';
+    setTimeout(()=>closeModal(),800);
+  }catch(e){
+    // Fallback - open sa new tab, hindi sa same tab para hindi mag 404 pag back
+    window.open(fileUrl,'_blank');
+    btn.textContent='Opened in new tab';
+  }finally{
+    setTimeout(()=>{btn.textContent='Download Now';btn.disabled=false;},1500);
+  }
 </script></body></html>
