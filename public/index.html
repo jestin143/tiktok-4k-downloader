@@ -83,7 +83,7 @@ body{background:#fefcff;min-height:100vh;overflow-x:hidden;position:relative}
 </div>
 
 <div class="footer-links">
-<a href="/about.html">About</a> | <a href="/privacy.html">Privacy Policy</a> | <a href="/contact.html">Contact</a> | <a href="/terms.html">Terms</a>
+<a href="#">About</a> | <a href="#">Privacy Policy</a> | <a href="#">Contact</a> | <a href="#">Terms</a>
 <p style="margin-top:10px">© 2026 TikTok 4K Downloader.com • For personal use only • We don't store videos</p>
 </div>
 
@@ -105,7 +105,6 @@ async function initGreeting(){try{const r=await fetch('/api/geo');const j=await 
 
 async function loadConfig(){try{let cfg=null; try{const local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null'); if(local&&local.ads) cfg={ads:local.ads,site:local.site||{},downloads:local.downloads||{}} }catch(e){}; if(!cfg){const r=await fetch('/api/config');cfg=await r.json();} SITE_CFG=cfg; if(cfg.site){ if(cfg.site.logo) document.querySelector('.logo').textContent=cfg.site.logo; if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill; if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline; if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub; if(cfg.site.footer) document.querySelectorAll('.footer').forEach(f=>f.textContent=cfg.site.footer); } if(cfg.downloads){if(cfg.downloads.btn4k_label)document.querySelector('.btn-gold').textContent=cfg.downloads.btn4k_label;if(cfg.downloads.btn720_label)document.querySelector('.btn-white').textContent=cfg.downloads.btn720_label} injectAds(cfg.ads)}catch(e){}}
 
-// Helper para mapagana ang mga injected script tags ng ads
 function setAdContent(element, htmlCode) {
   if(!element || !htmlCode) return;
   element.innerHTML = htmlCode;
@@ -142,7 +141,7 @@ function injectAds(ads){
 
 initGreeting();loadConfig();
 
-async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
+async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);document.getElementById('urlInput').value='';}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
 function showPage1(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='block';}
 function openModal(type){currentType=type;const modalAd=document.querySelector('.modal-ad-big');if(modalAd){const h4k=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_4k)||320;const h720=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_720)||260;modalAd.style.height=(type==='4k'?h4k:h720)+'px';}
 const secs=(SITE_CFG&&SITE_CFG.downloads)?(type==='4k'?(SITE_CFG.downloads.countdown_4k||10):(SITE_CFG.downloads.countdown_720||5)):(type==='4k'?10:5);
@@ -152,6 +151,12 @@ function closeModal(){document.getElementById('modal').classList.remove('active'
 async function forceDownload(){
   if(!videoData) return;
   let fileUrl = currentType === '4k' ? (videoData.hdplay || videoData.play) : videoData.play;
+  
+  if(!fileUrl) {
+    alert('Error: Hindi nahanap ang video URL.');
+    return;
+  }
+
   const btn = document.getElementById('dlBtn');
   btn.textContent = 'Downloading...';
   btn.disabled = true;
@@ -169,7 +174,6 @@ async function forceDownload(){
     setTimeout(() => URL.revokeObjectURL(url), 2000);
     btn.textContent = 'Downloaded!';
   } catch(e) {
-    // Fallback para iwas 404 error kapag na-CORS block: buksan sa bagong tab para ma-save
     const a = document.createElement('a');
     a.href = fileUrl;
     a.target = '_blank';
@@ -183,6 +187,7 @@ async function forceDownload(){
       btn.textContent = 'Download Now';
       btn.disabled = false;
       closeModal();
+      showPage1(); // Automatic na ibabalik sa Page 1 pagkatapos mag-download
     }, 1500);
   }
 }
