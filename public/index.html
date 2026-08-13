@@ -3,65 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TikTok 4K Downloader - Save HD Videos Without Watermark Free</title>
-<meta name="description" content="Download TikTok videos in 4K HD without watermark. Free, fast, no login. Save TikTok videos worldwide.">
-<meta name="keywords" content="tiktok downloader, tiktok 4k, save tiktok without watermark, tiktok hd downloader">
-<link rel="canonical" href="https://tiktok-4k-downloader.vercel.app/">
+<title>TikTok 4K Downloader - Save HD Videos Without Watermark</title>
+<meta name="description" content="Download TikTok videos in 4K HD without watermark. Free, fast, no login. 10M+ trusted users worldwide.">
 <style>
-/* KEEP YOUR OLD CSS HERE - wag burahin yung luma mong CSS sa taas */
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:Inter,Arial,sans-serif;min-height:100vh}
+.greet-wrap{text-align:center;padding:15px;background:linear-gradient(90deg,#1a1a1a,#222);border-radius:10px;margin:20px auto;max-width:600px;font-size:18px}
+.greet-wrap span{color:#FFD700;font-weight:bold}
+.paste-wrap{max-width:700px;margin:30px auto;padding:0 15px}
+.paste-bar{display:flex;gap:10px;background:#1a1a1a;padding:12px;border-radius:15px;border:1px solid #333}
+.paste-bar input{flex:1;background:transparent;border:none;color:#fff;font-size:16px;outline:none}
+.btn-gold{background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;border:none;padding:12px 25px;border-radius:10px;font-weight:bold;cursor:pointer;font-size:16px}
+.ad-big{background:#151515;border:1px dashed #333;padding:10px;text-align:center;margin:20px auto;max-width:728px;border-radius:8px;min-height:90px}
+.ad-label{font-size:10px;color:#555;letter-spacing:1px}
+.footer{text-align:center;padding:20px;color:#777;font-size:14px}
+.header{display:flex;justify-content:space-between;align-items:center;padding:15px;max-width:1000px;margin:0 auto}
+.logo{font-weight:bold;font-size:20px;cursor:pointer}
+.video-card{max-width:600px;margin:20px auto;background:#1a1a1a;border-radius:15px;overflow:hidden;padding:20px;text-align:center}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:99}
+#modal.active{display:flex}
+.modal-card{background:#1e1e1e;padding:30px;border-radius:15px;max-width:400px;width:90%;text-align:center;position:relative}
+.close{position:absolute;top:10px;right:15px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer}
+.footer-links{margin-top:50px;padding:30px;text-align:center;border-top:1px solid #222;color:#888;font-size:13px;line-height:1.8}
+.footer-links a{color:#FFD700;text-decoration:none;margin:0 10px}
 </style>
 </head>
 <body>
 
-<!-- YUNG OLD BODY MO MANANATILI, ETO LANG BABAGUHIN NATIN SA GREETING -->
+<div id="page1">
+<div class="greet-wrap"><div id="greeting">🇺🇸 How are you, friend</div></div>
 
-<script>
-// ===== UPGRADED GREETMAP - IP BASED + 12 LANGUAGES =====
-const greetMap={
- PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},
- US:{flag:'🇺🇸',text:'How are you, friend'},
- GB:{flag:'🇬🇧',text:'How are you, friend'},
- JP:{flag:'🇯🇵',text:'こんにちは友達'},
- KR:{flag:'🇰🇷',text:'안녕 친구'},
- ES:{flag:'🇪🇸',text:'¡Hola amigo!'},
- MX:{flag:'🇲🇽',text:'¡Hola amigo!'},
- BR:{flag:'🇧🇷',text:'Olá amigo!'},
- PT:{flag:'🇵🇹',text:'Olá amigo!'},
- FR:{flag:'🇫🇷',text:'Bonjour ami!'},
- DE:{flag:'🇩🇪',text:'Hallo Freund!'},
- IN:{flag:'🇮🇳',text:'नमस्ते दोस्त!'},
- SA:{flag:'🇸🇦',text:'مرحبا صديقي!'},
- AE:{flag:'🇦🇪',text:'مرحبا صديقي!'}
-};
-async function initGreeting(){
- try{
-  const r=await fetch('/api/geo');
-  const j=await r.json();
-  let country=(j.country||'US').toUpperCase();
-  let g=greetMap[country]||greetMap['US'];
-  document.getElementById('greeting').innerHTML=g.flag+' '+g.text;
- }catch(e){
-  document.getElementById('greeting').innerHTML='🇺🇸 How are you, friend';
- }
-}
-</script>
+<div class="paste-wrap">
+<div class="paste-bar">
+<input id="urlInput" placeholder="Paste TikTok link here...">
+<button class="btn-gold" onclick="doSave()">Download</button>
+</div>
+</div>
 
-<!-- DAGDAG SA BABA BEFORE </body> PARA SA ADSENSE -->
-<div class="seo-footer" style="max-width:900px;margin:50px auto;padding:20px;color:#aaa;font-size:14px;line-height:1.6">
-<h2 style="color:#fff">Why Use Our TikTok Downloader?</h2>
-<p>Free 4K HD TikTok downloader without watermark. No login, no limits, works on all devices. Trusted by 10M+ users worldwide.</p>
+<div class="ad-big"><div class="ad-label">AD</div><div id="ad-top">728x90 - Your ad here</div></div>
 
-<h3>How to Download?</h3>
-<p>1. Copy TikTok link 2. Paste above 3. Click Download 4K HD - 10s wait for HD processing</p>
+<div class="footer">Trusted by 10M+ downloads worldwide</div>
 
-<div class="footer-links" style="margin-top:40px;padding:20px;text-align:center;border-top:1px solid #333">
-<a href="/about.html" style="color:#FFD700;margin:0 10px">About</a> |
-<a href="/privacy.html" style="color:#FFD700;margin:0 10px">Privacy Policy</a> |
-<a href="/contact.html" style="color:#FFD700;margin:0 10px">Contact</a> |
-<a href="/terms.html" style="color:#FFD700;margin:0 10px">Terms</a>
+<!-- SEO + ADSENSE FOOTER -->
+<div class="footer-links">
+<h3 style="color:#fff;margin-bottom:10px">TikTok 4K Downloader - Free HD Without Watermark</h3>
+<p>Download TikTok videos in 4K HD without watermark. No login, no limits, works on all devices.</p>
+<br>
+<a href="/about.html">About</a> | <a href="/privacy.html">Privacy Policy</a> | <a href="/contact.html">Contact</a> | <a href="/terms.html">Terms</a>
 <p style="margin-top:15px">© 2026 TikTok 4K Downloader - For personal use only. We don't store videos. Respect creator rights.</p>
 </div>
 </div>
 
+<div id="page2" style="display:none">
+<div class="header"><div class="logo" onclick="showPage1()">← TikTok 4K Downloader</div></div>
+<div class="video-card">
+<div class="cover" id="cover" style="width:100%;height:300px;background:#222;border-radius:10px;margin-bottom:15px">Cover</div>
+<div class="v-title" id="vTitle">Video Title</div>
+<div class="dl-wrap" style="margin-top:20px"><button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button></div>
+</div>
+<div class="ads-col"><div class="ad-big ad-big-page2"><div class="ad-label">AD</div><div id="ad-page2"></div></div></div>
+<div class="footer">Trusted by 10M+ downloads worldwide</div>
+</div>
+
+<div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><div id="modalContent">Loading...</div><div id="countText" style="margin-top:15px;color:#FFD700"></div></div></div>
+
+<script>
+let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null;
+const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸',text:'How are you, friend'},GB:{flag:'🇬🇧',text:'Hello friend'},JP:{flag:'🇯🇵',text:'こんにちは友達'},KR:{flag:'🇰🇷',text:'안녕 친구'},ES:{flag:'🇪🇸',text:'¡Hola amigo!'},MX:{flag:'🇲🇽',text:'¡Hola amigo!'},BR:{flag:'🇧🇷',text:'Olá amigo!'},FR:{flag:'🇫🇷',text:'Bonjour ami!'},DE:{flag:'🇩🇪',text:'Hallo Freund!'},IN:{flag:'🇮🇳',text:'नमस्ते दोस्त!'},SA:{flag:'🇸🇦',text:'مرحبا صديقي!'},AE:{flag:'🇦🇪',text:'مرحبا صديقي!'}};
+async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country||'US').toUpperCase();let g=greetMap[country]||greetMap['US'];document.getElementById('greeting').innerHTML=g.flag+' '+g.text;}catch(e){document.getElementById('greeting').innerHTML='🇺🇸 How are you, friend'}}
+async function loadConfig(){try{let local=null;try{local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null')}catch(e){} if(local){SITE_CFG=local} else {const r=await fetch('/api/config');SITE_CFG=await r.json()} injectAds(SITE_CFG.ads||[])}catch(e){}}
+function injectAds(ads){let top=document.getElementById('ad-top');if(ads[0])top.innerHTML=ads[0].code||top.innerHTML}
+initGreeting();loadConfig();
+async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste TikTok link first');document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block'; // TODO: call your API here
+document.getElementById('vTitle').textContent='Loading video...'}
+function showPage1(){document.getElementById('page1').style.display='block';document.getElementById('page2').style.display='none';document.getElementById('urlInput').value=''}
+function openModal(type){currentType=type;const modalAd=document.querySelector('.modal-ad-big');if(modalAd){} document.getElementById('modal').classList.add('active');let s=10;document.getElementById('countText').textContent='Please wait '+s+'s...';countdownInt=setInterval(()=>{s--;document.getElementById('countText').textContent='Please wait '+s+'s...';if(s<=0){clearInterval(countdownInt);forceDownload()}},1000)}
+function closeModal(){document.getElementById('modal').classList.remove('active');clearInterval(countdownInt)}
+async function forceDownload(){if(!videoData)return;let fileUrl=currentType==='4k'?videoData.hdplay||videoData.play:videoData.play;if(fileUrl)window.open(fileUrl,'_blank');closeModal()}
+</script>
 </body>
 </html>
