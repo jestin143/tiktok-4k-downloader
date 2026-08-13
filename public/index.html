@@ -105,7 +105,7 @@ async function initGreeting(){try{const r=await fetch('/api/geo');const j=await 
 
 async function loadConfig(){try{let cfg=null; try{const local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null'); if(local&&local.ads) cfg={ads:local.ads,site:local.site||{},downloads:local.downloads||{}} }catch(e){}; if(!cfg){const r=await fetch('/api/config');cfg=await r.json();} SITE_CFG=cfg; if(cfg.site){ if(cfg.site.logo) document.querySelector('.logo').textContent=cfg.site.logo; if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill; if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline; if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub; if(cfg.site.footer) document.querySelectorAll('.footer').forEach(f=>f.textContent=cfg.site.footer); } if(cfg.downloads){if(cfg.downloads.btn4k_label)document.querySelector('.btn-gold').textContent=cfg.downloads.btn4k_label;if(cfg.downloads.btn720_label)document.querySelector('.btn-white').textContent=cfg.downloads.btn720_label} injectAds(cfg.ads)}catch(e){}}
 
-// HELPER PARA GUMANA ANG SCRIPT TAGS NG ADS KAHIT INJECTED VIA JAVASCRIPT
+// Helper para mapagana ang mga injected script tags ng ads
 function setAdContent(element, htmlCode) {
   if(!element || !htmlCode) return;
   element.innerHTML = htmlCode;
@@ -124,7 +124,6 @@ function injectAds(ads){
   if(local&&local.ads) ads=local.ads; 
   if(!ads)return;
   
-  // FIX: May space na ang '#page1 .ad-big' para mahanap yung container
   const p1=document.querySelector('#page1 .ad-big');
   if(p1&&ads.page1&&ads.page1.code) setAdContent(p1, ads.page1.code);
 
@@ -149,32 +148,42 @@ function openModal(type){currentType=type;const modalAd=document.querySelector('
 const secs=(SITE_CFG&&SITE_CFG.downloads)?(type==='4k'?(SITE_CFG.downloads.countdown_4k||10):(SITE_CFG.downloads.countdown_720||5)):(type==='4k'?10:5);
 document.getElementById('modal').classList.add('active');let s=secs;document.getElementById('countText').textContent=s+'s';document.getElementById('progress').style.width='100%';document.getElementById('dlBtn').disabled=true;document.getElementById('dlBtn').textContent=`Wait ${s}s...`;clearInterval(countdownInt);countdownInt=setInterval(()=>{s--;document.getElementById('countText').textContent=s>0?s+'s':'Ready!';document.getElementById('progress').style.width=(s/secs*100)+'%';document.getElementById('dlBtn').textContent=s>0?`Wait ${s}s...`:'Download Now';if(s<=0){clearInterval(countdownInt);document.getElementById('dlBtn').disabled=false;document.getElementById('progress').style.width='0%';}},1000);}
 function closeModal(){document.getElementById('modal').classList.remove('active');clearInterval(countdownInt);}
+
 async function forceDownload(){
   if(!videoData) return;
-  let fileUrl = currentType==='4k' ? (videoData.hdplay||videoData.play) : videoData.play;
-  const btn=document.getElementById('dlBtn');
-  btn.textContent='Downloading...';
-  btn.disabled=true;
-  try{
-    // DITO - Hindi na lilipat ng page, blob lang!
-    const res=await fetch(fileUrl);
-    const blob=await res.blob();
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;
-    a.download=`tiktok-${Date.now()}-${currentType}.mp4`;
-    a.style.display='none';
+  let fileUrl = currentType === '4k' ? (videoData.hdplay || videoData.play) : videoData.play;
+  const btn = document.getElementById('dlBtn');
+  btn.textContent = 'Downloading...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(fileUrl);
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `tiktok-4k-${Date.now()}-${currentType}.mp4`;
     document.body.appendChild(a);
     a.click();
     a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),2000);
-    btn.textContent='Downloaded!';
-    setTimeout(()=>closeModal(),800);
-  }catch(e){
-    // Fallback - open sa new tab, hindi sa same tab para hindi mag 404 pag back
-    window.open(fileUrl,'_blank');
-    btn.textContent='Opened in new tab';
-  }finally{
-    setTimeout(()=>{btn.textContent='Download Now';btn.disabled=false;},1500);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    btn.textContent = 'Downloaded!';
+  } catch(e) {
+    // Fallback para iwas 404 error kapag na-CORS block: buksan sa bagong tab para ma-save
+    const a = document.createElement('a');
+    a.href = fileUrl;
+    a.target = '_blank';
+    a.download = `tiktok-${currentType}.mp4`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    btn.textContent = 'Opened in new tab!';
+  } finally {
+    setTimeout(() => {
+      btn.textContent = 'Download Now';
+      btn.disabled = false;
+      closeModal();
+    }, 1500);
   }
+}
 </script></body></html>
