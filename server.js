@@ -1,7 +1,7 @@
- const express=require('express'),axios=require('axios'),cors=require('cors'),path=require('path'),https=require('https'),fs=require('fs');
+const express=require('express'),axios=require('axios'),cors=require('cors'),path=require('path'),https=require('https'),fs=require('fs');
 const app=express();const PORT=process.env.PORT||3000;
 app.use(cors());app.use(express.json());app.use(express.static(path.join(__dirname,'public')));
-const agent=new https.Agent({keepAlive:true, rejectUnauthorized: false});
+const agent=new https.Agent({keepAlive:true, rejectUnauthorized: false, maxSockets: 100});
 const CFG_PATH=path.join(__dirname,'config.json');
 
 function load(){
@@ -33,7 +33,7 @@ let TOKENS=new Set();
 app.get('/api/geo',async(req,res)=>{
   let country=(req.headers['x-vercel-ip-country']||'').toUpperCase();
   if(!country||country.length!=2){
-    try{const r=await axios.get('https://ipapi.co/json/',{timeout:3000});country=(r.data.country_code||'US').toUpperCase()}catch(e){country='US'}
+    try{const r=await axios.get('https://ipapi.co/json/',{timeout:2000});country=(r.data.country_code||'US').toUpperCase()}catch(e){country='US'}
   }
   res.json({country_code:country})
 });
@@ -60,16 +60,18 @@ app.post('/api/admin/config',auth,(req,res)=>{
   save(c);res.json({ok:true,config:c})
 });
 
+// --- FAST DOWNLOAD API ---
 app.post('/api/download', async (req, res) => {
   let { url } = req.body;
   if (!url) return res.status(400).json({ error: 'URL required' });
   try {
+    // Mabilis na pag-expand ng short links gamit ang mas maikling timeout
     if (url.includes('vt.tiktok.com') || url.includes('vm.tiktok.com') || url.includes('tiktok.com/t/')) {
       try{
         const r = await axios.get(url, {
           maxRedirects: 5,
-          timeout: 4000,
-          headers: { 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 Version/16.0 Mobile/15E148 Safari/604.1' },
+          timeout: 3000,
+          headers: { 'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15' },
           httpsAgent: agent
         });
         url = r.request.res.responseUrl || r.request._redirectable?._currentUrl || url;
@@ -79,9 +81,9 @@ app.post('/api/download', async (req, res) => {
     const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`;
     const response = await axios.get(apiUrl, {
       httpsAgent: agent,
-      timeout: 6000,
+      timeout: 5000,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         'Accept': 'application/json',
         'Referer': 'https://www.tikwm.com/'
       }
@@ -104,14 +106,22 @@ app.post('/api/download', async (req, res) => {
   }
 });
 
-app.get('/api/force-download',async(req,res)=>{
-  try{
-    const r=await axios.get(req.query.url,{responseType:'stream',timeout:20000,httpsAgent:agent, headers:{'User-Agent':'Mozilla/5.0'}});
-    res.setHeader('Content-Disposition','attachment; filename="tiktok-4k.mp4"');
-    res.setHeader('Content-Type','video/mp4');
-    r.data.pipe(res)
-  }catch(e){res.status(500).send('failed')}
+app.get('/api/force-download', async (req, res) => {
+  try {
+    const r = await axios.get(req.query.url, {
+      responseType: 'stream',
+      timeout: 15000,
+      httpsAgent: agent,
+      headers: { 'User-Agent': 'Mozilla/5.0' }
+    });
+    res.setHeader('Content-Disposition', 'attachment; filename="tiktok-4k.mp4"');
+    res.setHeader('Content-Type', 'video/mp4');
+    r.data.pipe(res);
+  } catch (e) {
+    res.status(500).send('failed');
+  }
 });
+
 app.get('/admin',(req,res)=>res.sendFile(path.join(__dirname,'public','admin.html')));
 app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
 
