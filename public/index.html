@@ -70,13 +70,12 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .dl-now{width:100%;background:#0a0a0a;color:#fff;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:14px;margin-top:16px;cursor:pointer}
 .dl-now:disabled{background:rgba(10,10,10,.5)}
 
-/* Install Modal Styling with Step-by-Step Images */
+/* Install Modal Styling with Clean UI Icons */
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
 .install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
-.step-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:10px;margin-bottom:10px;text-align:left}
-.step-box p{font-size:11px;color:#374151;font-weight:600;margin-bottom:6px}
-.step-img{width:100%;height:110px;background:#f3f4f6;border-radius:8px;object-fit:cover;border:1px solid #e5e7eb;display:block}
+.step-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:10px;text-align:left}
+.step-box p{font-size:12px;color:#374151;font-weight:600;margin-bottom:8px}
 
 .seo-box{max-width:680px;margin:50px auto 0;padding:20px;background:rgba(255,255,255,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7);border-radius:16px;font-size:13px;color:#4b5563;line-height:1.7}
 .seo-box h2{color:#0a0a0a;font-size:15px;margin:18px 0 8px}
@@ -204,7 +203,7 @@ setInterval(() => {
   }
 }, 6000);
 
-// Smart Auto-Detect Install Guide / Prompt Handler with Online Stock Visual Guide Links
+// Smart Auto-Detect Install Guide / Prompt Handler with Clean UI Symbols
 function showInstallInstructions() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -223,32 +222,32 @@ function showInstallInstructions() {
     title.textContent = "Install on iPhone (Safari)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Tap the Share icon at the bottom of Safari.</p>
-        <img src="https://images.unsplash.com/photo-1556742049-0a67d553c299?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 1">
+        <p><b>Step 1:</b> I-tap ang <b>Share button</b> sa ibaba ng iyong Safari browser.</p>
+        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:22px; border:1px solid #e5e7eb;">⎋</div>
       </div>
       <div class="step-box">
-        <p><b>Step 2:</b> Scroll down and tap "Add to Home Screen".</p>
-        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 2">
+        <p><b>Step 2:</b> Mag-scroll pababa at hanapin ang <b>"Add to Home Screen"</b>.</p>
+        <div style="text-align:center; padding:8px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">➕ Add to Home Screen</div>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Tap "Add" at the top right. Done!</p>
-        <img src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 3">
+        <p><b>Step 3:</b> I-tap ang <b>"Add"</b> sa taas para matapos.</p>
+        <div style="text-align:center; padding:8px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Done! 🎉</div>
       </div>
     `;
   } else {
-    title.textContent = "Install on Android";
+    title.textContent = "Install on Android (Chrome)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Tap the 3 dots (⋮) in Chrome top-right.</p>
-        <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 1">
+        <p><b>Step 1:</b> I-tap ang <b>3-dots (⋮)</b> sa kanang itaas ng Chrome.</p>
+        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:22px; font-weight:bold; border:1px solid #e5e7eb;">⋮</div>
       </div>
       <div class="step-box">
-        <p><b>Step 2:</b> Select "Install app" or "Add to Home screen".</p>
-        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 2">
+        <p><b>Step 2:</b> Piliin ang <b>"Install app"</b> o <b>"Add to Home screen"</b>.</p>
+        <div style="text-align:center; padding:8px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">📱 Install App</div>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Confirm installation. Enjoy instant access!</p>
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 3">
+        <p><b>Step 3:</b> I-confirm ito at tapos na!</p>
+        <div style="text-align:center; padding:8px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Ready to use! 🚀</div>
       </div>
     `;
   }
