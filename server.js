@@ -1,4 +1,4 @@
-Const express=require('express'),axios=require('axios'),cors=require('cors'),path=require('path'),https=require('https'),fs=require('fs');
+const express=require('express'),axios=require('axios'),cors=require('cors'),path=require('path'),https=require('https'),fs=require('fs');
 const app=express();const PORT=process.env.PORT||3000;
 app.use(cors());
 app.use(express.json({limit:'10mb'})); // FIX 1: DATI WALANG LIMIT KAYA HINDI NASAVE MALAKING ADS!
