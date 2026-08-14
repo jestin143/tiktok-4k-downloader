@@ -311,9 +311,9 @@ async function forceDownload(){
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       
       if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        alert("Download complete\nClick more or share to save video");
+        alert("Download Complete\nClick more to save the video");
       } else if (/android/i.test(userAgent)) {
-        alert("Download complete\nCheck download to save video");
+        alert("Download complete\nClick download to save the video");
       }
     }
     
