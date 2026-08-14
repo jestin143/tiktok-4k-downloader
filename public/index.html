@@ -138,34 +138,34 @@ async function initGreeting(){try{const r=await fetch('/api/geo');const j=await 
 
 async function loadConfig(){
   try{
-    let cfg=null; 
+    let cfg=null;
     try{
-      const local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null'); 
-      if(local&&local.ads) cfg={ads:local.ads,site:local.site||{},downloads:local.downloads||{}} 
-    }catch(e){}; 
-    
+      const local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null');
+      if(local&&local.ads) cfg={ads:local.ads,site:local.site||{},downloads:local.downloads||{}}
+    }catch(e){};
+
     if(!cfg){
       const r=await fetch('/api/config');
       cfg=await r.json();
-    } 
-    
-    SITE_CFG=cfg; 
-    if(cfg.site){ 
-      if(cfg.site.logo) document.querySelector('.logo').textContent=cfg.site.logo; 
-      if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill; 
-      if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline; 
-      if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub; 
-      if(cfg.site.footer) document.querySelectorAll('.footer').forEach(f=>f.textContent=cfg.site.footer); 
-    } 
+    }
+
+    SITE_CFG=cfg;
+    if(cfg.site){
+      if(cfg.site.logo) document.querySelector('.logo').textContent=cfg.site.logo;
+      if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill;
+      if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline;
+      if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub;
+      if(cfg.site.footer) document.querySelectorAll('.footer').forEach(f=>f.textContent=cfg.site.footer);
+    }
     if(cfg.downloads){
       if(cfg.downloads.btn4k_label)document.querySelector('.btn-gold').textContent=cfg.downloads.btn4k_label;
       if(cfg.downloads.btn720_label)document.querySelector('.btn-white').textContent=cfg.downloads.btn720_label;
-    } 
+    }
     injectAds(cfg.ads);
   }catch(e){}}
 
 function setAdContent(element, htmlCode) {
-  if(!element || !htmlCode) return;
+  if(!element ||!htmlCode) return;
   element.innerHTML = htmlCode;
   const scripts = element.querySelectorAll('script');
   scripts.forEach(oldScript => {
@@ -179,22 +179,22 @@ function setAdContent(element, htmlCode) {
 function injectAds(ads){
   let local=null;
   try{local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null')}catch(e){};
-  if(local&&local.ads) ads=local.ads; 
+  if(local&&local.ads) ads=local.ads;
   if(!ads)return;
-  
-  const p1=document.querySelector('#page1 .ad-big');
+
+  const p1=document.querySelector('#page1.ad-big');
   if(p1&&ads.page1&&ads.page1.code) setAdContent(p1, ads.page1.code);
 
   const p2=document.querySelector('.ad-big-page2');
   if(p2&&ads.page2&&ads.page2.code) setAdContent(p2, ads.page2.code);
 
   const m=document.querySelector('.modal-ad-big');
-  if(m&&ads.modal&&ads.modal.code) setAdContent(m, ads.modal.code); 
+  if(m&&ads.modal&&ads.modal.code) setAdContent(m, ads.modal.code);
 
-  const modalAd=document.querySelector('.modal-ad-big'); 
-  if(modalAd&&ads.modal){ 
-    if(ads.modal.height_4k) modalAd.dataset.h4k=ads.modal.height_4k; 
-    if(ads.modal.height_720) modalAd.dataset.h720=ads.modal.height_720; 
+  const modalAd=document.querySelector('.modal-ad-big');
+  if(modalAd&&ads.modal){
+    if(ads.modal.height_4k) modalAd.dataset.h4k=ads.modal.height_4k;
+    if(ads.modal.height_720) modalAd.dataset.h720=ads.modal.height_720;
   }
 }
 
@@ -244,7 +244,7 @@ function showInstallInstructions() {
   const content = document.getElementById('installContent');
   const title = document.getElementById('installModalTitle');
 
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+  if (/iPad|iPhone|iPod/.test(userAgent) &&!window.MSStream) {
     title.textContent = "Install on iPhone (Safari)";
     content.innerHTML = `
       <div class="step-box">
@@ -302,7 +302,64 @@ function closeInstallModal() {
   document.getElementById('installModal').classList.remove('active');
 }
 
-async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);document.getElementById('urlInput').value='';}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
+// --- ITO LANG BINAGO BOSS - SABAY TRABAHO: LIPAT AGAD PAGE 2 + 3SEC + FETCH ---
+async function doSave(){
+  const url=document.getElementById('urlInput').value.trim();
+  if(!url) return alert('Paste link');
+  const btn=document.querySelector('.save-btn');
+  const goldBtn=document.querySelector('.btn-gold');
+  const whiteBtn=document.querySelector('.btn-white');
+  btn.textContent='Loading...';btn.disabled=true;
+
+  // 1. LIPAT AGAD SA PAGE 2 - 0.1 SEC LANG!
+  document.getElementById('vTitle').textContent='Fetching video... ⏳';
+  document.getElementById('vCreator').textContent='Please wait 3 seconds...';
+  document.getElementById('cover').innerHTML='<div style="width:100%;height:100%;background:linear-gradient(135deg,#ddd6fe,#fbcfe8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px"><div style="font-size:32px">⏳</div><div id="cd" style="font-size:13px;font-weight:700;color:#111">Loading 3s...</div></div>';
+  goldBtn.disabled=true;goldBtn.style.opacity='0.6';goldBtn.textContent='Loading... 3s';
+  whiteBtn.disabled=true;whiteBtn.style.opacity='0.6';whiteBtn.textContent='Please wait...';
+  document.getElementById('page1').style.display='none';
+  document.getElementById('page2').style.display='block';
+  window.scrollTo(0,0);
+
+  let fetched=null,fetchDone=false,timerDone=false;
+  let sec=3;
+  const timer=setInterval(()=>{
+    sec--;
+    const cd=document.getElementById('cd');if(cd) cd.textContent=`Loading ${sec}s...`;
+    goldBtn.textContent=`Loading... ${sec}s`;
+    if(sec<=0){clearInterval(timer);timerDone=true;if(fetchDone) done();}
+  },1000);
+
+  // 2. FETCH SA BACKGROUND HABANG NAGCO-COUNTDOWN!
+  fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})})
+ .then(r=>r.json()).then(d=>{
+    if(d.error) throw new Error(d.error);
+    fetched=d;fetchDone=true;if(timerDone) done();
+    else {
+      // Kung tapos na fetch pero hindi pa tapos 3 sec, hintayin timer
+      if(sec<=0) done();
+    }
+  }).catch(e=>{
+    clearInterval(timer);
+    alert('Failed: '+e.message);
+    showPage1();
+    btn.textContent='Save HD Video';btn.disabled=false;
+    goldBtn.disabled=false;goldBtn.style.opacity='1';
+    whiteBtn.disabled=false;whiteBtn.style.opacity='1';
+  });
+
+  function done(){
+    if(!fetched) return;
+    videoData=fetched;
+    document.getElementById('vTitle').textContent=fetched.title;
+    document.getElementById('vCreator').textContent=fetched.author;
+    if(fetched.cover) document.getElementById('cover').innerHTML=`<img src="${fetched.cover}">`;
+    goldBtn.disabled=false;goldBtn.style.opacity='1';goldBtn.textContent=(SITE_CFG&&SITE_CFG.downloads&&SITE_CFG.downloads.btn4k_label)||'Download 4K HD • 10s ad';
+    whiteBtn.disabled=false;whiteBtn.style.opacity='1';whiteBtn.textContent=(SITE_CFG&&SITE_CFG.downloads&&SITE_CFG.downloads.btn720_label)||'Download 720p • 5s ad';
+    btn.textContent='Save HD Video';btn.disabled=false;
+    document.getElementById('urlInput').value='';
+  }
+}
 function showPage1(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='block';}
 function openModal(type){currentType=type;const modalAd=document.querySelector('.modal-ad-big');if(modalAd){const h4k=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_4k)||320;const h720=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_720)||260;modalAd.style.height=(type==='4k'?h4k:h720)+'px';}
 const secs=(SITE_CFG&&SITE_CFG.downloads)?(type==='4k'?(SITE_CFG.downloads.countdown_4k||10):(SITE_CFG.downloads.countdown_720||5)):(type==='4k'?10:5);
@@ -311,8 +368,8 @@ function closeModal(){document.getElementById('modal').classList.remove('active'
 
 async function forceDownload(){
   if(!videoData) return;
-  let fileUrl = currentType === '4k' ? (videoData.hdplay || videoData.play) : videoData.play;
-  
+  let fileUrl = currentType === '4k'? (videoData.hdplay || videoData.play) : videoData.play;
+
   if(!fileUrl) {
     alert('Error: Video URL not found.');
     return;
