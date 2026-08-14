@@ -1,4 +1,4 @@
-Const express=require('express'),axios=require('axios'),cors=require('cors'),path=require('path'),https=require('https'),fs=require('fs');
+const express=require('express'),axios=require('axios'),cors=require('cors'),path=require('path'),https=require('https'),fs=require('fs');
 const app=express();const PORT=process.env.PORT||3000;
 app.use(cors());app.use(express.json());app.use(express.static(path.join(__dirname,'public')));
 const agent=new https.Agent({keepAlive:true, rejectUnauthorized: false});
