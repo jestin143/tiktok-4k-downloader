@@ -41,6 +41,8 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .install-app-btn:hover{background:rgba(255,255,255,1);color:#1f2937}
 .ad-big{margin:32px auto 0;max-width:680px;width:100%;height:auto;min-height:120px;background:#FFD814;border:none;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
 .ad-big-page2{max-width:680px}
+.ad-label{font-size:10px;letter-spacing:.18em;color:#9ca3af;text-transform:uppercase;font-weight:700}
+.ad-prev{font-size:11px;color:#6b7280;margin-top:4px}
 .footer{text-align:center;margin-top:40px;font-size:11px;color:#9ca3af;font-weight:500}
 #page2{display:none}
 .video-card{max-width:380px;margin:32px auto 0;background:rgba(255,255,255,.8);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.95);box-shadow:0 20px 50px rgba(168,85,247,.12);border-radius:16px;padding:16px}
@@ -89,6 +91,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
+<!-- HARDCODED AD PAGE 1 - HINDI NA MAWAWALA -->
 <div class="ad-big">
   <div style="text-align:center; width:100%;">
     <div style="font-size:22px;">🔥</div>
@@ -115,6 +118,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
 <div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
 <div class="dl-wrap"><button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button><button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button></div>
+<!-- HARDCODED AD PAGE 2 -->
 <div class="ads-col"><div class="ad-big ad-big-page2">
   <div style="text-align:center; width:100%;">
     <div style="font-size:22px;">🔥</div>
@@ -126,6 +130,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
 </div>
+<!-- HARDCODED AD MODAL -->
 <div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big">
   <div style="text-align:center; width:100%;">
     <div style="font-size:20px;">🔥</div>
@@ -134,6 +139,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
     <a href="https://shopee.ph" target="_blank" style="display:inline-block; margin-top:10px; background:#EE4D2D; color:#fff; padding:9px 20px; border-radius:9999px; font-weight:800; text-decoration:none; font-size:12px;">SHOP NOW →</a>
   </div>
 </div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
+
 <div id="installModal"><div class="install-card"><h3 id="installModalTitle" style="font-size:16px; font-weight:700; margin-bottom:12px; color:#111;">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px; width:100%; background:#0a0a0a; color:#fff; border:none; padding:10px; border-radius:9999px; font-weight:700; cursor:pointer; font-size:13px;">Got it</button></div></div>
 
 <script>
@@ -154,12 +160,21 @@ function setAdContent(element, htmlCode) {
 }
 function injectAds(ads){
   if(!ads) return;
+  let local=null;
+  try{local=JSON.parse(localStorage.getItem('tiktok_ads_override')||'null')}catch(e){};
+  if(local&&local.ads) ads=local.ads;
+  if(!ads)return;
   const p1=document.querySelector('#page1.ad-big');
   if(p1&&ads.page1&&ads.page1.code&&ads.page1.code.trim()) setAdContent(p1, ads.page1.code);
   const p2=document.querySelector('.ad-big-page2');
   if(p2&&ads.page2&&ads.page2.code&&ads.page2.code.trim()) setAdContent(p2, ads.page2.code);
   const m=document.querySelector('.modal-ad-big');
   if(m&&ads.modal&&ads.modal.code&&ads.modal.code.trim()) setAdContent(m, ads.modal.code);
+  const modalAd=document.querySelector('.modal-ad-big');
+  if(modalAd&&ads.modal){
+    if(ads.modal.height_4k) modalAd.dataset.h4k=ads.modal.height_4k;
+    if(ads.modal.height_720) modalAd.dataset.h720=ads.modal.height_720;
+  }
 }
 initGreeting();loadConfig();
 window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
@@ -192,7 +207,7 @@ function showInstallInstructions() {
   modal.classList.add('active');
 }
 function closeInstallModal() { document.getElementById('installModal').classList.remove('active'); }
-async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);document.getElementById('urlInput').value='';}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
+async function doSave(){const url=document.getElementById('urlInput'].value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);document.getElementById('urlInput').value='';}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
 function showPage1(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='block';}
 function openModal(type){currentType=type;const modalAd=document.querySelector('.modal-ad-big');if(modalAd){const h4k=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_4k)||320;const h720=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_720)||260;modalAd.style.height=(type==='4k'?h4k:h720)+'px';}
 const secs=(SITE_CFG&&SITE_CFG.downloads)?(type==='4k'?(SITE_CFG.downloads.countdown_4k||10):(SITE_CFG.downloads.countdown_720||5)):(type==='4k'?10:5);
@@ -202,84 +217,61 @@ function closeModal(){document.getElementById('modal').classList.remove('active'
 async function forceDownload(){
   if(!videoData) return;
   let fileUrl = currentType === '4k'? (videoData.hdplay || videoData.play) : videoData.play;
-  if(!fileUrl) return alert('Video URL not found');
+  if(!fileUrl) { alert('Error: Video URL not found.'); return; }
   const btn = document.getElementById('dlBtn');
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-  // ===== IPHONE HOMESCREEN - FIX BLACK SCREEN ISSUE =====
-  if(isStandalone && isIOS){
-    btn.textContent = 'Preparing...';
-    btn.disabled = true;
-    try{
-      const res = await fetch(fileUrl);
-      const blob = await res.blob();
-      const file = new File([blob], `tiktok-${Date.now()}.mp4`, {type: 'video/mp4'});
-
-      // Try native Share Sheet - WALANG BLACK SCREEN!
-      if(navigator.canShare && navigator.canShare({files: [file]})){
-        closeModal();
-        await navigator.share({
-          files: [file],
-          title: 'TikTok Video',
-          text: 'Save to Photos'
-        });
-        btn.textContent = 'Download Now';
-        btn.disabled = false;
-        showPage1();
-        return;
-      }
-    }catch(e){ console.log('share failed', e); }
-
-    // Fallback: Show video + clear instruction (hindi na black file icon)
-    closeModal();
-    const overlay = document.createElement('div');
-    overlay.style = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;padding:20px;';
-    overlay.innerHTML = `
-      <div style="background:white;border-radius:24px;padding:24px;max-width:340px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
-        <div style="width:60px;height:60px;background:#22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:30px">✓</div>
-        <div style="font-weight:800;font-size:18px;margin-top:14px;color:#111">Video Ready!</div>
-        <div style="font-size:13px;color:#555;margin-top:10px;line-height:1.6;text-align:left;background:#f9fafb;padding:12px;border-radius:12px">
-          <b>Para ma-save sa iPhone:</b><br>
-          1. I-play yung video sa next screen<br>
-          2. Tap <b>Share button ⬆️</b> sa baba<br>
-          3. Tap <b>Save Video</b><br><br>
-          <span style="color:#7c3aed">Nasa Photos mo na agad!</span>
-        </div>
-        <button id="openVidBtn" style="margin-top:16px;width:100%;background:#0a0a0a;color:#fff;border:none;padding:14px;border-radius:9999px;font-weight:700;font-size:14px">▶️ Open Video & Save</button>
-        <button onclick="this.closest('div').parentElement.remove()" style="margin-top:8px;width:100%;background:transparent;color:#6b7280;border:none;padding:10px;font-weight:600;font-size:13px">Close</button>
-      </div>`;
-    document.body.appendChild(overlay);
-    document.getElementById('openVidBtn').onclick = () => {
-      window.open(fileUrl, '_blank');
-      overlay.remove();
-      showPage1();
-    };
-    btn.textContent = 'Download Now';
-    btn.disabled = false;
-    return;
-  }
-
-  // ===== NORMAL (Android + Normal Browser) - Gumagana na dati =====
   btn.textContent = 'Downloading...';
   btn.disabled = true;
-  try{
-    const res = await fetch(fileUrl);
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
+  try {
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    
+    if (isStandalone && /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+      // iOS Home Screen mode: direct window.open/anchor target blank para lumabas ang download manager
+      const a = document.createElement('a');
+      a.href = fileUrl;
+      a.target = '_blank';
+      a.setAttribute('download', `tiktok-${currentType}-${Date.now()}.mp4`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      alert("Download Complete\nClick more to save the video");
+    } else if (isStandalone && /android/i.test(navigator.userAgent)) {
+      const res = await fetch(fileUrl);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `tiktok-4k-${Date.now()}-${currentType}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      alert("Download complete\nClick download to save the video");
+    } else {
+      // Standard Browser Mode
+      const res = await fetch(fileUrl);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `tiktok-4k-${Date.now()}-${currentType}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+    
+    btn.textContent = 'Downloaded!';
+  } catch(e) {
     const a = document.createElement('a');
-    a.href = url;
-    a.download = `tiktok-4k-${Date.now()}-${currentType}.mp4`;
+    a.href = fileUrl;
+    a.target = '_blank';
+    a.download = `tiktok-${currentType}.mp4`;
     document.body.appendChild(a);
     a.click();
     a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url),2000);
-    btn.textContent = 'Downloaded! ✓';
-  }catch(e){
-    window.open(fileUrl, '_blank');
     btn.textContent = 'Opened in new tab!';
-  }finally{
-    setTimeout(()=>{ btn.textContent='Download Now'; btn.disabled=false; closeModal(); showPage1(); },1500);
+  } finally {
+    setTimeout(() => { btn.textContent = 'Download Now'; btn.disabled = false; closeModal(); showPage1(); }, 1500);
   }
 }
 </script></body></html>
