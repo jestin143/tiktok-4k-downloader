@@ -40,6 +40,10 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-btn:hover{background:rgba(124,58,237,0.2)}
 .save-btn{width:100%;max-width:380px;margin-top:16px;padding:16px;background:linear-gradient(180deg,#1f1f1f 0%,#0a0a0a 100%);color:#fff;font-size:14px;font-weight:700;border:none;border-radius:9999px;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.2);transition:.2s}
 .save-btn:hover{transform:translateY(-1px);box-shadow:0 15px 35px rgba(0,0,0,0.35)}
+/* Add to Home Screen Button Styling */
+.install-app-btn{width:100%;max-width:380px;margin-top:10px;padding:12px;background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.95);color:#4b5563;font-size:12px;font-weight:600;border-radius:9999px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.03);transition:.2s}
+.install-app-btn:hover{background:rgba(255,255,255,1);color:#1f2937}
+
 .ad-big{margin:32px auto 0;max-width:680px;width:100%;height:280px;background:rgba(255,255,255,.45);backdrop-filter:blur(16px);border:2px dashed rgba(255,255,255,.8);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
 .ad-big-page2{height:360px;max-width:680px}
 .ad-label{font-size:10px;letter-spacing:.18em;color:#9ca3af;text-transform:uppercase;font-weight:700}
@@ -65,11 +69,16 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .progress-inner{height:100%;background:linear-gradient(90deg,#fcd34d,#facc15);width:100%;transition:width 1s linear}
 .dl-now{width:100%;background:#0a0a0a;color:#fff;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:14px;margin-top:16px;cursor:pointer}
 .dl-now:disabled{background:rgba(10,10,10,.5)}
+/* Install Modal Styling */
+#installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
+#installModal.active{display:flex}
+.install-card{background:#fff;border-radius:24px;max-width:320px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
+
 .seo-box{max-width:680px;margin:50px auto 0;padding:20px;background:rgba(255,255,255,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7);border-radius:16px;font-size:13px;color:#4b5563;line-height:1.7}
 .seo-box h2{color:#0a0a0a;font-size:15px;margin:18px 0 8px}
 .footer-links{text-align:center;margin-top:30px;padding:20px 10px;font-size:11px;color:#9ca3af;line-height:1.8}
 .footer-links a{color:#7c3aed;text-decoration:none;margin:0 8px;font-weight:500}
-@media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
+@media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.install-app-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><div class="blob b6"></div>
 <div class="container">
@@ -85,6 +94,8 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
     <button class="paste-btn" onclick="autoPaste()">Paste</button>
   </div>
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
+  <!-- Dito idinagdag ang Add to Home Screen button -->
+  <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
 <div class="ad-big"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Your ad here — Big Card</div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
@@ -113,6 +124,10 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 </div>
 </div>
 <div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
+
+<!-- Add to Home Screen Modal Popup -->
+<div id="installModal"><div class="install-card"><h3 style="font-size:18px; font-weight:700; margin-bottom:15px; color:#111;">Add to Home Screen</h3><div id="installContent" style="font-size:13px; color:#374151; line-height:1.6; text-align:left;"></div><button onclick="closeInstallModal()" style="margin-top:20px; width:100%; background:#0a0a0a; color:#fff; border:none; padding:12px; border-radius:9999px; font-weight:700; cursor:pointer;">Got it</button></div></div>
+
 <script>
 let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null;
 const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸',text:'How are you, friend'},GB:{flag:'🇬🇧',text:'How are you, friend'},JP:{flag:'🇯🇵',text:'こんにちは友達'},KR:{flag:'🇰🇷',text:'안녕하세요 친구'},ES:{flag:'🇪🇸',text:'¿Cómo estás, amigo?'},MX:{flag:'🇲🇽',text:'¡Hola amigo!'},BR:{flag:'🇧🇷',text:'Olá amigo!'},FR:{flag:'🇫🇷',text:'Bonjour ami!'},DE:{flag:'🇩🇪',text:'Hallo Freund!'},IN:{flag:'🇮🇳',text:'नमस्ते दोस्त!'},SA:{flag:'🇸🇦',text:'مرحبا صديقي!'},ID:{flag:'🇮🇩',text:'Apa kabar, teman'}};
@@ -179,6 +194,41 @@ setInterval(() => {
     counterEl.textContent = currentVal.toLocaleString();
   }
 }, 6000);
+
+// Add to Home Screen Instructions Logic
+function showInstallInstructions() {
+  const modal = document.getElementById('installModal');
+  const content = document.getElementById('installContent');
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    content.innerHTML = `
+      <p><b>Para sa iPhone (Safari):</b></p>
+      <ol style="margin-top:8px; padding-left:18px;">
+        <li>Pindutin ang <b>Share button</b> (icon na may arrow pataas ⎋) sa ibaba ng Safari.</li>
+        <li>I-scroll pababa at piliin ang <b>"Add to Home Screen"</b>.</li>
+        <li>Pindutin ang <b>"Add"</b> sa kanang itaas.</li>
+      </ol>
+    `;
+  } else if (/android/i.test(userAgent)) {
+    content.innerHTML = `
+      <p><b>Para sa Android (Chrome):</b></p>
+      <ol style="margin-top:8px; padding-left:18px;">
+        <li>Pindutin ang <b>tatlong tuldok (⋮)</b> sa kanang itaas ng Chrome.</li>
+        <li>Piliin ang <b>"Add to Home screen"</b> o <b>"Install app"</b>.</li>
+        <li>Pindutin ang <b>"Add"</b> para matapos.</li>
+      </ol>
+    `;
+  } else {
+    content.innerHTML = `<p>Buksan ang website na ito sa iyong mobile phone (Safari o Chrome) para ma-add sa home screen.</p>`;
+  }
+
+  modal.classList.add('active');
+}
+
+function closeInstallModal() {
+  document.getElementById('installModal').classList.remove('active');
+}
 
 async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);document.getElementById('urlInput').value='';}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
 function showPage1(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='block';}
