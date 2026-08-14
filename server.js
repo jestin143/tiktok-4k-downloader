@@ -1,4 +1,3 @@
-
 const express=require('express'),axios=require('axios'),cors=require('cors'),path=require('path'),https=require('https'),fs=require('fs');
 const app=express();const PORT=process.env.PORT||3000;
 app.use(cors());app.use(express.json());app.use(express.static(path.join(__dirname,'public')));
@@ -17,4 +16,8 @@ app.post('/api/download',async(req,res)=>{const{url}=req.body;if(!url)return res
 app.get('/api/force-download',async(req,res)=>{try{const r=await axios.get(req.query.url,{responseType:'stream',timeout:15000,httpsAgent:agent});res.setHeader('Content-Disposition','attachment; filename="tiktok-4k.mp4"');res.setHeader('Content-Type','video/mp4');r.data.pipe(res)}catch(e){res.status(500).send('failed')}});
 app.get('/admin',(req,res)=>res.sendFile(path.join(__dirname,'public','admin.html')));
 app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
-app.listen(PORT,()=>console.log('Running '+PORT));
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT,()=>console.log('Running '+PORT));
+}
+module.exports = app;
