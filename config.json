@@ -2,7 +2,7 @@
   "ads": {
     "page1": {
       "enabled": true,
-      "code": "<a href='https://s.shopee.ph/9zwuG5V3J5' target='_blank' style='display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;background:linear-gradient(90deg,#fcd34d,#facc15);padding:18px;border-radius:18px;width:92%;box-shadow:0 10px 30px rgba(0,0,0,.15);border:1px solid rgba(255,255,255,.8)'><div style='font-size:15px;font-weight:800;color:#000;letter-spacing:-0.02em'>🔥 HOT DEAL SA SHOPEE</div><div style='font-size:12px;color:#333;margin-top:6px'>Trending • Free Shipping • Voucher</div><div style='margin-top:10px;background:#ee4d2d;color:#fff;padding:8px 18px;border-radius:9999px;font-size:13px;font-weight:800;box-shadow:0 4px 12px rgba(238,77,45,.3)'>SHOP NOW →</div></a>",
+      "code": "",
       "label": "Big Ad"
     },
     "page2": {
