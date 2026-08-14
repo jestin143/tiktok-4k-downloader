@@ -82,7 +82,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
-<div class="ad-big"><div style="text-align:center;width:100%"><div style="font-size:22px">🔥</div><div style="font-size:18px;font-weight:900;color:#111;margin-top:2px">HOT DEAL SA SHOPEE</div><div style="font-size:13px;color:#333;margin-top:4px">Trending • Free Shipping • Voucher</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:12px;background:#EE4D2D;color:#fff;padding:10px 24px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:13px">SHOP NOW →</a></div></div>
+<div class="ad-big" id="ad-page1"><div style="text-align:center;width:100%"><div style="font-size:22px">🔥</div><div style="font-size:18px;font-weight:900;color:#111;margin-top:2px">HOT DEAL SA SHOPEE</div><div style="font-size:13px;color:#333;margin-top:4px">Trending • Free Shipping • Voucher</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:12px;background:#EE4D2D;color:#fff;padding:10px 24px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:13px">SHOP NOW →</a></div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 <div class="seo-box"><h2>How to Download TikTok Videos in 4K HD?</h2><p>Copy link, paste, save.</p></div>
 </div>
@@ -90,17 +90,31 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
 <div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
 <div class="dl-wrap"><button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button><button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button></div>
-<div class="ads-col"><div class="ad-big ad-big-page2"><div style="text-align:center;width:100%"><div style="font-size:22px">🔥</div><div style="font-size:18px;font-weight:900;color:#111">HOT DEAL SA SHOPEE</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:12px;background:#EE4D2D;color:#fff;padding:10px 24px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:13px">SHOP NOW →</a></div></div></div>
+<div class="ads-col"><div class="ad-big ad-big-page2" id="ad-page2"><div style="text-align:center;width:100%"><div style="font-size:22px">🔥</div><div style="font-size:18px;font-weight:900;color:#111">HOT DEAL SA SHOPEE</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:12px;background:#EE4D2D;color:#fff;padding:10px 24px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:13px">SHOP NOW →</a></div></div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
 </div>
-<div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big"><div style="text-align:center;width:100%"><div style="font-size:20px">🔥</div><div style="font-size:17px;font-weight:900;color:#111">HOT DEAL SA SHOPEE</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:10px;background:#EE4D2D;color:#fff;padding:9px 20px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:12px">SHOP NOW →</a></div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
+<div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big" id="ad-modal"><div style="text-align:center;width:100%"><div style="font-size:20px">🔥</div><div style="font-size:17px;font-weight:900;color:#111">HOT DEAL SA SHOPEE</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:10px;background:#EE4D2D;color:#fff;padding:9px 20px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:12px">SHOP NOW →</a></div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
 <div id="installModal"><div class="install-card"><h3 id="installModalTitle" style="font-size:16px;font-weight:700;margin-bottom:12px">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px;width:100%;background:#0a0a0a;color:#fff;border:none;padding:10px;border-radius:9999px;font-weight:700;cursor:pointer">Got it</button></div></div>
 <script>
 let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null,deferredPrompt=null;
 const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸',text:'How are you, friend'}};
-async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){}}
-async function loadConfig(){try{const r=await fetch('/api/config');SITE_CFG=await r.json();}catch(e){}}
+async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country_code||j.country||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){}}
+async function loadConfig(){
+  try{
+    const r=await fetch('/api/config');
+    SITE_CFG=await r.json();
+    if(SITE_CFG?.ads?.page1?.code && SITE_CFG.ads.page1.code.trim()!==''){
+      document.getElementById('ad-page1').innerHTML=SITE_CFG.ads.page1.code;
+    }
+    if(SITE_CFG?.ads?.page2?.code && SITE_CFG.ads.page2.code.trim()!==''){
+      document.getElementById('ad-page2').innerHTML=SITE_CFG.ads.page2.code;
+    }
+    if(SITE_CFG?.ads?.modal?.code && SITE_CFG.ads.modal.code.trim()!==''){
+      document.getElementById('ad-modal').innerHTML=SITE_CFG.ads.modal.code;
+    }
+  }catch(e){console.log('config fail',e)}
+}
 initGreeting();loadConfig();
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
 async function autoPaste(){try{const t=await navigator.clipboard.readText();if(t)document.getElementById('urlInput').value=t;}catch(e){alert('Long-press paste manually');}}
