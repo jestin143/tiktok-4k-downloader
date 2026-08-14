@@ -174,13 +174,11 @@ function injectAds(ads){
 
 initGreeting();loadConfig();
 
-// Capture Android Chrome Auto-Install Event
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
 });
 
-// Auto-Paste Function (Feature 1)
 async function autoPaste() {
   try {
     const text = await navigator.clipboard.readText();
@@ -194,7 +192,6 @@ async function autoPaste() {
   }
 }
 
-// Live Counter Dynamic Increment (Feature 4)
 setInterval(() => {
   const counterEl = document.getElementById('counter');
   if(counterEl) {
@@ -203,7 +200,6 @@ setInterval(() => {
   }
 }, 6000);
 
-// Smart Auto-Detect Install Guide Handler with Exact Safari Toolbar & Arrow Icon
 function showInstallInstructions() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -250,7 +246,14 @@ function showInstallInstructions() {
     content.innerHTML = `
       <div class="step-box">
         <p><b>Step 1:</b> Tap the <b>3-dots menu (⋮)</b> in the top-right corner of Chrome.</p>
-        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:22px; font-weight:bold; border:1px solid #e5e7eb; color:#111;">⋮ <span style="font-size:12px; color:#3b82f6; vertical-align:middle;">◄ Tap here</span></div>
+        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:8px; display:flex; justify-content:flex-end; align-items:center; padding-right:24px;">
+          <div style="position:relative; display:inline-block;">
+            <div style="border:2px solid #3b82f6; border-radius:8px; padding:4px 10px; background:rgba(59,130,246,0.15); color:#fff; font-size:20px; font-weight:bold;">
+              ⋮
+            </div>
+            <div style="position:absolute; top:-20px; left:50%; transform:translateX(-50%); color:#3b82f6; font-size:14px; font-weight:bold;">▼</div>
+          </div>
+        </div>
       </div>
       <div class="step-box">
         <p><b>Step 2:</b> Select <b>"Install app"</b> or <b>"Add to Home screen"</b>.</p>
@@ -300,6 +303,20 @@ async function forceDownload(){
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
+    
+    // Check kung ang user ay nasa Home Screen app mode
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    
+    if (isStandalone) {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        alert("Download complete\nClick more or share to save video");
+      } else if (/android/i.test(userAgent)) {
+        alert("Download complete\nCheck download to save video");
+      }
+    }
+    
     btn.textContent = 'Downloaded!';
   } catch(e) {
     const a = document.createElement('a');
