@@ -4,18 +4,10 @@ app.use(cors());app.use(express.json());app.use(express.static(path.join(__dirna
 const agent=new https.Agent({keepAlive:true, rejectUnauthorized: false});
 const CFG_PATH=path.join(__dirname,'config.json');
 
-// --- SUPER FAST CACHE 10 MINS ---
+// --- FAST CACHE ---
 const CACHE = new Map();
-function getCache(url){
-  const c = CACHE.get(url);
-  if(c && Date.now() - c.time < 10*60*1000) return c.data;
-  if(c) CACHE.delete(url);
-  return null;
-}
-function setCache(url,data){
-  CACHE.set(url,{data,time:Date.now()});
-  if(CACHE.size>200) CACHE.delete(CACHE.keys().next().value);
-}
+function getCache(url){ const c=CACHE.get(url); if(c && Date.now()-c.time < 600000) return c.data; return null; }
+function setCache(url,data){ CACHE.set(url,{data,time:Date.now()}); if(CACHE.size>100) CACHE.clear(); }
 
 function load(){
   try{if(fs.existsSync(CFG_PATH)) return JSON.parse(fs.readFileSync(CFG_PATH,'utf8'))}catch(e){}
@@ -35,7 +27,7 @@ function save(c){
 let TOKENS=new Set();
 app.get('/api/geo',async(req,res)=>{
   let country=(req.headers['x-vercel-ip-country']||'').toUpperCase();
-  if(!country||country.length!=2) country='US'; // WAG NA TUMAWAG SA ipapi.co - super bagal!
+  if(!country) country='US';
   res.json({country_code:country})
 });
 app.get('/api/config',(req,res)=>{
@@ -60,71 +52,47 @@ app.post('/api/admin/config',auth,(req,res)=>{
   save(c);res.json({ok:true,config:c})
 });
 
-// --- SUPER FAST DOWNLOAD API - 2-3x BILIS ---
+// --- FAST DOWNLOAD - NO CRASH ---
 app.post('/api/download', async (req, res) => {
   let { url } = req.body;
   if (!url) return res.status(400).json({ error: 'URL required' });
   
-  // CHECK CACHE FIRST - INSTANT!
   const cached = getCache(url);
   if(cached) return res.json(cached);
 
   try {
-    // FAST expand vt/vm links - HEAD lang, hindi full GET
     if (url.includes('vt.tiktok.com') || url.includes('vm.tiktok.com') || url.includes('tiktok.com/t/')) {
       try{
-        const r = await axios.head(url, { maxRedirects: 5, timeout: 3000, httpsAgent: agent });
-        // fallback if head doesn't give final url
+        const r = await axios.get(url, { maxRedirects:5, timeout:3500, httpsAgent:agent, headers:{'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15'} });
         url = r.request.res.responseUrl || url;
-      }catch(e){
-        try{
-          const r2 = await axios.get(url, { maxRedirects: 5, timeout: 3500, httpsAgent: agent, headers:{'User-Agent':'Mozilla/5.0'} });
-          url = r2.request.res.responseUrl || r2.request._redirectable?._currentUrl || url;
-        }catch(e2){}
-      }
+      }catch(e){}
     }
 
-    // 3 APIS SABAY SABAY - KUNG SINO MAUNA, SYA MANANALO! (Promise.any)
-    const fetchTikWM = async () => {
-      const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`;
-      const r = await axios.get(apiUrl, { httpsAgent: agent, timeout: 4000, headers:{'User-Agent':'Mozilla/5.0','Referer':'https://www.tikwm.com/'} });
-      if(r.data?.data?.play){
-        const d=r.data.data;
-        return { title:d.title||'TikTok Video', author:d.author?.nickname||d.author?.unique_id||'@creator', cover:d.cover||d.origin_cover||'', play:d.play||'', hdplay:d.hdplay||d.play||'' };
-      }
-      throw new Error('tikwm no play');
-    };
-    const fetchTikly = async () => {
-      const r = await axios.post('https://api.tiklydown.eu.org/api/download', {url}, { timeout: 4000, headers:{'User-Agent':'Mozilla/5.0'} });
-      if(r.data?.video?.noWatermark){
-        return { title:r.data.title||'TikTok Video', author:r.data.author||'@creator', cover:r.data.cover||'', play:r.data.video.noWatermark, hdplay:r.data.video.noWatermarkHD||r.data.video.noWatermark };
-      }
-      throw new Error('tikly fail');
-    };
-    const fetchSSSTik = async () => {
-      // backup 3
-      const r = await axios.get(`https://tikcdn.io/api/download?url=${encodeURIComponent(url)}`, { timeout: 4000, httpsAgent: agent, headers:{'User-Agent':'Mozilla/5.0'} });
-      if(r.data?.video?.noWatermark){
-        return { title:r.data.title||'TikTok Video', author:'@creator', cover:'', play:r.data.video.noWatermark, hdplay:r.data.video.noWatermark };
-      }
-      throw new Error('ssstik fail');
-    };
-
-    let data;
-    try{
-      data = await Promise.any([fetchTikWM(), fetchTikly(), fetchSSSTik()]);
-    }catch(e){
-      // fallback to single tikwm if Promise.any all fail
-      data = await fetchTikWM();
+    // FAST 4 SEC ONLY
+    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`;
+    const response = await axios.get(apiUrl, {
+      httpsAgent: agent,
+      timeout: 4500,
+      headers: { 'User-Agent':'Mozilla/5.0', 'Referer':'https://www.tikwm.com/' }
+    });
+    
+    if (response.data && response.data.data && response.data.data.play) {
+      const d = response.data.data;
+      const data = {
+        title: d.title || 'TikTok Video',
+        author: d.author ? (d.author.nickname || d.author.unique_id || '@creator') : '@creator',
+        cover: d.cover || d.origin_cover || '',
+        play: d.play || '',
+        hdplay: d.hdplay || d.play || ''
+      };
+      setCache(req.body.url, data);
+      setCache(url, data);
+      return res.json(data);
     }
-
-    setCache(req.body.url, data); // cache original url
-    setCache(url, data); // cache expanded url
-    return res.json(data);
-
+    return res.status(500).json({ error: 'Failed to fetch' });
   } catch (e) {
-    console.log('API Error:', e.message);
-    return res.status(500).json({ error: 'Failed - Try full tiktok.com/video link' });
+    console.log('Error:', e.message);
+    return res.status(500).json({ error: 'TikTok blocked - use full link' });
   }
 });
 
