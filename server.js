@@ -12,7 +12,38 @@ app.post('/api/admin/login',(req,res)=>{const c=load();const {email,password}=re
 function auth(req,res,next){const t=req.headers['x-admin-token'];if(t&&TOKENS.has(t))return next();res.status(401).json({error:'Unauthorized'})}
 app.get('/api/admin/config',auth,(req,res)=>res.json(load()));
 app.post('/api/admin/config',auth,(req,res)=>{const c=load();const b=req.body;if(b.ads)c.ads=b.ads;if(b.site)c.site=b.site;if(b.downloads)c.downloads=b.downloads;if(b.greetings)c.greetings=b.greetings;if(b.admin){c.admin=b.admin;}save(c);res.json({ok:true,config:c})});
-app.post('/api/download',async(req,res)=>{const{url}=req.body;if(!url)return res.status(400).json({error:'URL required'});try{const apiUrl=`https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`;const r=await axios.get(apiUrl,{httpsAgent:agent,timeout:12000});if(r.data&&r.data.data){const d=r.data.data;return res.json({title:d.title||'TikTok Video',author:d.author?(d.author.nickname||'@creator'):'@creator',cover:d.cover||'',play:d.play||'',hdplay:d.hdplay||d.play||''})}res.status(500).json({error:'Failed'})}catch(e){res.status(500).json({error:'API error'})}});
+
+app.post('/api/download', async (req, res) => {
+  let { url } = req.body;
+  if (!url) return res.status(400).json({ error: 'URL required' });
+
+  try {
+    // 1. I-expand ang vt.tiktok.com o vm.tiktok.com short links kung meron man
+    if (url.includes('vt.tiktok.com') || url.includes('vm.tiktok.com')) {
+      const r = await axios.get(url, { maxRedirects: 5, httpsAgent: agent, timeout: 5000 });
+      url = r.request.res.responseUrl || url;
+    }
+
+    const apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`;
+    const response = await axios.get(apiUrl, { httpsAgent: agent, timeout: 12000 });
+    
+    if (response.data && response.data.data) {
+      const d = response.data.data;
+      return res.json({
+        title: d.title || 'TikTok Video',
+        author: d.author ? (d.author.nickname || '@creator') : '@creator',
+        cover: d.cover || '',
+        play: d.play || '',
+        hdplay: d.hdplay || d.play || ''
+      });
+    }
+    res.status(500).json({ error: 'Failed to fetch video data' });
+  } catch (e) {
+    console.log('API Error:', e.message);
+    res.status(500).json({ error: 'API error: ' + e.message });
+  }
+});
+
 app.get('/api/force-download',async(req,res)=>{try{const r=await axios.get(req.query.url,{responseType:'stream',timeout:15000,httpsAgent:agent});res.setHeader('Content-Disposition','attachment; filename="tiktok-4k.mp4"');res.setHeader('Content-Type','video/mp4');r.data.pipe(res)}catch(e){res.status(500).send('failed')}});
 app.get('/admin',(req,res)=>res.sendFile(path.join(__dirname,'public','admin.html')));
 app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
