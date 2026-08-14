@@ -74,9 +74,9 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
 .install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
-.step-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:10px;text-align:left}
-.step-box p{font-size:12px;color:#374151;font-weight:600;margin-bottom:6px}
-.step-img{width:100%;height:100px;background:#e5e7eb;border-radius:8px;object-fit:cover;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:11px}
+.step-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:10px;margin-bottom:10px;text-align:left}
+.step-box p{font-size:11px;color:#374151;font-weight:600;margin-bottom:6px}
+.step-img{width:100%;height:110px;background:#f3f4f6;border-radius:8px;object-fit:cover;border:1px solid #e5e7eb;display:block}
 
 .seo-box{max-width:680px;margin:50px auto 0;padding:20px;background:rgba(255,255,255,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7);border-radius:16px;font-size:13px;color:#4b5563;line-height:1.7}
 .seo-box h2{color:#0a0a0a;font-size:15px;margin:18px 0 8px}
@@ -204,9 +204,8 @@ setInterval(() => {
   }
 }, 6000);
 
-// Smart Auto-Detect Install Guide / Prompt Handler
+// Smart Auto-Detect Install Guide / Prompt Handler with Online Stock Visual Guide Links
 function showInstallInstructions() {
-  // If Android Chrome supports automatic direct prompt, trigger it immediately!
   if (deferredPrompt) {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then((choiceResult) => {
@@ -224,32 +223,32 @@ function showInstallInstructions() {
     title.textContent = "Install on iPhone (Safari)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Tap the Share button at the bottom bar.</p>
-        <div class="step-img">[ Insert Step 1 Image Here ]</div>
+        <p><b>Step 1:</b> Tap the Share icon at the bottom of Safari.</p>
+        <img src="https://images.unsplash.com/photo-1556742049-0a67d553c299?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 1">
       </div>
       <div class="step-box">
         <p><b>Step 2:</b> Scroll down and tap "Add to Home Screen".</p>
-        <div class="step-img">[ Insert Step 2 Image Here ]</div>
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 2">
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Tap "Add" in the top right corner. Done!</p>
-        <div class="step-img">[ Insert Step 3 Image Here ]</div>
+        <p><b>Step 3:</b> Tap "Add" at the top right. Done!</p>
+        <img src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 3">
       </div>
     `;
   } else {
     title.textContent = "Install on Android";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Tap the 3 dots (⋮) in the top-right corner.</p>
-        <div class="step-img">[ Insert Step 1 Image Here ]</div>
+        <p><b>Step 1:</b> Tap the 3 dots (⋮) in Chrome top-right.</p>
+        <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 1">
       </div>
       <div class="step-box">
         <p><b>Step 2:</b> Select "Install app" or "Add to Home screen".</p>
-        <div class="step-img">[ Insert Step 2 Image Here ]</div>
+        <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 2">
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Confirm installation. App is now on your home screen!</p>
-        <div class="step-img">[ Insert Step 3 Image Here ]</div>
+        <p><b>Step 3:</b> Confirm installation. Enjoy instant access!</p>
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&auto=format&fit=crop&q=60" class="step-img" alt="Step 3">
       </div>
     `;
   }
