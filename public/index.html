@@ -69,10 +69,14 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .progress-inner{height:100%;background:linear-gradient(90deg,#fcd34d,#facc15);width:100%;transition:width 1s linear}
 .dl-now{width:100%;background:#0a0a0a;color:#fff;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:14px;margin-top:16px;cursor:pointer}
 .dl-now:disabled{background:rgba(10,10,10,.5)}
-/* Install Modal Styling */
+
+/* Install Modal Styling with Step-by-Step Images */
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
-.install-card{background:#fff;border-radius:24px;max-width:320px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
+.install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
+.step-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:10px;text-align:left}
+.step-box p{font-size:12px;color:#374151;font-weight:600;margin-bottom:6px}
+.step-img{width:100%;height:100px;background:#e5e7eb;border-radius:8px;object-fit:cover;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:11px}
 
 .seo-box{max-width:680px;margin:50px auto 0;padding:20px;background:rgba(255,255,255,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7);border-radius:16px;font-size:13px;color:#4b5563;line-height:1.7}
 .seo-box h2{color:#0a0a0a;font-size:15px;margin:18px 0 8px}
@@ -94,7 +98,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
     <button class="paste-btn" onclick="autoPaste()">Paste</button>
   </div>
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
-  <!-- Dito idinagdag ang Add to Home Screen button -->
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
 <div class="ad-big"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Your ad here — Big Card</div></div>
@@ -125,11 +128,11 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 </div>
 <div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
 
-<!-- Add to Home Screen Modal Popup -->
-<div id="installModal"><div class="install-card"><h3 style="font-size:18px; font-weight:700; margin-bottom:15px; color:#111;">Add to Home Screen</h3><div id="installContent" style="font-size:13px; color:#374151; line-height:1.6; text-align:left;"></div><button onclick="closeInstallModal()" style="margin-top:20px; width:100%; background:#0a0a0a; color:#fff; border:none; padding:12px; border-radius:9999px; font-weight:700; cursor:pointer;">Got it</button></div></div>
+<!-- Add to Home Screen Auto-Detect Modal -->
+<div id="installModal"><div class="install-card"><h3 id="installModalTitle" style="font-size:16px; font-weight:700; margin-bottom:12px; color:#111;">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px; width:100%; background:#0a0a0a; color:#fff; border:none; padding:10px; border-radius:9999px; font-weight:700; cursor:pointer; font-size:13px;">Got it</button></div></div>
 
 <script>
-let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null;
+let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null,deferredPrompt=null;
 const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸',text:'How are you, friend'},GB:{flag:'🇬🇧',text:'How are you, friend'},JP:{flag:'🇯🇵',text:'こんにちは友達'},KR:{flag:'🇰🇷',text:'안녕하세요 친구'},ES:{flag:'🇪🇸',text:'¿Cómo estás, amigo?'},MX:{flag:'🇲🇽',text:'¡Hola amigo!'},BR:{flag:'🇧🇷',text:'Olá amigo!'},FR:{flag:'🇫🇷',text:'Bonjour ami!'},DE:{flag:'🇩🇪',text:'Hallo Freund!'},IN:{flag:'🇮🇳',text:'नमस्ते दोस्त!'},SA:{flag:'🇸🇦',text:'مرحبا صديقي!'},ID:{flag:'🇮🇩',text:'Apa kabar, teman'}};
 
 async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country||j.country_code||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){document.getElementById('greeting').textContent='🇺🇸 How are you, friend'}}
@@ -172,6 +175,12 @@ function injectAds(ads){
 
 initGreeting();loadConfig();
 
+// Capture Android Chrome Auto-Install Event
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
 // Auto-Paste Function (Feature 1)
 async function autoPaste() {
   try {
@@ -179,10 +188,10 @@ async function autoPaste() {
     if(text) {
       document.getElementById('urlInput').value = text;
     } else {
-      alert('Walang nakitang kopyang link sa iyong clipboard.');
+      alert('No copied link found in your clipboard.');
     }
   } catch(e) {
-    alert('Mangyaring pindutin nang matagal ang input box at i-paste nang manu-mano (kailangan ng pahintulot ng browser).');
+    alert('Please long-press the input box and paste manually.');
   }
 }
 
@@ -195,34 +204,55 @@ setInterval(() => {
   }
 }, 6000);
 
-// Add to Home Screen Instructions Logic
+// Smart Auto-Detect Install Guide / Prompt Handler
 function showInstallInstructions() {
-  const modal = document.getElementById('installModal');
-  const content = document.getElementById('installContent');
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    content.innerHTML = `
-      <p><b>Para sa iPhone (Safari):</b></p>
-      <ol style="margin-top:8px; padding-left:18px;">
-        <li>Pindutin ang <b>Share button</b> (icon na may arrow pataas ⎋) sa ibaba ng Safari.</li>
-        <li>I-scroll pababa at piliin ang <b>"Add to Home Screen"</b>.</li>
-        <li>Pindutin ang <b>"Add"</b> sa kanang itaas.</li>
-      </ol>
-    `;
-  } else if (/android/i.test(userAgent)) {
-    content.innerHTML = `
-      <p><b>Para sa Android (Chrome):</b></p>
-      <ol style="margin-top:8px; padding-left:18px;">
-        <li>Pindutin ang <b>tatlong tuldok (⋮)</b> sa kanang itaas ng Chrome.</li>
-        <li>Piliin ang <b>"Add to Home screen"</b> o <b>"Install app"</b>.</li>
-        <li>Pindutin ang <b>"Add"</b> para matapos.</li>
-      </ol>
-    `;
-  } else {
-    content.innerHTML = `<p>Buksan ang website na ito sa iyong mobile phone (Safari o Chrome) para ma-add sa home screen.</p>`;
+  // If Android Chrome supports automatic direct prompt, trigger it immediately!
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      deferredPrompt = null;
+    });
+    return;
   }
 
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const modal = document.getElementById('installModal');
+  const content = document.getElementById('installContent');
+  const title = document.getElementById('installModalTitle');
+
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    title.textContent = "Install on iPhone (Safari)";
+    content.innerHTML = `
+      <div class="step-box">
+        <p><b>Step 1:</b> Tap the Share button at the bottom bar.</p>
+        <div class="step-img">[ Insert Step 1 Image Here ]</div>
+      </div>
+      <div class="step-box">
+        <p><b>Step 2:</b> Scroll down and tap "Add to Home Screen".</p>
+        <div class="step-img">[ Insert Step 2 Image Here ]</div>
+      </div>
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Step 3:</b> Tap "Add" in the top right corner. Done!</p>
+        <div class="step-img">[ Insert Step 3 Image Here ]</div>
+      </div>
+    `;
+  } else {
+    title.textContent = "Install on Android";
+    content.innerHTML = `
+      <div class="step-box">
+        <p><b>Step 1:</b> Tap the 3 dots (⋮) in the top-right corner.</p>
+        <div class="step-img">[ Insert Step 1 Image Here ]</div>
+      </div>
+      <div class="step-box">
+        <p><b>Step 2:</b> Select "Install app" or "Add to Home screen".</p>
+        <div class="step-img">[ Insert Step 2 Image Here ]</div>
+      </div>
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Step 3:</b> Confirm installation. App is now on your home screen!</p>
+        <div class="step-img">[ Insert Step 3 Image Here ]</div>
+      </div>
+    `;
+  }
   modal.classList.add('active');
 }
 
@@ -242,7 +272,7 @@ async function forceDownload(){
   let fileUrl = currentType === '4k' ? (videoData.hdplay || videoData.play) : videoData.play;
   
   if(!fileUrl) {
-    alert('Error: Hindi nahanap ang video URL.');
+    alert('Error: Video URL not found.');
     return;
   }
 
