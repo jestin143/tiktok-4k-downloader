@@ -174,13 +174,11 @@ function injectAds(ads){
 
 initGreeting();loadConfig();
 
-// Capture Android Chrome Auto-Install Event
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
 });
 
-// Auto-Paste Function (Feature 1)
 async function autoPaste() {
   try {
     const text = await navigator.clipboard.readText();
@@ -194,7 +192,6 @@ async function autoPaste() {
   }
 }
 
-// Live Counter Dynamic Increment (Feature 4)
 setInterval(() => {
   const counterEl = document.getElementById('counter');
   if(counterEl) {
@@ -203,7 +200,6 @@ setInterval(() => {
   }
 }, 6000);
 
-// Smart Auto-Detect Install Guide Handler with Exact Safari Toolbar & Android Chrome UI Icons
 function showInstallInstructions() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -307,6 +303,20 @@ async function forceDownload(){
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
+    
+    // Check kung ang user ay nasa Home Screen app mode
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    
+    if (isStandalone) {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        alert("Download complete\nClick more or share to save video");
+      } else if (/android/i.test(userAgent)) {
+        alert("Download complete\nCheck download to save video");
+      }
+    }
+    
     btn.textContent = 'Downloaded!';
   } catch(e) {
     const a = document.createElement('a');
