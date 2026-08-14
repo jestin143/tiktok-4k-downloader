@@ -36,7 +36,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-btn{background:rgba(124,58,237,0.1);color:#7c3aed;border:none;padding:8px 12px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;transition:0.2s}
 .save-btn{width:100%;max-width:380px;margin-top:16px;padding:16px;background:linear-gradient(180deg,#1f1f1f 0%,#0a0a0a 100%);color:#fff;font-size:14px;font-weight:700;border:none;border-radius:9999px;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.2);transition:.2s}
 .install-app-btn{width:100%;max-width:380px;margin-top:10px;padding:12px;background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.95);color:#4b5563;font-size:12px;font-weight:600;border-radius:9999px;cursor:pointer}
-.ad-big{margin:32px auto 0;max-width:680px;width:100%;height:auto;min-height:120px;background:#FFD814;border:none;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.ad-big{margin:32px auto 0;max-width:680px;width:100%;height:auto;min-height:120px;background:rgba(255,255,255,0.6);border:none;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.04)}
 #page2{display:none}
 .video-card{max-width:380px;margin:32px auto 0;background:rgba(255,255,255,.8);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.95);box-shadow:0 20px 50px rgba(168,85,247,.12);border-radius:16px;padding:16px}
 .cover{height:160px;border-radius:12px;background:linear-gradient(135deg,#ddd6fe,#fbcfe8);display:flex;align-items:center;justify-content:center;font-size:36px;overflow:hidden}
@@ -60,18 +60,16 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
 .install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
-.step-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:10px;text-align:left}
 .footer{text-align:center;margin-top:40px;font-size:11px;color:#9ca3af}
 .seo-box{max-width:680px;margin:50px auto 0;padding:20px;background:rgba(255,255,255,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7);border-radius:16px;font-size:13px;color:#4b5563;line-height:1.7}
 .seo-box h2{color:#0a0a0a;font-size:15px;margin:18px 0 8px}
-.footer-links{text-align:center;margin-top:30px;padding:20px 10px;font-size:11px;color:#9ca3af}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><div class="blob b6"></div>
 <div class="container">
 <div id="page1">
-<div class="header"><div class="logo">TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
-<div class="headline">Download TikTok Videos in 4K</div>
-<div class="sub">Paste link below and save HD videos without watermark</div>
+<div class="header"><div class="logo" id="logoText">TikTok 4K Downloader.com</div><div class="pill" id="pillText">No watermark • Fast • HD 4K</div></div>
+<div class="headline" id="headlineText">Download TikTok Videos in 4K</div>
+<div class="sub" id="subText">Paste link below and save HD videos without watermark</div>
 <div class="social-proof">🔥 <span id="counter">14,285</span> videos downloaded today</div>
 <div class="greet-wrap"><div id="greeting">How are you, friend</div></div>
 <div class="paste-wrap">
@@ -79,51 +77,106 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
     <input id="urlInput" placeholder="Paste TikTok link here...">
     <button class="paste-btn" onclick="autoPaste()">Paste</button>
   </div>
-  <button class="save-btn" onclick="doSave()">Save HD Video</button>
+  <button class="save-btn" id="btnSaveMain">Save HD Video</button>
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
-<div class="ad-big" id="ad-page1"><div style="text-align:center;width:100%"><div style="font-size:22px">🔥</div><div style="font-size:18px;font-weight:900;color:#111;margin-top:2px">HOT DEAL SA SHOPEE</div><div style="font-size:13px;color:#333;margin-top:4px">Trending • Free Shipping • Voucher</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:12px;background:#EE4D2D;color:#fff;padding:10px 24px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:13px">SHOP NOW →</a></div></div>
-<div class="footer">Trusted by 10M+ downloads worldwide</div>
+<!-- AD BOX PAGE 1 (Galing sa config.json) -->
+<div class="ad-big" id="ad-page1"></div>
+<div class="footer" id="footerText">Trusted by 10M+ downloads worldwide</div>
 <div class="seo-box"><h2>How to Download TikTok Videos in 4K HD?</h2><p>Copy link, paste, save.</p></div>
 </div>
 <div id="page2">
 <div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
 <div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
-<div class="dl-wrap"><button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button><button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button></div>
-<div class="ads-col"><div class="ad-big ad-big-page2" id="ad-page2"><div style="text-align:center;width:100%"><div style="font-size:22px">🔥</div><div style="font-size:18px;font-weight:900;color:#111">HOT DEAL SA SHOPEE</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:12px;background:#EE4D2D;color:#fff;padding:10px 24px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:13px">SHOP NOW →</a></div></div></div>
+<div class="dl-wrap"><button class="btn-gold" id="btn4kLabel" onclick="openModal('4k')">Download 4K HD • 10s ad</button><button class="btn-white" id="btn720Label" onclick="openModal('720')">Download 720p • 5s ad</button></div>
+<div class="ads-col">
+  <!-- AD BOX PAGE 2 (Galing sa config.json) -->
+  <div class="ad-big ad-big-page2" id="ad-page2"></div>
+</div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
 </div>
-<div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big" id="ad-modal"><div style="text-align:center;width:100%"><div style="font-size:20px">🔥</div><div style="font-size:17px;font-weight:900;color:#111">HOT DEAL SA SHOPEE</div><a href="https://shopee.ph" target="_blank" style="display:inline-block;margin-top:10px;background:#EE4D2D;color:#fff;padding:9px 20px;border-radius:9999px;font-weight:800;text-decoration:none;font-size:12px">SHOP NOW →</a></div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
-<div id="installModal"><div class="install-card"><h3 id="installModalTitle" style="font-size:16px;font-weight:700;margin-bottom:12px">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px;width:100%;background:#0a0a0a;color:#fff;border:none;padding:10px;border-radius:9999px;font-weight:700;cursor:pointer">Got it</button></div></div>
+<div id="modal">
+  <div class="modal-card">
+    <button class="close" onclick="closeModal()">✕</button>
+    <!-- AD BOX MODAL (Galing sa config.json) -->
+    <div class="ad-big modal-ad-big" id="ad-modal"></div>
+    <div class="count" id="countText">10s</div>
+    <div class="progress"><div class="progress-inner" id="progress"></div></div>
+    <button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button>
+  </div>
+</div>
+<div id="installModal"><div class="install-card"><h3 style="font-size:16px;font-weight:700;margin-bottom:12px">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px;width:100%;background:#0a0a0a;color:#fff;border:none;padding:10px;border-radius:9999px;font-weight:700;cursor:pointer">Got it</button></div></div>
 <script>
 let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null,deferredPrompt=null;
 const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸',text:'How are you, friend'}};
-async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country_code||j.country||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){}}
+async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country_code||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){}}
+
 async function loadConfig(){
   try{
     const r=await fetch('/api/config');
     SITE_CFG=await r.json();
-    if(SITE_CFG?.ads?.page1?.code && SITE_CFG.ads.page1.code.trim()!==''){
-      document.getElementById('ad-page1').innerHTML=SITE_CFG.ads.page1.code;
+    
+    // I-load ang Ad Codes mula sa Config kung mayroon man
+    if(SITE_CFG?.ads){
+      if(SITE_CFG.ads.page1?.code){
+        document.getElementById('ad-page1').innerHTML = SITE_CFG.ads.page1.code;
+      }
+      if(SITE_CFG.ads.page2?.code){
+        document.getElementById('ad-page2').innerHTML = SITE_CFG.ads.page2.code;
+      }
+      if(SITE_CFG.ads.modal?.code){
+        document.getElementById('ad-modal').innerHTML = SITE_CFG.ads.modal.code;
+      }
     }
-    if(SITE_CFG?.ads?.page2?.code && SITE_CFG.ads.page2.code.trim()!==''){
-      document.getElementById('ad-page2').innerHTML=SITE_CFG.ads.page2.code;
-    }
-    if(SITE_CFG?.ads?.modal?.code && SITE_CFG.ads.modal.code.trim()!==''){
-      document.getElementById('ad-modal').innerHTML=SITE_CFG.ads.modal.code;
-    }
-  }catch(e){console.log('config fail',e)}
+  }catch(e){console.log('Config load error:', e)}
 }
 initGreeting();loadConfig();
+
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
 async function autoPaste(){try{const t=await navigator.clipboard.readText();if(t)document.getElementById('urlInput').value=t;}catch(e){alert('Long-press paste manually');}}
 function showInstallInstructions(){if(deferredPrompt){deferredPrompt.prompt();return;}const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);document.getElementById('installModal').classList.add('active');document.getElementById('installContent').innerHTML=isIOS?'iPhone: Tap Share button ⬆️ → Add to Home Screen':'Android: Tap ⋮ → Install App';}
 function closeInstallModal(){document.getElementById('installModal').classList.remove('active');}
-async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);document.getElementById('urlInput').value='';}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
+
+async function doSave(){
+  const url=document.getElementById('urlInput').value.trim();
+  if(!url)return alert('Paste link');
+  const btn=document.querySelector('.save-btn');
+  btn.textContent='Fetching...';btn.disabled=true;
+  try{
+    const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
+    const data=await r.json();
+    if(data.error)throw new Error(data.error);
+    videoData=data;
+    document.getElementById('vTitle').textContent=data.title;
+    document.getElementById('vCreator').textContent=data.author;
+    if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;
+    document.getElementById('page1').style.display='none';
+    document.getElementById('page2').style.display='block';
+    window.scrollTo(0,0);
+    document.getElementById('urlInput').value='';
+  }catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}
+}
 function showPage1(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='block';}
-function openModal(type){currentType=type;document.getElementById('modal').classList.add('active');let s=type==='4k'?10:5;document.getElementById('countText').textContent=s+'s';document.getElementById('progress').style.width='100%';document.getElementById('dlBtn').disabled=true;document.getElementById('dlBtn').textContent=`Wait ${s}s...`;clearInterval(countdownInt);countdownInt=setInterval(()=>{s--;document.getElementById('countText').textContent=s>0?s+'s':'Ready!';document.getElementById('progress').style.width=(s/(type==='4k'?10:5)*100)+'%';document.getElementById('dlBtn').textContent=s>0?`Wait ${s}s...`:'Download Now';if(s<=0){clearInterval(countdownInt);document.getElementById('dlBtn').disabled=false;}},1000);}
+function openModal(type){
+  currentType=type;
+  document.getElementById('modal').classList.add('active');
+  let s=type==='4k'?10:5;
+  document.getElementById('countText').textContent=s+'s';
+  document.getElementById('progress').style.width='100%';
+  document.getElementById('dlBtn').disabled=true;
+  document.getElementById('dlBtn').textContent=`Wait ${s}s...`;
+  clearInterval(countdownInt);
+  countdownInt=setInterval(()=>{
+    s--;
+    document.getElementById('countText').textContent=s>0?s+'s':'Ready!';
+    document.getElementById('progress').style.width=(s/(type==='4k'?10:5)*100)+'%';
+    document.getElementById('dlBtn').textContent=s>0?`Wait ${s}s...`:'Download Now';
+    if(s<=0){clearInterval(countdownInt);document.getElementById('dlBtn').disabled=false;}
+  },1000);
+}
 function closeModal(){document.getElementById('modal').classList.remove('active');clearInterval(countdownInt);}
+
 async function forceDownload(){
   if(!videoData)return;
   let fileUrl=currentType==='4k'?(videoData.hdplay||videoData.play):videoData.play;
@@ -159,4 +212,5 @@ async function forceDownload(){
   }catch(e){window.open(fileUrl,'_blank');btn.textContent='Opened!';}
   finally{setTimeout(()=>{btn.textContent='Download Now';btn.disabled=false;closeModal();showPage1();},1500);}
 }
+document.getElementById('btnSaveMain').onclick = doSave;
 </script></body></html>
