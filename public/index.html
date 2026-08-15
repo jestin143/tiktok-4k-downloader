@@ -63,7 +63,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .save-btn:hover { transform: translateY(-2px); }
 
-/* ROYAL EMERALD JELLY GLOW BUTTON (4K Option - Option 2 Color + Jelly Style) */
+/* OPTION 1 JELLY GLOW STYLE (4K Option - Multi-color Rainbow Jelly) */
 .btn-gold {
   position: relative;
   width: 100%;
@@ -72,18 +72,18 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   font-size: 14px;
   font-weight: 700;
   border-radius: 9999px;
-  border: 1px solid rgba(52, 211, 153, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #064e3b, #047857, #10b981, #34d399, #064e3b);
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6, #06b6d4, #ec4899);
   background-size: 300% 300%;
-  animation: jellyColorFlow 5s ease infinite, emeraldPulse 2s ease-in-out infinite alternate;
-  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(16, 185, 129, 0.5);
+  animation: jellyColorFlow 5s ease infinite, jellyPulse 2s ease-in-out infinite alternate;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(139, 92, 246, 0.5);
   transition: transform 0.2s ease;
 }
 .btn-gold:hover { transform: translateY(-2px); }
@@ -122,10 +122,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 5px 15px rgba(59, 130, 246, 0.3); }
   100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(99, 102, 241, 0.7); }
 }
-@keyframes emeraldPulse {
-  0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 6px 20px rgba(16, 185, 129, 0.4); }
-  100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.3), 0 14px 35px rgba(52, 211, 153, 0.8); }
-}
 
 .spinner {
   width: 16px;
@@ -140,8 +136,32 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   to { transform: rotate(360deg); }
 }
 
-.install-app-btn{width:100%;max-width:380px;margin-top:10px;padding:12px;background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.95);color:#4b5563;font-size:12px;font-weight:600;border-radius:9999px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.03);transition:.2s}
-.install-app-btn:hover{background:rgba(255,255,255,1);color:#1f2937}
+/* ADD TO HOME SCREEN WITH JELLY GLOW */
+.install-app-btn {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 12px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #10b981, #06b6d4, #3b82f6, #10b981);
+  background-size: 300% 300%;
+  animation: jellyColorFlow 6s ease infinite, installPulse 2s ease-in-out infinite alternate;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.2), 0 8px 20px rgba(16, 185, 129, 0.35);
+  transition: transform 0.2s ease;
+}
+.install-app-btn:hover { transform: translateY(-2px); }
+
+@keyframes installPulse {
+  0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.2), 0 5px 15px rgba(6, 182, 212, 0.3); }
+  100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.2), 0 12px 28px rgba(16, 185, 129, 0.6); }
+}
 
 .ad-big{margin:32px auto 0;max-width:680px;width:100%;height:280px;background:rgba(255,255,255,.45);backdrop-filter:blur(16px);border:2px dashed rgba(255,255,255,.8);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
 .ad-big-page2{height:360px;max-width:680px}
