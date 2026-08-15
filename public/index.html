@@ -364,7 +364,7 @@ const greetMap = {PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺�
 
 async function initGreeting() {
   try {
-    const r = await fetch('/api/geo');
+    const r = await fetch('https://ipapi.co/json/');
     const j = await r.json();
     let country = (j.country || j.country_code || 'US').toUpperCase();
     const map = greetMap[country] || greetMap['US'];
@@ -374,6 +374,7 @@ async function initGreeting() {
   }
 }
 
+// Binago para basahin ang hiwalay mong config.json gamit ang fetch()
 async function loadConfig() {
   try {
     let cfg = null; 
@@ -383,7 +384,8 @@ async function loadConfig() {
     } catch(e) {}
      
     if(!cfg) {
-      const r = await fetch('/api/config');
+      // Babasahin ang config.json sa parehong folder
+      const r = await fetch('config.json');
       cfg = await r.json();
     } 
      
@@ -398,9 +400,10 @@ async function loadConfig() {
       if(cfg.downloads.btn720_label) document.querySelector('.btn-white').textContent = cfg.downloads.btn720_label;
     } 
     
-    // Suportahan ang pag-basa mula sa universal_boxes
     injectUniversalBoxes(cfg);
-  } catch(e) {}
+  } catch(e) {
+    console.error("Hindi mabasa ang config.json:", e);
+  }
 }
 
 function setAdContent(element, htmlCode) {
@@ -433,7 +436,7 @@ function injectUniversalBoxes(cfg) {
       if(box.code && box.code.trim() !== '') {
         setAdContent(targetEl, box.code);
       } else if(box.url && box.url.trim() !== '') {
-        // Kung blangko ang code pero may URL (tulad ng Shopee link mo), gagawin nitong clickable banner ang card
+        // Kapag may Shopee link ka o anong link sa config.json, gagawin nitong clickable banner ang card
         targetEl.innerHTML = `
           <a href="${box.url}" target="_blank" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; text-decoration:none; color:inherit; padding:15px; text-align:center;">
             <div class="ad-label">SPONSORED PROMO</div>
@@ -579,40 +582,46 @@ function openModal(type) {
 
   modal.classList.add('active');
   dlBtn.disabled = true;
-  dlBtn.className = 'dl-now ' + (type === '4k' ? 'gold-jelly' : 'blue-jelly');
-  countBox.className = 'count-box ' + (type === '4k' ? 'gold-jelly-box' : 'blue-jelly-box');
-
-  let seconds = type === '4k' ? (SITE_CFG?.downloads?.countdown_4k || 10) : (SITE_CFG?.downloads?.countdown_720 || 5);
-  countText.textContent = seconds + 's';
+  
+  let timeLeft = (type === '4k') ? 10 : 5;
+  countText.textContent = timeLeft + 's';
+  progress.style.transition = 'none';
   progress.style.width = '100%';
 
+  if(type === '4k') {
+    countBox.className = 'count-box gold-jelly-box';
+    dlBtn.className = 'dl-now gold-jelly';
+  } else {
+    countBox.className = 'count-box blue-jelly-box';
+    dlBtn.className = 'dl-now blue-jelly';
+  }
+
+  setTimeout(() => {
+    progress.style.transition = `width ${timeLeft}s linear`;
+    progress.style.width = '0%';
+  }, 50);
+
   if(countdownInt) clearInterval(countdownInt);
-
-  let total = seconds;
-  let current = seconds;
-
   countdownInt = setInterval(() => {
-    current--;
-    if(current > 0) {
-      countText.textContent = current + 's';
-      progress.style.width = ((current / total) * 100) + '%';
+    timeLeft--;
+    if(timeLeft > 0) {
+      countText.textContent = timeLeft + 's';
     } else {
       clearInterval(countdownInt);
       countText.textContent = 'Ready!';
       progress.style.width = '0%';
       dlBtn.disabled = false;
-      dlBtn.textContent = 'Download Now (' + (type === '4k' ? '4K HD' : '720p') + ')';
     }
   }, 1000);
 }
 
 function closeModal() {
-  if(countdownInt) clearInterval(countdownInt);
   document.getElementById('modal').classList.remove('active');
+  if(countdownInt) clearInterval(countdownInt);
 }
 
 function forceDownload() {
-  alert('Starting ' + currentType.toUpperCase() + ' download without watermark!');
+  alert('Simulating download process. Enjoy your video!');
   closeModal();
 }
 </script>
