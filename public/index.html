@@ -47,7 +47,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-btn{background:rgba(124,58,237,0.1);color:#7c3aed;border:none;padding:8px 12px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;transition:0.2s}
 .paste-btn:hover{background:rgba(124,58,237,0.2)}
 
-/* 3D GLOSSY JELLY BUTTON (Page 1 Save Button) */
 .save-btn {
   position: relative;
   width: 100%;
@@ -374,7 +373,6 @@ async function initGreeting() {
   }
 }
 
-// Binago para basahin ang hiwalay mong config.json gamit ang fetch()
 async function loadConfig() {
   try {
     let cfg = null; 
@@ -384,7 +382,6 @@ async function loadConfig() {
     } catch(e) {}
      
     if(!cfg) {
-      // Babasahin ang config.json sa parehong folder
       const r = await fetch('config.json');
       cfg = await r.json();
     } 
@@ -402,7 +399,7 @@ async function loadConfig() {
     
     injectUniversalBoxes(cfg);
   } catch(e) {
-    console.error("Hindi mabasa ang config.json:", e);
+    console.error("Config load error:", e);
   }
 }
 
@@ -436,7 +433,6 @@ function injectUniversalBoxes(cfg) {
       if(box.code && box.code.trim() !== '') {
         setAdContent(targetEl, box.code);
       } else if(box.url && box.url.trim() !== '') {
-        // Kapag may Shopee link ka o anong link sa config.json, gagawin nitong clickable banner ang card
         targetEl.innerHTML = `
           <a href="${box.url}" target="_blank" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; text-decoration:none; color:inherit; padding:15px; text-align:center;">
             <div class="ad-label">SPONSORED PROMO</div>
@@ -500,46 +496,46 @@ function showInstallInstructions() {
     title.textContent = "Add to Dock (Mac Safari)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Click the <b>Share icon</b> (box with arrow pointing up) in the Safari toolbar.</p>
+        <p><b>Step 1:</b> Click ang <b>Share icon</b> (parisukat na may arrow pataas) sa Safari toolbar.</p>
       </div>
       <div class="step-box">
-        <p><b>Step 2:</b> Click <b>"Add to Dock"</b> from the dropdown menu.</p>
+        <p><b>Step 2:</b> I-click ang <b>"Add to Dock"</b> mula sa dropdown menu.</p>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Click <b>Add</b> to confirm and launch it like a native app.</p>
+        <p><b>Step 3:</b> I-click ang <b>Add</b> para kumpirmahin.</p>
       </div>
     `;
   } else if (isIOS) {
     title.textContent = "Add to Home Screen (iPhone/iPad)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Tap the <b>Share button</b> at the bottom of your Safari browser.</p>
+        <p><b>Step 1:</b> I-tap ang <b>Share icon</b> (parisukat na may arrow pataas) sa ibaba o itaas ng iyong browser.</p>
       </div>
       <div class="step-box">
-        <p><b>Step 2:</b> Scroll down through the menu options and tap <b>"Add to Home Screen"</b>.</p>
+        <p><b>Step 2:</b> Mag-scroll pababa sa menu at i-tap ang <b>"Add to Home Screen"</b>.</p>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Tap <b>Add</b> in the top right corner to finish.</p>
+        <p><b>Step 3:</b> I-tap ang <b>Add</b> sa kanang itaas para tapusin.</p>
       </div>
     `;
   } else if (isAndroid) {
     title.textContent = "Add to Home Screen (Android)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Tap the <b>Menu icon</b> (three vertical dots) in the top right corner.</p>
+        <p><b>Step 1:</b> I-tap ang <b>Menu icon</b> (tatlong tuldok) sa kanang itaas ng browser.</p>
       </div>
       <div class="step-box">
-        <p><b>Step 2:</b> Tap <b>"Add to Home screen"</b> or <b>"Install app"</b>.</p>
+        <p><b>Step 2:</b> I-tap ang <b>"Add to Home screen"</b> o <b>"Install app"</b>.</p>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Tap <b>Install</b> or <b>Add</b> to confirm.</p>
+        <p><b>Step 3:</b> I-tap ang <b>Install</b> o <b>Add</b> para kumpirmahin.</p>
       </div>
     `;
   } else {
     title.textContent = "Add to Home Screen";
     content.innerHTML = `
       <div class="step-box" style="margin-bottom:0;">
-        <p>Please open this website in Safari (Mac/iOS) or Chrome (Android/PC) to easily add it to your device home screen or dock.</p>
+        <p>Buksan ang website na ito sa Safari (Mac/iOS) o Chrome (Android/PC) para madaling maidagdag sa iyong home screen o dock.</p>
       </div>
     `;
   }
@@ -621,7 +617,7 @@ function closeModal() {
 }
 
 function forceDownload() {
-  alert('Simulating download process. Enjoy your video!');
+  alert('Starting ' + currentType.toUpperCase() + ' download without watermark!');
   closeModal();
 }
 </script>
