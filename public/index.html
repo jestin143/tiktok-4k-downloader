@@ -12,26 +12,60 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#f3e8ff">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TikTok 4K Downloader","description":"Download TikTok videos in 4K HD without watermark free","url":"https://tiktok-4k-downloader.vercel.app/","applicationCategory":"MultimediaApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-height:100vh;overflow-x:hidden;position:relative}
 
 /* --- JELLY GLOWING LIGHTS BACKGROUND BLOBS --- */
 .blob{position:fixed;border-radius:50%;filter:blur(110px);opacity:0.65;z-index:0;pointer-events:none;animation:float 18s ease-in-out infinite alternate}
-.b1{width:340px;height:340px;background:#a855f7;left:5%;top:5%;animation-duration:14s} /* Purple / Violet */
-.b2{width:300px;height:300px;background:#ec4899;right:5%;top:8%;animation-duration:20s} /* Pink / Magenta */
-.b3{width:320px;height:320px;background:#3b82f6;left:15%;top:45%;animation-duration:17s} /* Blue / Cyan */
-.b4{width:280px;height:280px;background:#10b981;right:18%;top:40%;animation-duration:22s} /* Green / Mint */
-.b5{width:290px;height:290px;background:#f59e0b;left:25%;bottom:5%;animation-duration:16s} /* Yellow / Gold */
-.b6{width:270px;height:270px;background:#f97316;right:8%;bottom:10%;animation-duration:19s} /* Orange */
-.b7{width:260px;height:260px;background:#ef4444;left:45%;top:25%;animation-duration:25s} /* Red */
+.b1{width:340px;height:340px;background:#a855f7;left:5%;top:5%;animation-duration:14s}
+.b2{width:300px;height:300px;background:#ec4899;right:5%;top:8%;animation-duration:20s}
+.b3{width:320px;height:320px;background:#3b82f6;left:15%;top:45%;animation-duration:17s}
+.b4{width:280px;height:280px;background:#10b981;right:18%;top:40%;animation-duration:22s}
+.b5{width:290px;height:290px;background:#f59e0b;left:25%;bottom:5%;animation-duration:16s}
+.b6{width:270px;height:270px;background:#f97316;right:8%;bottom:10%;animation-duration:19s}
+.b7{width:260px;height:260px;background:#ef4444;left:45%;top:25%;animation-duration:25s}
 
 @keyframes float{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-25px) scale(1.08)}100%{transform:translate(-20px,25px) scale(0.95)}}
 
+/* --- ANIMATIONS FOR BUTTONS --- */
+@keyframes jellyColorFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes jellyPulse {
+  0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 5px 15px rgba(59, 130, 246, 0.3); }
+  100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(99, 102, 241, 0.7); }
+}
+@keyframes goldPulse {
+  0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 5px 15px rgba(245, 158, 11, 0.4); }
+  100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(255, 112, 67, 0.75); }
+}
+@keyframes installPulse {
+  0% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.2), 0 5px 15px rgba(6, 182, 212, 0.3); }
+  100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.2), 0 12px 28px rgba(16, 185, 129, 0.6); }
+}
+
 .container{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:16px 16px 40px}
 .header{display:flex;justify-content:space-between;align-items:center;padding:12px 4px}
-.logo{font-weight:700;font-size:14px;color:#0a0a0a}
+
+/* --- LOGO STYLE --- */
+.logo{
+  font-weight: 700;
+  font-size: 13px;
+  color: #0a0a0a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo svg {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
 .pill{padding:6px 14px;background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.8);box-shadow:0 8px 32px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,1);border-radius:9999px;font-size:11px;font-weight:500;color:#374151}
 .headline{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0a0a0a;text-align:center;margin-top:48px}
 @media(max-width:600px){.headline{font-size:28px}}
@@ -47,12 +81,54 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-btn{background:linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(168,85,247,0.2) 100%);color:#7c3aed;border:1px solid rgba(124,58,237,0.2);padding:8px 16px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;transition:all 0.25s ease}
 .paste-btn:hover{background:rgba(124,58,237,0.3);transform:scale(1.05)}
 
-.save-btn{width:100%;max-width:380px;margin-top:16px;padding:16px;background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);color:#fff;font-size:14px;font-weight:700;border:none;border-radius:9999px;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,0.35),inset 0 1px 0 rgba(255,255,255,0.25);transition:all 0.25s ease}
-.save-btn:hover{transform:translateY(-2px);box-shadow:0 15px 30px rgba(124,58,237,0.45);background:linear-gradient(135deg,#8b5cf6 0%,#6366f1 100%)}
-.save-btn:active{transform:translateY(0)}
+/* --- 3D GLOSSY JELLY BUTTON (SAVE HD VIDEO) --- */
+.save-btn{
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 16px;
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6, #06b6d4, #ec4899);
+  background-size: 300% 300%;
+  animation: jellyColorFlow 5s ease infinite, jellyPulse 2s ease-in-out infinite alternate;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(139, 92, 246, 0.4);
+  transition: transform 0.2s ease;
+}
+.save-btn:hover { transform: translateY(-2px); }
+.save-btn:active { transform: translateY(0); }
 
-.install-app-btn{width:100%;max-width:380px;margin-top:10px;padding:14px;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,1);color:#374151;font-size:12px;font-weight:600;border-radius:9999px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.04);transition:all 0.25s ease}
-.install-app-btn:hover{background:#fff;color:#7c3aed;border-color:#7c3aed;transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,0.15)}
+/* --- INSTALL APP BUTTON --- */
+.install-app-btn{
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin-top: 12px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #10b981, #06b6d4, #3b82f6, #10b981);
+  background-size: 300% 300%;
+  animation: jellyColorFlow 6s ease infinite, installPulse 2s ease-in-out infinite alternate;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.2), 0 8px 20px rgba(16, 185, 129, 0.35);
+  transition: transform 0.2s ease;
+}
+.install-app-btn:hover { transform: translateY(-2px); }
 
 .ad-big{margin:32px auto 0;max-width:680px;width:100%;height:280px;background:rgba(255,255,255,.45);backdrop-filter:blur(16px);border:2px dashed rgba(255,255,255,.8);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
 .ad-big-page2{height:360px;max-width:680px}
@@ -67,11 +143,55 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .v-creator{font-size:11px;color:#6b7280;margin-top:4px}
 .dl-wrap{max-width:380px;margin:24px auto 0;display:flex;flex-direction:column;gap:12px}
 
-.btn-gold{width:100%;background:linear-gradient(135deg,#fde047 0%,#facc15 100%);color:#713f12;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:16px;cursor:pointer;box-shadow:0 8px 22px rgba(250,204,21,0.4);transition:all 0.25s ease}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(250,204,21,0.55);background:linear-gradient(135deg,#fef08a 0%,#fde047 100%)}
+/* --- 3D GOLD JELLY BUTTON (4K OPTION) --- */
+.btn-gold{
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #ea580c, #ff7043, #fbbf24, #ea580c);
+  background-size: 300% 300%;
+  animation: jellyColorFlow 5s ease infinite, goldPulse 2s ease-in-out infinite alternate;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(255, 112, 67, 0.6);
+  transition: transform 0.2s ease;
+}
+.btn-gold:hover { transform: translateY(-2px); }
 
-.btn-white{width:100%;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,1);color:#1f2937;font-size:13px;font-weight:700;border-radius:9999px;padding:16px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.04);transition:all 0.25s ease}
-.btn-white:hover{background:#fff;color:#7c3aed;border-color:#7c3aed;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
+/* --- 3D VIBRANT WHITE/BLUE JELLY BUTTON (720P OPTION) --- */
+.btn-white{
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 16px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #3b82f6, #6366f1, #a855f7, #3b82f6);
+  background-size: 300% 300%;
+  animation: jellyColorFlow 5s ease infinite, jellyPulse 2s ease-in-out infinite alternate;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(59, 130, 246, 0.4);
+  transition: transform 0.2s ease;
+}
+.btn-white:hover { transform: translateY(-2px); }
 
 .ads-col{max-width:680px;margin:32px auto 0}
 #modal{display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.3);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:16px}
@@ -114,7 +234,13 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 
 <div class="container">
 <div id="page1">
-<div class="header"><div class="logo">TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
+<div class="header">
+  <div class="logo">
+    <svg viewBox="0 0 512 512"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9333ea"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#ec4899"/></linearGradient><linearGradient id="lgg" x1="0%" y1="0%" x2="0%" y2="60%"><stop offset="0%" stop-color="#fff" stop-opacity="0.6"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="128" fill="url(#lg)"/><rect width="512" height="256" rx="128" fill="url(#lgg)"/><path d="M256 130v170m0 0l-65-65m65 65l65-65" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><rect x="176" y="328" width="160" height="72" rx="36" fill="#fff"/><text x="256" y="378" font-family="Inter, sans-serif" font-weight="800" font-size="38" fill="#111" text-anchor="middle">4K</text></svg>
+    TikTok 4K Downloader.com
+  </div>
+  <div class="pill">No watermark • Fast • HD 4K</div>
+</div>
 <div class="headline">Download TikTok Videos in 4K</div>
 <div class="sub">Paste link below and save HD videos without watermark</div>
 <div class="social-proof">🔥 <span id="counter">14,285</span> videos downloaded today</div>
@@ -146,9 +272,18 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 
 </div>
 <div id="page2">
-<div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
+<div class="header">
+  <div class="logo" onclick="showPage1()" style="cursor:pointer">
+    <svg viewBox="0 0 512 512"><defs><linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9333ea"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#ec4899"/></linearGradient><linearGradient id="lgg2" x1="0%" y1="0%" x2="0%" y2="60%"><stop offset="0%" stop-color="#fff" stop-opacity="0.6"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="128" fill="url(#lg2)"/><rect width="512" height="256" rx="128" fill="url(#lgg2)"/><path d="M256 130v170m0 0l-65-65m65 65l65-65" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><rect x="176" y="328" width="160" height="72" rx="36" fill="#fff"/><text x="256" y="378" font-family="Inter, sans-serif" font-weight="800" font-size="38" fill="#111" text-anchor="middle">4K</text></svg>
+    TikTok 4K Downloader.com
+  </div>
+  <div class="pill">No watermark • Fast • HD 4K</div>
+</div>
 <div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
-<div class="dl-wrap"><button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button><button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button></div>
+<div class="dl-wrap">
+  <button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button>
+  <button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button>
+</div>
 <div class="ads-col"><div class="ad-big ad-big-page2"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Big Ad Card — Page 2</div></div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
@@ -179,7 +314,10 @@ async function loadConfig(){
     
     SITE_CFG=cfg; 
     if(cfg.site){ 
-      if(cfg.site.logo) document.querySelector('.logo').textContent=cfg.site.logo; 
+      if(cfg.site.logo) {
+        const logoEl = document.querySelector('.logo');
+        if(logoEl) logoEl.childNodes[logoEl.childNodes.length - 1].textContent = " " + cfg.site.logo;
+      }
       if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill; 
       if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline; 
       if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub; 
@@ -268,7 +406,23 @@ function showInstallInstructions() {
   const content = document.getElementById('installContent');
   const title = document.getElementById('installModalTitle');
 
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+  const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(userAgent) && !/Macintosh|Windows/.test(userAgent);
+  const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent) || (!isIOS && !isAndroid && navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
+
+  if (isMac || (!isIOS && !isAndroid && /Mac|Win|Linux/.test(userAgent))) {
+    title.textContent = "Save to Bookmarks on Mac / PC";
+    content.innerHTML = `
+      <div class="step-box">
+        <p><b>Step 1:</b> Press this keyboard shortcut to bookmark this page:</p>
+        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:14px; font-weight:700; color:#7c3aed; border:1px solid #e5e7eb; margin-top:6px;">⌨️ Press Cmd + D (Mac) or Ctrl + D (PC)</div>
+      </div>
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Step 2:</b> Click <b>"Done"</b> or <b>"Add"</b> on your browser's pop-up to save it for quick access.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">⭐ Ready to use anytime!</div>
+      </div>
+    `;
+  } else if (isIOS) {
     title.textContent = "Install on iPhone (Safari)";
     content.innerHTML = `
       <div class="step-box">
@@ -295,7 +449,7 @@ function showInstallInstructions() {
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Done! 🎉</div>
       </div>
     `;
-  } else {
+  } else if (isAndroid) {
     title.textContent = "Install on Android (Chrome)";
     content.innerHTML = `
       <div class="step-box">
@@ -316,6 +470,14 @@ function showInstallInstructions() {
       <div class="step-box" style="margin-bottom:0;">
         <p><b>Step 3:</b> Confirm the installation. Ready to use!</p>
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Ready to use! 🚀</div>
+      </div>
+    `;
+  } else {
+    title.textContent = "Bookmark App (Desktop / PC)";
+    content.innerHTML = `
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Quick Shortcut:</b> Press <b style="color:#7c3aed">Ctrl + D</b> or <b style="color:#7c3aed">Cmd + D</b> to bookmark this page.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#374151; border:1px solid #e5e7eb;">⭐ Bookmark this tab</div>
       </div>
     `;
   }
