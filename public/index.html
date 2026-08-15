@@ -73,7 +73,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .save-btn:hover { transform: translateY(-2px); }
 
-/* OPTION 3 NEON FIRE GOLD JELLY STYLE (4K Option) */
 .btn-gold {
   position: relative;
   width: 100%;
@@ -103,7 +102,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(255, 112, 67, 0.75); }
 }
 
-/* VIBRANT GLOWING JELLY BUTTON (720p Option) */
 .btn-white {
   position: relative;
   width: 100%;
@@ -151,7 +149,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   to { transform: rotate(360deg); }
 }
 
-/* ADD TO HOME SCREEN WITH JELLY GLOW */
 .install-app-btn {
   position: relative;
   width: 100%;
@@ -197,7 +194,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .close{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:9999px;background:rgba(0,0,0,.05);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#555}
 .modal-ad-big{height:260px!important;width:100%;margin-top:8px;transition:height.3s ease}
 
-/* COUNTDOWN JELLY BOX STYLING */
 .count-box {
   padding: 16px;
   border-radius: 20px;
@@ -220,22 +216,14 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.2), 0 10px 25px rgba(59, 130, 246, 0.4);
 }
-.count-box.gold-jelly-box .count, .count-box.blue-jelly-box .count {
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-.count-box.gold-jelly-box .progress-inner, .count-box.blue-jelly-box .progress-inner {
-  background: #fff;
-}
-.count-box.gold-jelly-box .progress, .count-box.blue-jelly-box .progress {
-  background: rgba(255,255,255,0.3);
-}
+.count-box.gold-jelly-box .count, .count-box.blue-jelly-box .count { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+.count-box.gold-jelly-box .progress-inner, .count-box.blue-jelly-box .progress-inner { background: #fff; }
+.count-box.gold-jelly-box .progress, .count-box.blue-jelly-box .progress { background: rgba(255,255,255,0.3); }
 
 .count{font-size:24px;font-weight:700;color:#333;text-align:center}
 .progress{height:4px;background:#e5e7eb;border-radius:9999px;margin-top:8px;overflow:hidden}
 .progress-inner{height:100%;background:linear-gradient(90deg,#9ca3af,#6b7280);width:100%;transition:width 1s linear}
 
-/* JELLY GLOW STYLES FOR THE MODAL DOWNLOAD BUTTON */
 .dl-now {
   position: relative;
   width: 100%;
@@ -252,21 +240,16 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   transition: transform 0.2s ease;
 }
 .dl-now:not(:disabled):hover { transform: translateY(-2px); }
-
-/* Gold Jelly Theme for 4K Modal Button */
 .dl-now.gold-jelly {
   background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #ea580c, #ff7043, #fbbf24, #ea580c);
   animation: jellyColorFlow 5s ease infinite, goldPulse 2s ease-in-out infinite alternate;
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(255, 112, 67, 0.5);
 }
-
-/* Blue Jelly Theme for 720p Modal Button */
 .dl-now.blue-jelly {
   background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #3b82f6, #6366f1, #a855f7, #3b82f6);
   animation: jellyColorFlow 5s ease infinite, jellyPulse 2s ease-in-out infinite alternate;
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(59, 130, 246, 0.4);
 }
-
 .dl-now:disabled {
   background: #9ca3af !important;
   animation: none !important;
@@ -275,7 +258,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   text-shadow: none;
 }
 
-/* Install Modal Styling */
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
 .install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
@@ -368,7 +350,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   </div>
 </div>
 
-<!-- Add to Home Screen Auto-Detect Modal -->
 <div id="installModal">
   <div class="install-card">
     <h3 id="installModalTitle" style="font-size:16px; font-weight:700; margin-bottom:12px; color:#111;">Add to Home Screen</h3>
@@ -398,7 +379,7 @@ async function loadConfig() {
     let cfg = null; 
     try {
       const local = JSON.parse(localStorage.getItem('tiktok_ads_override') || 'null'); 
-      if(local && local.ads) cfg = { ads: local.ads, site: local.site || {}, downloads: local.downloads || {} }; 
+      if(local) cfg = local; 
     } catch(e) {}
      
     if(!cfg) {
@@ -417,8 +398,8 @@ async function loadConfig() {
       if(cfg.downloads.btn720_label) document.querySelector('.btn-white').textContent = cfg.downloads.btn720_label;
     } 
     
-    // Depend ang mga ad cards sa config data
-    injectAds(cfg.ads);
+    // Suportahan ang pag-basa mula sa universal_boxes
+    injectUniversalBoxes(cfg);
   } catch(e) {}
 }
 
@@ -434,31 +415,35 @@ function setAdContent(element, htmlCode) {
   });
 }
 
-function injectAds(ads) {
+function injectUniversalBoxes(cfg) {
   let local = null;
   try { local = JSON.parse(localStorage.getItem('tiktok_ads_override') || 'null'); } catch(e) {}
-  if(local && local.ads) ads = local.ads; 
-  if(!ads) return;
+  if(local) cfg = local; 
+  if(!cfg || !cfg.universal_boxes) return;
    
-  // Page 1 Ad
-  const p1 = document.getElementById('adPage1');
-  if(p1 && ads.page1 && ads.page1.code) {
-    setAdContent(p1, ads.page1.code);
-  }
+  cfg.universal_boxes.forEach(box => {
+    if(!box.enabled) return;
+    
+    let targetEl = null;
+    if(box.position === 'page1') targetEl = document.getElementById('adPage1');
+    else if(box.position === 'page2') targetEl = document.getElementById('adPage2');
+    else if(box.position === 'modal') targetEl = document.getElementById('adModal');
 
-  // Page 2 Ad
-  const p2 = document.getElementById('adPage2');
-  if(p2 && ads.page2 && ads.page2.code) {
-    setAdContent(p2, ads.page2.code);
-  }
-
-  // Modal Ad
-  const m = document.getElementById('adModal');
-  if(m && ads.modal && ads.modal.code) {
-    setAdContent(m, ads.modal.code);
-    if(ads.modal.height_4k) m.dataset.h4k = ads.modal.height_4k;
-    if(ads.modal.height_720) m.dataset.h720 = ads.modal.height_720;
-  }
+    if(targetEl) {
+      if(box.code && box.code.trim() !== '') {
+        setAdContent(targetEl, box.code);
+      } else if(box.url && box.url.trim() !== '') {
+        // Kung blangko ang code pero may URL (tulad ng Shopee link mo), gagawin nitong clickable banner ang card
+        targetEl.innerHTML = `
+          <a href="${box.url}" target="_blank" style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; text-decoration:none; color:inherit; padding:15px; text-align:center;">
+            <div class="ad-label">SPONSORED PROMO</div>
+            <div style="font-weight:700; font-size:14px; color:#7c3aed; margin-top:8px;">🔥 Tap to check out exclusive featured items!</div>
+            <div class="ad-prev" style="word-break:break-all; max-width:90%; margin-top:4px;">${box.url}</div>
+          </a>
+        `;
+      }
+    }
+  });
 }
 
 initGreeting();
@@ -513,15 +498,6 @@ function showInstallInstructions() {
     content.innerHTML = `
       <div class="step-box">
         <p><b>Step 1:</b> Click the <b>Share icon</b> (box with arrow pointing up) in the Safari toolbar.</p>
-        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:8px; display:flex; justify-content:center; align-items:center; gap:16px;">
-          <span style="color:#6b7280; font-size:18px;">‹</span>
-          <span style="color:#6b7280; font-size:18px;">›</span>
-          <div style="position:relative; display:inline-block;">
-            <div style="border:2px solid #3b82f6; border-radius:8px; padding:4px 8px; background:rgba(59,130,246,0.15);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="step-box">
         <p><b>Step 2:</b> Click <b>"Add to Dock"</b> from the dropdown menu.</p>
