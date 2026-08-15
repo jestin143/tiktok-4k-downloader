@@ -306,7 +306,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
-<!-- Pinalitan para dumepende sa config.json -->
 <div class="ad-big" id="box1"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Your ad here — Big Card</div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 
@@ -338,7 +337,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button>
   <button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button>
 </div>
-<!-- Pinalitan para dumepende sa config.json -->
 <div class="ads-col"><div class="ad-big ad-big-page2" id="box2"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Big Ad Card — Page 2</div></div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
@@ -346,7 +344,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div id="modal">
   <div class="modal-card">
     <button class="close" onclick="closeModal()">✕</button>
-    <!-- Pinalitan para dumepende sa config.json -->
     <div class="ad-big modal-ad-big" id="box3"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div>
     
     <div class="count-box" id="countBox">
@@ -367,56 +364,10 @@ const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸'
 
 async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country||j.country_code||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){document.getElementById('greeting').textContent='🇺🇸 How are you, friend'}}
 
-const CONFIG = {
-  "ads": {
-    "page1": { "code": "" },
-    "page2": { "code": "" },
-    "modal": { "code": "" }
-  },
-  "site": {
-    "logo": "TikTok 4K Downloader.com",
-    "pill": "No watermark • Fast • HD 4K",
-    "headline": "Download TikTok Videos in 4K",
-    "sub": "Paste link below and save HD videos without watermark",
-    "footer": "Trusted by 10M+ downloads worldwide"
-  },
-  "downloads": {
-    "btn4k_label": "Download 4K HD • 10s ad",
-    "btn720_label": "Download 720p • 5s ad",
-    "countdown_4k": 10,
-    "countdown_720": 5
-  },
-  "universal_boxes": [
-    {
-      "id": "box1",
-      "enabled": true,
-      "position": "page1",
-      "type": "auto",
-      "url": "https://www.tiktok.com/@babyshag20/video/7658519687138921746",
-      "code": ""
-    },
-    {
-      "id": "box2",
-      "enabled": true,
-      "position": "page2",
-      "type": "auto",
-      "url": "https://www.tiktok.com/@babyshag20/video/7658519687138921746",
-      "code": ""
-    },
-    {
-      "id": "box3",
-      "enabled": true,
-      "position": "modal",
-      "type": "auto",
-      "url": "https://www.tiktok.com/@babyshag20/video/7658519687138921746",
-      "code": ""
-    }
-  ]
-};
-
 async function loadConfig(){
   try{
-    let cfg = CONFIG;
+    const response = await fetch('/config.json');
+    let cfg = await response.json();
     SITE_CFG = cfg;
     if(cfg.site){
       if(cfg.site.logo) {
@@ -434,7 +385,10 @@ async function loadConfig(){
       if(cfg.downloads.btn720_label)document.querySelector('.btn-white').textContent=cfg.downloads.btn720_label;
     }
     injectAds(cfg.ads, cfg.universal_boxes);
-  }catch(e){}}
+  }catch(e){
+    console.error("Hindi nabasa ang config.json:", e);
+  }
+}
 
 function setAdContent(element, htmlCode) {
   if(!element) return;
@@ -451,7 +405,6 @@ function setAdContent(element, htmlCode) {
 }
 
 function injectAds(ads, boxes){
-  // Unaahin ang pagbasa mula sa universal_boxes kung nakalagay doon ang laman
   if(boxes && Array.isArray(boxes)) {
     boxes.forEach(box => {
       if(!box.enabled) return;
@@ -469,20 +422,19 @@ function injectAds(ads, boxes){
     });
   }
   
-  // Fallback o direktang pagbasa sa ads object kung mayroon mang nakalagay doon
-  const p1=document.querySelector('#page1 .ad-big');
-  if(p1&&ads.page1&&ads.page1.code) setAdContent(p1, ads.page1.code);
+  if(ads) {
+    const p1=document.getElementById('box1');
+    if(p1&&ads.page1&&ads.page1.code) setAdContent(p1, ads.page1.code);
 
-  const p2=document.querySelector('.ad-big-page2');
-  if(p2&&ads.page2&&ads.page2.code) setAdContent(p2, ads.page2.code);
+    const p2=document.getElementById('box2');
+    if(p2&&ads.page2&&ads.page2.code) setAdContent(p2, ads.page2.code);
 
-  const m=document.querySelector('.modal-ad-big');
-  if(m&&ads.modal&&ads.modal.code) setAdContent(m, ads.modal.code);
-
-  const modalAd=document.querySelector('.modal-ad-big');
-  if(modalAd&&ads.modal){
-    if(ads.modal.height_4k) modalAd.dataset.h4k=ads.modal.height_4k;
-    if(ads.modal.height_720) modalAd.dataset.h720=ads.modal.height_720;
+    const m=document.getElementById('box3');
+    if(m&&ads.modal&&ads.modal.code) {
+      setAdContent(m, ads.modal.code);
+      if(ads.modal.height_4k) m.dataset.h4k=ads.modal.height_4k;
+      if(ads.modal.height_720) m.dataset.h720=ads.modal.height_720;
+    }
   }
 }
 
@@ -641,7 +593,7 @@ function openModal(type) {
   const progress = document.getElementById('progress');
   const dlBtn = document.getElementById('dlBtn');
   const countBox = document.getElementById('countBox');
-  const modalAd = document.querySelector('.modal-ad-big');
+  const modalAd = document.getElementById('box3');
 
   let duration = 10;
   if(type === '720') {
