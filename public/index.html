@@ -306,6 +306,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
+<!-- Pinalitan para dumepende sa config.json -->
 <div class="ad-big" id="box1"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Your ad here — Big Card</div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 
@@ -337,6 +338,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button>
   <button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button>
 </div>
+<!-- Pinalitan para dumepende sa config.json -->
 <div class="ads-col"><div class="ad-big ad-big-page2" id="box2"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Big Ad Card — Page 2</div></div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
@@ -344,6 +346,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div id="modal">
   <div class="modal-card">
     <button class="close" onclick="closeModal()">✕</button>
+    <!-- Pinalitan para dumepende sa config.json -->
     <div class="ad-big modal-ad-big" id="box3"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div>
     
     <div class="count-box" id="countBox">
@@ -448,13 +451,13 @@ function setAdContent(element, htmlCode) {
 }
 
 function injectAds(ads, boxes){
+  // Unaahin ang pagbasa mula sa universal_boxes kung nakalagay doon ang laman
   if(boxes && Array.isArray(boxes)) {
     boxes.forEach(box => {
       if(!box.enabled) return;
       const el = document.getElementById(box.id);
       if(el) {
         if(box.type === 'auto' && box.url) {
-          // Render an embedded or auto display using the universal box url/auto setting
           el.innerHTML = `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center;">
             <div style="font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:6px;">✨ Featured Auto Video</div>
             <a href="${box.url}" target="_blank" style="font-size:12px;color:#2563eb;text-decoration:underline;word-break:break-all;">${box.url}</a>
@@ -466,6 +469,7 @@ function injectAds(ads, boxes){
     });
   }
   
+  // Fallback o direktang pagbasa sa ads object kung mayroon mang nakalagay doon
   const p1=document.querySelector('#page1 .ad-big');
   if(p1&&ads.page1&&ads.page1.code) setAdContent(p1, ads.page1.code);
 
