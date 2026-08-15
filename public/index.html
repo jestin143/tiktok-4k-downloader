@@ -8,6 +8,7 @@
 <meta property="og:description" content="Download TikTok videos in 4K HD without watermark. Free & Fast!">
 <meta property="og:url" content="https://tiktok-4k-downloader.vercel.app/">
 <meta property="og:type" content="website">
+<!-- PWA Mobile App Meta Tags -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#f3e8ff">
@@ -36,8 +37,8 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-btn{background:rgba(124,58,237,0.1);color:#7c3aed;border:none;padding:8px 12px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;transition:0.2s}
 .paste-btn:hover{background:rgba(124,58,237,0.2)}
 
-/* 3D GLOSSY JELLY BUTTON STYLING (Shared for Save & Download Options) */
-.save-btn, .btn-gold, .btn-white {
+/* 3D GLOSSY JELLY BUTTON (Page 1 Save Button) */
+.save-btn {
   position: relative;
   width: 100%;
   max-width: 380px;
@@ -58,11 +59,59 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   animation: jellyColorFlow 5s ease infinite, jellyPulse 2s ease-in-out infinite alternate;
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(139, 92, 246, 0.4);
   transition: transform 0.2s ease;
+  margin-top: 16px;
 }
-.save-btn { margin-top: 16px; }
-.save-btn:hover, .btn-gold:hover, .btn-white:hover {
+.save-btn:hover { transform: translateY(-2px); }
+
+/* PREMIUM LUXURY GOLD & OBSIDIAN BLACK BUTTON (4K Option) */
+.btn-gold {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #facc15; /* Luxury Gold Text */
+  background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #000000 100%);
+  border: 1px solid rgba(250, 204, 21, 0.5);
+  box-shadow: inset 0 2px 4px rgba(250,204,21,0.3), inset 0 -3px 6px rgba(0,0,0,0.8), 0 12px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+.btn-gold:hover {
   transform: translateY(-2px);
+  box-shadow: inset 0 2px 6px rgba(250,204,21,0.5), inset 0 -3px 6px rgba(0,0,0,0.8), 0 15px 35px rgba(250, 204, 21, 0.25);
 }
+
+/* 720p Button (Standard Glass Style) */
+.btn-white {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #1f2937;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease;
+}
+.btn-white:hover { transform: translateY(-2px); background: rgba(255, 255, 255, 1); }
+
 @keyframes jellyColorFlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -163,7 +212,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
 <div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
 <div class="dl-wrap">
-  <button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button>
+  <button class="btn-gold" onclick="openModal('4k')">⭐ Download 4K HD • 10s ad</button>
   <button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button>
 </div>
 <div class="ads-col"><div class="ad-big ad-big-page2"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Big Ad Card — Page 2</div></div></div>
@@ -172,6 +221,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 </div>
 <div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
 
+<!-- Add to Home Screen Auto-Detect Modal -->
 <div id="installModal"><div class="install-card"><h3 id="installModalTitle" style="font-size:16px; font-weight:700; margin-bottom:12px; color:#111;">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px; width:100%; background:#0a0a0a; color:#fff; border:none; padding:10px; border-radius:9999px; font-weight:700; cursor:pointer; font-size:13px;">Got it</button></div></div>
 
 <script>
