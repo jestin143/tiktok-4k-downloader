@@ -471,15 +471,30 @@ function showInstallInstructions() {
   const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent) || (!isIOS && !isAndroid && navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
 
   if (isMac || (!isIOS && !isAndroid && /Mac|Win|Linux/.test(userAgent))) {
-    title.textContent = "Save to Bookmarks on Mac / PC";
+    title.textContent = "Add to Dock (Mac Safari)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Press this keyboard shortcut to bookmark this page:</p>
-        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:14px; font-weight:700; color:#7c3aed; border:1px solid #e5e7eb; margin-top:6px;">⌨️ Press Cmd + D (Mac) or Ctrl + D (PC)</div>
+        <p><b>Step 1:</b> Click the <b>Share icon</b> (box with arrow pointing up) in the Safari toolbar.</p>
+        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:8px; display:flex; justify-content:center; align-items:center; gap:16px;">
+          <span style="color:#6b7280; font-size:18px;">‹</span>
+          <span style="color:#6b7280; font-size:18px;">›</span>
+          <div style="position:relative; display:inline-block;">
+            <div style="border:2px solid #3b82f6; border-radius:8px; padding:4px 8px; background:rgba(59,130,246,0.15);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+            </div>
+            <div style="position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); color:#3b82f6; font-size:14px; font-weight:bold;">▲</div>
+          </div>
+          <span style="color:#6b7280; font-size:18px;">📖</span>
+          <span style="color:#6b7280; font-size:18px;">❏</span>
+        </div>
+      </div>
+      <div class="step-box">
+        <p><b>Step 2:</b> Click <b>"Add to Dock"</b> from the drop-down menu.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">📌 Add to Dock</div>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 2:</b> Click <b>"Done"</b> or <b>"Add"</b> on your browser's pop-up to save it for quick access.</p>
-        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">⭐ Ready to use anytime!</div>
+        <p><b>Step 3:</b> Click <b>"Add"</b> to confirm. Success!</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Success! 🎉</div>
       </div>
     `;
   } else if (isIOS) {
