@@ -8,7 +8,6 @@
 <meta property="og:description" content="Download TikTok videos in 4K HD without watermark. Free & Fast!">
 <meta property="og:url" content="https://tiktok-4k-downloader.vercel.app/">
 <meta property="og:type" content="website">
-<!-- PWA Mobile App Meta Tags (Feature 3) -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#f3e8ff">
@@ -37,12 +36,11 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-btn{background:rgba(124,58,237,0.1);color:#7c3aed;border:none;padding:8px 12px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;transition:0.2s}
 .paste-btn:hover{background:rgba(124,58,237,0.2)}
 
-/* NEW 3D GLOSSY JELLY BUTTON STYLING */
-.save-btn {
+/* 3D GLOSSY JELLY BUTTON STYLING (Shared for Save & Download Options) */
+.save-btn, .btn-gold, .btn-white {
   position: relative;
   width: 100%;
   max-width: 380px;
-  margin-top: 16px;
   padding: 16px;
   font-size: 14px;
   font-weight: 700;
@@ -61,7 +59,8 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(139, 92, 246, 0.4);
   transition: transform 0.2s ease;
 }
-.save-btn:hover {
+.save-btn { margin-top: 16px; }
+.save-btn:hover, .btn-gold:hover, .btn-white:hover {
   transform: translateY(-2px);
 }
 @keyframes jellyColorFlow {
@@ -100,9 +99,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .cover img{width:100%;height:100%;object-fit:cover;border-radius:12px}
 .v-title{font-size:13px;font-weight:700;margin-top:12px;color:#111}
 .v-creator{font-size:11px;color:#6b7280;margin-top:4px}
-.dl-wrap{max-width:380px;margin:24px auto 0;display:flex;flex-direction:column;gap:12px}
-.btn-gold{width:100%;background:linear-gradient(180deg,#fef08a 0%,#facc15 100%);color:#000;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:15px;cursor:pointer;box-shadow:0 8px 22px rgba(250,204,21,0.35)}
-.btn-white{width:100%;background:rgba(255,255,255,.8);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);color:#374151;font-size:13px;font-weight:700;border-radius:9999px;padding:15px;cursor:pointer}
+.dl-wrap{max-width:380px;margin:24px auto 0;display:flex;flex-direction:column;gap:12px;align-items:center}
 .ads-col{max-width:680px;margin:32px auto 0}
 #modal{display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.3);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:16px}
 #modal.active{display:flex}
@@ -115,19 +112,18 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .dl-now{width:100%;background:#0a0a0a;color:#fff;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:14px;margin-top:16px;cursor:pointer}
 .dl-now:disabled{background:rgba(10,10,10,.5)}
 
-/* Install Guide Modal Styling */
-#installModal{display:none;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.4);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:16px}
+/* Install Modal Styling */
+#installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
-.install-card{background:rgba(255,255,255,.95);backdrop-filter:blur(32px);border:1px solid rgba(255,255,255,1);box-shadow:0 30px 80px rgba(0,0,0,.2);border-radius:28px;max-width:400px;width:100%;padding:24px;position:relative;text-align:left}
-.install-card h3{font-size:16px;font-weight:700;color:#111;margin-bottom:12px}
-.install-card p{font-size:13px;color:#4b5563;line-height:1.6;margin-bottom:10px}
-.install-card ol{padding-left:18px;font-size:13px;color:#4b5563;line-height:1.7}
+.install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
+.step-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-bottom:10px;text-align:left}
+.step-box p{font-size:12px;color:#374151;font-weight:600;margin-bottom:8px}
 
 .seo-box{max-width:680px;margin:50px auto 0;padding:20px;background:rgba(255,255,255,.5);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7);border-radius:16px;font-size:13px;color:#4b5563;line-height:1.7}
 .seo-box h2{color:#0a0a0a;font-size:15px;margin:18px 0 8px}
 .footer-links{text-align:center;margin-top:30px;padding:20px 10px;font-size:11px;color:#9ca3af;line-height:1.8}
 .footer-links a{color:#7c3aed;text-decoration:none;margin:0 8px;font-weight:500}
-@media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.install-app-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
+@media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn, .btn-gold, .btn-white{max-width:340px}.install-app-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
 </style></head><body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><div class="blob b6"></div>
 <div class="container">
@@ -166,26 +162,17 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div id="page2">
 <div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
 <div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
-<div class="dl-wrap"><button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button><button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button></div>
+<div class="dl-wrap">
+  <button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button>
+  <button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button>
+</div>
 <div class="ads-col"><div class="ad-big ad-big-page2"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Big Ad Card — Page 2</div></div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
 </div>
-
 <div id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div class="ad-big modal-ad-big"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div><div class="count" id="countText">10s</div><div class="progress"><div class="progress-inner" id="progress"></div></div><button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button></div></div>
 
-<!-- Add to Home Screen Instructions Modal -->
-<div id="installModal">
-  <div class="install-card">
-    <button class="close" onclick="closeInstallModal()">✕</button>
-    <h3>📱 Add App to Home Screen</h3>
-    <p>Install this app on your device for quick, app-like access:</p>
-    <ol>
-      <li><b>iPhone/iPad (Safari):</b> Tap the Share button <span style="font-size:16px;">⎙</span> below, then select <b>"Add to Home Screen"</b>.</li>
-      <li><b>Android (Chrome):</b> Tap the Menu dots <span style="font-size:16px;">⋮</span> on the top right, then select <b>"Install App"</b> or <b>"Add to Home screen"</b>.</li>
-    </ol>
-  </div>
-</div>
+<div id="installModal"><div class="install-card"><h3 id="installModalTitle" style="font-size:16px; font-weight:700; margin-bottom:12px; color:#111;">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px; width:100%; background:#0a0a0a; color:#fff; border:none; padding:10px; border-radius:9999px; font-weight:700; cursor:pointer; font-size:13px;">Got it</button></div></div>
 
 <script>
 let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null,deferredPrompt=null;
@@ -289,9 +276,66 @@ function showInstallInstructions() {
     deferredPrompt.userChoice.then((choiceResult) => {
       deferredPrompt = null;
     });
-  } else {
-    document.getElementById('installModal').classList.add('active');
+    return;
   }
+
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const modal = document.getElementById('installModal');
+  const content = document.getElementById('installContent');
+  const title = document.getElementById('installModalTitle');
+
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    title.textContent = "Install on iPhone (Safari)";
+    content.innerHTML = `
+      <div class="step-box">
+        <p><b>Step 1:</b> Tap the <b>Share button</b> at the bottom toolbar of Safari.</p>
+        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:8px; display:flex; justify-content:center; align-items:center; gap:16px;">
+          <span style="color:#6b7280; font-size:18px;">‹</span>
+          <span style="color:#6b7280; font-size:18px;">›</span>
+          <div style="position:relative; display:inline-block;">
+            <div style="border:2px solid #3b82f6; border-radius:8px; padding:4px 8px; background:rgba(59,130,246,0.15);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+            </div>
+            <div style="position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); color:#3b82f6; font-size:14px; font-weight:bold;">▲</div>
+          </div>
+          <span style="color:#6b7280; font-size:18px;">📖</span>
+          <span style="color:#6b7280; font-size:18px;">❏</span>
+        </div>
+      </div>
+      <div class="step-box">
+        <p><b>Step 2:</b> Scroll down and tap <b>"Add to Home Screen"</b>.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">➕ Add to Home Screen</div>
+      </div>
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Step 3:</b> Tap <b>"Add"</b> at the top right corner. All done!</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Done! 🎉</div>
+      </div>
+    `;
+  } else {
+    title.textContent = "Install on Android (Chrome)";
+    content.innerHTML = `
+      <div class="step-box">
+        <p><b>Step 1:</b> Tap the <b>3-dots menu (⋮)</b> in the top-right corner of Chrome.</p>
+        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:8px; display:flex; justify-content:flex-end; align-items:center; padding-right:24px;">
+          <div style="position:relative; display:inline-block;">
+            <div style="border:2px solid #3b82f6; border-radius:8px; padding:4px 10px; background:rgba(59,130,246,0.15); color:#fff; font-size:20px; font-weight:bold;">
+              ⋮
+            </div>
+            <div style="position:absolute; top:-20px; left:50%; transform:translateX(-50%); color:#3b82f6; font-size:14px; font-weight:bold;">▼</div>
+          </div>
+        </div>
+      </div>
+      <div class="step-box">
+        <p><b>Step 2:</b> Select <b>"Install app"</b> or <b>"Add to Home screen"</b>.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">📱 Install App</div>
+      </div>
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Step 3:</b> Confirm the installation. Ready to use!</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Ready to use! 🚀</div>
+      </div>
+    `;
+  }
+  modal.classList.add('active');
 }
 
 function closeInstallModal() {
