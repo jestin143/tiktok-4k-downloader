@@ -1,4 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TikTok 4K Downloader - Save HD Videos Without Watermark Free 2026</title>
 <meta name="description" content="Download TikTok videos in 4K HD without watermark FREE. Fast, no login, works on all devices. Best TikTok downloader 2026 trusted by 10M+ users worldwide.">
 <meta name="keywords" content="tiktok downloader, tiktok 4k downloader, download tiktok without watermark, tiktok hd downloader, save tiktok videos, tiktok no watermark">
@@ -107,6 +111,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .save-btn:hover { transform: translateY(-2px); }
 .save-btn:active { transform: translateY(0); }
+.save-btn:disabled { opacity: 0.8; cursor: wait; }
 
 /* --- INSTALL APP BUTTON --- */
 .install-app-btn{
@@ -221,7 +226,9 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .footer-links{text-align:center;margin-top:30px;padding:20px 10px;font-size:11px;color:#9ca3af;line-height:1.8}
 .footer-links a{color:#7c3aed;text-decoration:none;margin:0 8px;font-weight:500}
 @media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.install-app-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
-</style></head><body>
+</style>
+</head>
+<body>
 
 <!-- Jelly Glowing Light Blobs -->
 <div class="blob b1"></div>
@@ -488,7 +495,57 @@ function closeInstallModal() {
   document.getElementById('installModal').classList.remove('active');
 }
 
-async function doSave(){const url=document.getElementById('urlInput').value.trim();if(!url)return alert('Paste link');const btn=document.querySelector('.save-btn');btn.textContent='Fetching...';btn.disabled=true;try{const r=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});const data=await r.json();if(data.error)throw new Error(data.error);videoData=data;document.getElementById('vTitle').textContent=data.title;document.getElementById('vCreator').textContent=data.author;if(data.cover)document.getElementById('cover').innerHTML=`<img src="${data.cover}">`;document.getElementById('page1').style.display='none';document.getElementById('page2').style.display='block';window.scrollTo(0,0);document.getElementById('urlInput').value='';}catch(e){alert('Failed: '+e.message)}finally{btn.textContent='Save HD Video';btn.disabled=false;}}
+async function doSave() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) return alert('Please paste a TikTok link first.');
+  
+  const btn = document.querySelector('.save-btn');
+  btn.disabled = true;
+  
+  const steps = [
+    "Connecting to TikTok...",
+    "Extracting 4K stream...",
+    "Removing watermark...",
+    "Finalizing HD file..."
+  ];
+  
+  let stepIdx = 0;
+  btn.textContent = steps[stepIdx];
+  
+  const loadingInterval = setInterval(() => {
+    stepIdx++;
+    if (stepIdx < steps.length) {
+      btn.textContent = steps[stepIdx];
+    }
+  }, 450);
+
+  try {
+    const r = await fetch('/api/download', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url })
+    });
+    const data = await r.json();
+    if (data.error) throw new Error(data.error);
+    
+    clearInterval(loadingInterval);
+    videoData = data;
+    document.getElementById('vTitle').textContent = data.title;
+    document.getElementById('vCreator').textContent = data.author;
+    if (data.cover) document.getElementById('cover').innerHTML = `<img src="${data.cover}">`;
+    document.getElementById('page1').style.display = 'none';
+    document.getElementById('page2').style.display = 'block';
+    window.scrollTo(0, 0);
+    document.getElementById('urlInput').value = '';
+  } catch (e) {
+    clearInterval(loadingInterval);
+    alert('Failed: ' + e.message);
+  } finally {
+    btn.textContent = 'Save HD Video';
+    btn.disabled = false;
+  }
+}
+
 function showPage1(){document.getElementById('page2').style.display='none';document.getElementById('page1').style.display='block';}
 function openModal(type){currentType=type;const modalAd=document.querySelector('.modal-ad-big');if(modalAd){const h4k=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_4k)||320;const h720=(SITE_CFG&&SITE_CFG.ads&&SITE_CFG.ads.modal&&SITE_CFG.ads.modal.height_720)||260;modalAd.style.height=(type==='4k'?h4k:h720)+'px';}
 const secs=(SITE_CFG&&SITE_CFG.downloads)?(type==='4k'?(SITE_CFG.downloads.countdown_4k||10):(SITE_CFG.downloads.countdown_720||5)):(type==='4k'?10:5);
