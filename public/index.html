@@ -8,7 +8,6 @@
 <meta property="og:description" content="Download TikTok videos in 4K HD without watermark. Free & Fast!">
 <meta property="og:url" content="https://tiktok-4k-downloader.vercel.app/">
 <meta property="og:type" content="website">
-<!-- PWA Mobile App Meta Tags (Feature 3) -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#f3e8ff">
@@ -17,9 +16,19 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-height:100vh;overflow-x:hidden;position:relative}
-.blob{position:fixed;border-radius:50%;filter:blur(130px);opacity:0.5;z-index:0;pointer-events:none;animation:float 20s ease-in-out infinite alternate}
-.b1{width:320px;height:320px;background:#c084fc;left:10%;top:8%}.b2{width:280px;height:280px;background:#f9a8d4;right:10%;top:5%}.b3{width:260px;height:260px;background:#93c5fd;left:5%;top:40%}.b4{width:300px;height:300px;background:#c084fc;right:15%;top:45%}.b5{width:280px;height:280px;background:#f9a8d4;left:20%;bottom:10%}.b6{width:260px;height:260px;background:#93c5fd;left:45%;bottom:5%}
-@keyframes float{0%{transform:translate(0,0)}100%{transform:translate(20px,-20px)}}
+
+/* --- JELLY GLOWING LIGHTS BACKGROUND BLOBS --- */
+.blob{position:fixed;border-radius:50%;filter:blur(110px);opacity:0.65;z-index:0;pointer-events:none;animation:float 18s ease-in-out infinite alternate}
+.b1{width:340px;height:340px;background:#a855f7;left:5%;top:5%;animation-duration:14s} /* Purple / Violet */
+.b2{width:300px;height:300px;background:#ec4899;right:5%;top:8%;animation-duration:20s} /* Pink / Magenta */
+.b3{width:320px;height:320px;background:#3b82f6;left:15%;top:45%;animation-duration:17s} /* Blue / Cyan */
+.b4{width:280px;height:280px;background:#10b981;right:18%;top:40%;animation-duration:22s} /* Green / Mint */
+.b5{width:290px;height:290px;background:#f59e0b;left:25%;bottom:5%;animation-duration:16s} /* Yellow / Gold */
+.b6{width:270px;height:270px;background:#f97316;right:8%;bottom:10%;animation-duration:19s} /* Orange */
+.b7{width:260px;height:260px;background:#ef4444;left:45%;top:25%;animation-duration:25s} /* Red */
+
+@keyframes float{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-25px) scale(1.08)}100%{transform:translate(-20px,25px) scale(0.95)}}
+
 .container{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:16px 16px 40px}
 .header{display:flex;justify-content:space-between;align-items:center;padding:12px 4px}
 .logo{font-weight:700;font-size:14px;color:#0a0a0a}
@@ -27,7 +36,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .headline{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0a0a0a;text-align:center;margin-top:48px}
 @media(max-width:600px){.headline{font-size:28px}}
 .sub{font-size:13px;color:#6b7280;text-align:center;margin-top:12px;font-weight:500}
-/* Social Proof / Live Counter Styling (Feature 4) */
 .social-proof{text-align:center;font-size:12px;color:#7c3aed;margin-top:8px;font-weight:600}
 .greet-wrap{display:flex;justify-content:center;margin-top:20px}
 #greeting{padding:6px 16px;background:rgba(255,255,255,.7);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.8);box-shadow:0 4px 15px rgba(0,0,0,.03);border-radius:9999px;font-size:12px;font-weight:500;color:#1f2937}
@@ -36,17 +44,13 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-bar input{flex:1;border:none;outline:none;background:transparent;font-size:14px;color:#111;font-weight:500}
 .paste-bar input::placeholder{color:#9ca3af}
 
-/* --- UPDATED BUTTON STYLES --- */
-/* Auto-Paste Button Styling */
 .paste-btn{background:linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(168,85,247,0.2) 100%);color:#7c3aed;border:1px solid rgba(124,58,237,0.2);padding:8px 16px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;transition:all 0.25s ease}
 .paste-btn:hover{background:rgba(124,58,237,0.3);transform:scale(1.05)}
 
-/* Save HD Video Button */
 .save-btn{width:100%;max-width:380px;margin-top:16px;padding:16px;background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);color:#fff;font-size:14px;font-weight:700;border:none;border-radius:9999px;cursor:pointer;box-shadow:0 10px 25px rgba(124,58,237,0.35),inset 0 1px 0 rgba(255,255,255,0.25);transition:all 0.25s ease}
 .save-btn:hover{transform:translateY(-2px);box-shadow:0 15px 30px rgba(124,58,237,0.45);background:linear-gradient(135deg,#8b5cf6 0%,#6366f1 100%)}
 .save-btn:active{transform:translateY(0)}
 
-/* Add to Home Screen Button */
 .install-app-btn{width:100%;max-width:380px;margin-top:10px;padding:14px;background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,1);color:#374151;font-size:12px;font-weight:600;border-radius:9999px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.04);transition:all 0.25s ease}
 .install-app-btn:hover{background:#fff;color:#7c3aed;border-color:#7c3aed;transform:translateY(-1px);box-shadow:0 6px 20px rgba(124,58,237,0.15)}
 
@@ -63,11 +67,9 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .v-creator{font-size:11px;color:#6b7280;margin-top:4px}
 .dl-wrap{max-width:380px;margin:24px auto 0;display:flex;flex-direction:column;gap:12px}
 
-/* Gold Download Button */
 .btn-gold{width:100%;background:linear-gradient(135deg,#fde047 0%,#facc15 100%);color:#713f12;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:16px;cursor:pointer;box-shadow:0 8px 22px rgba(250,204,21,0.4);transition:all 0.25s ease}
 .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(250,204,21,0.55);background:linear-gradient(135deg,#fef08a 0%,#fde047 100%)}
 
-/* White Download Button */
 .btn-white{width:100%;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,1);color:#1f2937;font-size:13px;font-weight:700;border-radius:9999px;padding:16px;cursor:pointer;box-shadow:0 4px 15px rgba(0,0,0,.04);transition:all 0.25s ease}
 .btn-white:hover{background:#fff;color:#7c3aed;border-color:#7c3aed;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
 
@@ -76,7 +78,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 #modal.active{display:flex}
 .modal-card{background:rgba(255,255,255,.9);backdrop-filter:blur(32px);border:1px solid rgba(255,255,255,1);box-shadow:0 30px 80px rgba(0,0,0,.15);border-radius:28px;max-width:440px;width:100%;padding:24px;position:relative}
 
-/* Close Button in Modal */
 .close{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:9999px;background:rgba(0,0,0,.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#555;transition:all 0.2s ease}
 .close:hover{background:rgba(0,0,0,.12);color:#000}
 
@@ -85,12 +86,10 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .progress{height:4px;background:#e5e7eb;border-radius:9999px;margin-top:8px;overflow:hidden}
 .progress-inner{height:100%;background:linear-gradient(90deg,#fcd34d,#facc15);width:100%;transition:width 1s linear}
 
-/* Download Now Button in Modal */
 .dl-now{width:100%;background:linear-gradient(135deg,#1f2937 0%,#111827 100%);color:#fff;font-size:13px;font-weight:700;border:none;border-radius:9999px;padding:15px;margin-top:16px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.2);transition:all 0.25s ease}
 .dl-now:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 10px 25px rgba(0,0,0,0.3);background:linear-gradient(135deg,#374151 0%,#1f2937 100%)}
 .dl-now:disabled{background:rgba(10,10,10,.4);cursor:not-allowed;box-shadow:none}
 
-/* Install Modal Styling */
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
 .install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
@@ -103,7 +102,16 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .footer-links a{color:#7c3aed;text-decoration:none;margin:0 8px;font-weight:500}
 @media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.install-app-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
 </style></head><body>
-<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><div class="blob b6"></div>
+
+<!-- Jelly Glowing Light Blobs -->
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div class="blob b4"></div>
+<div class="blob b5"></div>
+<div class="blob b6"></div>
+<div class="blob b7"></div>
+
 <div class="container">
 <div id="page1">
 <div class="header"><div class="logo">TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
