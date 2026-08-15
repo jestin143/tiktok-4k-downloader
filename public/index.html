@@ -496,7 +496,7 @@ function showInstallInstructions() {
     title.textContent = "Add to Dock (Mac Safari)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Click ang <b>Share icon</b> (parisukat na may arrow pataas) sa Safari toolbar.</p>
+        <p><b>Step 1:</b> Click ang <b>Share icon</b> sa Safari toolbar.</p>
       </div>
       <div class="step-box">
         <p><b>Step 2:</b> I-click ang <b>"Add to Dock"</b> mula sa dropdown menu.</p>
@@ -506,23 +506,36 @@ function showInstallInstructions() {
       </div>
     `;
   } else if (isIOS) {
-    title.textContent = "Add to Home Screen (iPhone/iPad)";
+    title.textContent = "Install on iPhone (Safari)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> I-tap ang <b>Share icon</b> (parisukat na may arrow pataas) sa ibaba o itaas ng iyong browser.</p>
+        <p><b>Step 1:</b> Tapikin ang <b>Share button</b> sa ibabang toolbar ng Safari.</p>
+        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:10px; display:flex; justify-content:center; align-items:center; gap:14px; margin-top:8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <div style="position:relative; display:inline-block;">
+            <div style="border:2px solid #3b82f6; border-radius:8px; padding:4px 8px; background:rgba(59,130,246,0.2);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+            </div>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+        </div>
       </div>
       <div class="step-box">
-        <p><b>Step 2:</b> Mag-scroll pababa sa menu at i-tap ang <b>"Add to Home Screen"</b>.</p>
+        <p><b>Step 2:</b> Mag-scroll pababa at piliin ang <b>"Add to Home Screen"</b>.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">➕ Add to Home Screen</div>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> I-tap ang <b>Add</b> sa kanang itaas para tapusin.</p>
+        <p><b>Step 3:</b> I-tap ang <b>"Add"</b> sa kanang itaas. Tapos na!</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Done! 🎉</div>
       </div>
     `;
   } else if (isAndroid) {
     title.textContent = "Add to Home Screen (Android)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> I-tap ang <b>Menu icon</b> (tatlong tuldok) sa kanang itaas ng browser.</p>
+        <p><b>Step 1:</b> I-tap ang <b>Menu icon (⋮)</b> sa kanang itaas ng browser.</p>
       </div>
       <div class="step-box">
         <p><b>Step 2:</b> I-tap ang <b>"Add to Home screen"</b> o <b>"Install app"</b>.</p>
@@ -535,7 +548,7 @@ function showInstallInstructions() {
     title.textContent = "Add to Home Screen";
     content.innerHTML = `
       <div class="step-box" style="margin-bottom:0;">
-        <p>Buksan ang website na ito sa Safari (Mac/iOS) o Chrome (Android/PC) para madaling maidagdag sa iyong home screen o dock.</p>
+        <p>Buksan ang website na ito sa Safari (Mac/iOS) o Chrome (Android/PC) para madaling maidagdag sa iyong home screen.</p>
       </div>
     `;
   }
