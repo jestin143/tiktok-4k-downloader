@@ -8,6 +8,11 @@
 <meta property="og:description" content="Download TikTok videos in 4K HD without watermark. Free & Fast!">
 <meta property="og:url" content="https://tiktok-4k-downloader.vercel.app/">
 <meta property="og:type" content="website">
+
+<!-- Custom Logo & PWA App Icon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%239333ea'/%3E%3Cstop offset='50%25' stop-color='%23c084fc'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3ClinearGradient id='glass' x1='0%25' y1='0%25' x2='0%25' y2='60%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='0.6'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='128' fill='url(%23bg)'/%3E%3Crect width='512' height='256' rx='128' fill='url(%23glass)'/%3E%3Cpath d='M256 130v170m0 0l-65-65m65 65l65-65' stroke='%23ffffff' stroke-width='46' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='176' y='328' width='160' height='72' rx='36' fill='%23ffffff'/%3E%3Ctext x='256' y='378' font-family='Inter, sans-serif' font-weight='800' font-size='38' fill='%23111111' text-anchor='middle'%3E4K%3E%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%239333ea'/%3E%3Cstop offset='50%25' stop-color='%23c084fc'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3ClinearGradient id='glass' x1='0%25' y1='0%25' x2='0%25' y2='60%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='0.6'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='128' fill='url(%23bg)'/%3E%3Crect width='512' height='256' rx='128' fill='url(%23glass)'/%3E%3Cpath d='M256 130v170m0 0l-65-65m65 65l65-65' stroke='%23ffffff' stroke-width='46' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='176' y='328' width='160' height='72' rx='36' fill='%23ffffff'/%3E%3Ctext x='256' y='378' font-family='Inter, sans-serif' font-weight='800' font-size='38' fill='%23111111' text-anchor='middle'%3E4K%3E%3C/text%3E%3C/svg%3E">
+
 <!-- PWA Mobile App Meta Tags -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -22,7 +27,8 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 @keyframes float{0%{transform:translate(0,0)}100%{transform:translate(20px,-20px)}}
 .container{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:16px 16px 40px}
 .header{display:flex;justify-content:space-between;align-items:center;padding:12px 4px}
-.logo{font-weight:700;font-size:14px;color:#0a0a0a}
+.logo{font-weight:700;font-size:13px;color:#0a0a0a;display:flex;align-items:center;gap:8px}
+.logo img, .logo svg{width:24px;height:24px;border-radius:6px}
 .pill{padding:6px 14px;background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.8);box-shadow:0 8px 32px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,1);border-radius:9999px;font-size:11px;font-weight:500;color:#374151}
 .headline{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0a0a0a;text-align:center;margin-top:48px}
 @media(max-width:600px){.headline{font-size:28px}}
@@ -281,7 +287,13 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><div class="blob b6"></div>
 <div class="container">
 <div id="page1">
-<div class="header"><div class="logo">TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
+<div class="header">
+  <div class="logo">
+    <svg viewBox="0 0 512 512"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9333ea"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#ec4899"/></linearGradient><linearGradient id="lgg" x1="0%" y1="0%" x2="0%" y2="60%"><stop offset="0%" stop-color="#fff" stop-opacity="0.6"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="128" fill="url(#lg)"/><rect width="512" height="256" rx="128" fill="url(#lgg)"/><path d="M256 130v170m0 0l-65-65m65 65l65-65" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><rect x="176" y="328" width="160" height="72" rx="36" fill="#fff"/><text x="256" y="378" font-family="Inter, sans-serif" font-weight="800" font-size="38" fill="#111" text-anchor="middle">4K</text></svg>
+    TikTok 4K Downloader.com
+  </div>
+  <div class="pill">No watermark • Fast • HD 4K</div>
+</div>
 <div class="headline">Download TikTok Videos in 4K</div>
 <div class="sub">Paste link below and save HD videos without watermark</div>
 <div class="social-proof">🔥 <span id="counter">14,285</span> videos downloaded today</div>
@@ -313,7 +325,13 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 
 </div>
 <div id="page2">
-<div class="header"><div class="logo" onclick="showPage1()" style="cursor:pointer">← TikTok 4K Downloader.com</div><div class="pill">No watermark • Fast • HD 4K</div></div>
+<div class="header">
+  <div class="logo" onclick="showPage1()" style="cursor:pointer">
+    <svg viewBox="0 0 512 512"><defs><linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9333ea"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#ec4899"/></linearGradient><linearGradient id="lgg2" x1="0%" y1="0%" x2="0%" y2="60%"><stop offset="0%" stop-color="#fff" stop-opacity="0.6"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="128" fill="url(#lg2)"/><rect width="512" height="256" rx="128" fill="url(#lgg2)"/><path d="M256 130v170m0 0l-65-65m65 65l65-65" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><rect x="176" y="328" width="160" height="72" rx="36" fill="#fff"/><text x="256" y="378" font-family="Inter, sans-serif" font-weight="800" font-size="38" fill="#111" text-anchor="middle">4K</text></svg>
+    ← TikTok 4K Downloader.com
+  </div>
+  <div class="pill">No watermark • Fast • HD 4K</div>
+</div>
 <div class="video-card"><div class="cover" id="cover">▶️</div><div class="v-title" id="vTitle">Video title</div><div class="v-creator" id="vCreator">@creator</div></div>
 <div class="dl-wrap">
   <button class="btn-gold" onclick="openModal('4k')">⭐ Download 4K HD • 10s ad</button>
@@ -361,8 +379,6 @@ async function loadConfig(){
      
     SITE_CFG=cfg; 
     if(cfg.site){ 
-      if(cfg.site.logo) document.querySelector('.logo').textContent=cfg.site.logo; 
-      if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill; 
       if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline; 
       if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub; 
       if(cfg.site.footer) document.querySelectorAll('.footer').forEach(f=>f.textContent=cfg.site.footer); 
