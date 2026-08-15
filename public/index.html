@@ -1,4 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TikTok 4K Downloader - Save HD Videos Without Watermark Free 2026</title>
 <meta name="description" content="Download TikTok videos in 4K HD without watermark FREE. Fast, no login, works on all devices. Best TikTok downloader 2026 trusted by 10M+ users worldwide.">
 <meta name="keywords" content="tiktok downloader, tiktok 4k downloader, download tiktok without watermark, tiktok hd downloader, save tiktok videos, tiktok no watermark">
@@ -174,7 +178,32 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.2), 0 12px 28px rgba(16, 185, 129, 0.6); }
 }
 
-.ad-big{margin:32px auto 0;max-width:680px;width:100%;height:280px;background:rgba(255,255,255,.45);backdrop-filter:blur(16px);border:2px dashed rgba(255,255,255,.8);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;position:relative;cursor:pointer}
+/* NAAYOS NA AD CARD STYLES PARA MAPINDOT ANG LINK */
+.ad-big{
+  margin:32px auto 0;
+  max-width:680px;
+  width:100%;
+  height:280px;
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(16px);
+  border:2px dashed rgba(255,255,255,.8);
+  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  cursor:pointer;
+  z-index:2;
+}
+.ad-big * {
+  pointer-events: auto !important;
+}
+.ad-big a {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+}
 .ad-big-page2{height:360px;max-width:680px}
 .ad-label{font-size:10px;letter-spacing:.18em;color:#9ca3af;text-transform:uppercase;font-weight:700}
 .ad-prev{font-size:11px;color:#6b7280;margin-top:4px}
@@ -283,7 +312,9 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .footer-links{text-align:center;margin-top:30px;padding:20px 10px;font-size:11px;color:#9ca3af;line-height:1.8}
 .footer-links a{color:#7c3aed;text-decoration:none;margin:0 8px;font-weight:500}
 @media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn, .btn-gold, .btn-white{max-width:340px}.install-app-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
-</style></head><body>
+</style>
+</head>
+<body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div><div class="blob b6"></div>
 <div class="container">
 <div id="page1">
@@ -411,8 +442,7 @@ function injectAds(ads, boxes){
       const el = document.getElementById(box.id);
       if(el) {
         if(box.type === 'auto' && box.url) {
-          // Ginawang clickable ang buong ad card para sa Shopee / Auto link
-          el.innerHTML = `<a href="${box.url}" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;text-decoration:none;color:inherit;padding:10px;text-align:center;">
+          el.innerHTML = `<a href="${box.url}" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;text-decoration:none;color:inherit;padding:10px;text-align:center;position:relative;z-index:10;pointer-events:auto;">
             <div style="font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:6px;">✨ Featured Link</div>
             <div style="font-size:12px;color:#2563eb;text-decoration:underline;word-break:break-all;">${box.url}</div>
           </a>`;
@@ -511,47 +541,7 @@ function showInstallInstructions() {
       <div class="step-box" style="margin-bottom:0;">
         <p><b>Step 3:</b> Click <b>"Add"</b> to confirm. Success!</p>
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Success! 🎉</div>
-      </div>
-    `;
-  } else if (isIOS) {
-    title.textContent = "Install on iPhone (Safari)";
-    content.innerHTML = `
-      <div class="step-box">
-        <p><b>Step 1:</b> Tap the <b>Share button</b> at the bottom toolbar of Safari.</p>
-        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:8px; display:flex; justify-content:center; align-items:center; gap:16px;">
-          <span style="color:#6b7280; font-size:18px;">‹</span>
-          <span style="color:#6b7280; font-size:18px;">›</span>
-          <div style="position:relative; display:inline-block;">
-            <div style="border:2px solid #3b82f6; border-radius:8px; padding:4px 8px; background:rgba(59,130,246,0.15);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-            </div>
-            <div style="position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); color:#3b82f6; font-size:14px; font-weight:bold;">▲</div>
-          </div>
-          <span style="color:#6b7280; font-size:18px;">📖</span>
-          <span style="color:#6b7280; font-size:18px;">❏</span>
-        </div>
-      </div>
-      <div class="step-box">
-        <p><b>Step 2:</b> Scroll down and tap <b>"Add to Home Screen"</b>.</p>
-        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">➕ Add to Home Screen</div>
-      </div>
-      <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 3:</b> Tap <b>"Add"</b> in the top right corner. Done!</p>
-        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Added Successfully! 🎉</div>
-      </div>
-    `;
-  } else {
-    title.textContent = "Install on Android (Chrome)";
-    content.innerHTML = `
-      <div class="step-box">
-        <p><b>Step 1:</b> Tap the <b>three dots menu</b> (top right of browser).</p>
-        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#374151; border:1px solid #e5e7eb;">⋮ Menu</div>
-      </div>
-      <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 2:</b> Tap <b>"Install app"</b> or <b>"Add to Home screen"</b>.</p>
-        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">📱 Install App</div>
-      </div>
-    `;
+      </div>`;
   }
   modal.classList.add('active');
 }
@@ -560,100 +550,77 @@ function closeInstallModal() {
   document.getElementById('installModal').classList.remove('active');
 }
 
-function doSave() {
+function showPage1(){
+  document.getElementById('page1').style.display='block';
+  document.getElementById('page2').style.display='none';
+}
+function showPage2(){
+  document.getElementById('page1').style.display='none';
+  document.getElementById('page2').style.display='block';
+}
+
+function doSave(){
   const url = document.getElementById('urlInput').value.trim();
-  if(!url) {
-    alert('Please paste a TikTok link first.');
+  if(!url){
+    alert('Please paste a TikTok link first!');
     return;
   }
-  document.querySelector('.save-btn').innerHTML = '<div class="spinner"></div> Processing...';
-  setTimeout(() => {
-    document.querySelector('.save-btn').innerHTML = 'Save HD Video';
-    showPage2(url);
-  }, 1000);
+  showPage2();
 }
 
-function showPage2(url) {
-  document.getElementById('page1').style.display = 'none';
-  document.getElementById('page2').style.display = 'block';
-  window.scrollTo(0,0);
-  document.getElementById('vTitle').textContent = "TikTok Video 4K HD (No Watermark)";
-  document.getElementById('vCreator').textContent = "@babyshag20";
-  document.getElementById('cover').innerHTML = `<img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=80" alt="cover">`;
-}
-
-function showPage1() {
-  document.getElementById('page2').style.display = 'none';
-  document.getElementById('page1').style.display = 'block';
-  window.scrollTo(0,0);
-}
-
-function openModal(type) {
+function openModal(type){
   currentType = type;
   const modal = document.getElementById('modal');
+  const countBox = document.getElementById('countBox');
+  const dlBtn = document.getElementById('dlBtn');
   const countText = document.getElementById('countText');
   const progress = document.getElementById('progress');
-  const dlBtn = document.getElementById('dlBtn');
-  const countBox = document.getElementById('countBox');
-  const modalAd = document.getElementById('box3');
-
-  let duration = 10;
-  if(type === '720') {
-    duration = 5;
-    if(SITE_CFG && SITE_CFG.downloads && SITE_CFG.downloads.countdown_720) {
-      duration = SITE_CFG.downloads.countdown_720;
-    }
-    dlBtn.className = "dl-now blue-jelly";
-    countBox.className = "count-box blue-jelly-box";
-    if(modalAd && modalAd.dataset.h720) modalAd.style.height = modalAd.dataset.h720 + 'px';
-  } else {
-    if(SITE_CFG && SITE_CFG.downloads && SITE_CFG.downloads.countdown_4k) {
-      duration = SITE_CFG.downloads.countdown_4k;
-    }
-    dlBtn.className = "dl-now gold-jelly";
-    countBox.className = "count-box gold-jelly-box";
-    if(modalAd && modalAd.dataset.h4k) modalAd.style.height = modalAd.dataset.h4k + 'px';
-  }
-
-  let timeLeft = duration;
-  countText.textContent = timeLeft + 's';
-  progress.style.width = '100%';
-  dlBtn.disabled = true;
-  dlBtn.textContent = 'Please wait... (' + timeLeft + 's)';
+  
   modal.classList.add('active');
-
+  dlBtn.disabled = true;
+  
+  let duration = (type === '4k') ? 10 : 5;
+  countText.textContent = duration + 's';
+  progress.style.width = '100%';
+  
+  if(type === '4k') {
+    countBox.className = 'count-box gold-jelly-box';
+    dlBtn.className = 'dl-now gold-jelly';
+  } else {
+    countBox.className = 'count-box blue-jelly-box';
+    dlBtn.className = 'dl-now blue-jelly';
+  }
+  
+  let timeLeft = duration;
   if(countdownInt) clearInterval(countdownInt);
-
-  const startTime = Date.now();
-  const totalMs = duration * 1000;
-
+  
+  let startTime = Date.now();
+  let totalTime = duration * 1000;
+  
   countdownInt = setInterval(() => {
-    const elapsed = Date.now() - startTime;
-    const remainingMs = totalMs - elapsed;
-    timeLeft = Math.ceil(remainingMs / 1000);
-
-    if(timeLeft <= 0) {
+    let elapsed = Date.now() - startTime;
+    let remaining = Math.max(0, totalTime - elapsed);
+    let sec = Math.ceil(remaining / 1000);
+    
+    countText.textContent = sec + 's';
+    progress.style.width = (remaining / totalTime * 100) + '%';
+    
+    if(remaining <= 0) {
       clearInterval(countdownInt);
       countText.textContent = 'Ready!';
       progress.style.width = '0%';
       dlBtn.disabled = false;
-      dlBtn.textContent = 'Download Now';
-    } else {
-      countText.textContent = timeLeft + 's';
-      const pct = (remainingMs / totalMs) * 100;
-      progress.style.width = Math.max(0, pct) + '%';
-      dlBtn.textContent = 'Please wait... (' + timeLeft + 's)';
     }
-  }, 100);
+  }, 50);
 }
 
-function closeModal() {
+function closeModal(){
   if(countdownInt) clearInterval(countdownInt);
   document.getElementById('modal').classList.remove('active');
 }
 
-function forceDownload() {
-  alert('Download started successfully! Check your device downloads folder.');
+function forceDownload(){
+  alert('Simulated download started for ' + currentType.toUpperCase() + '!');
   closeModal();
 }
 </script>
