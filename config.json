@@ -19,7 +19,7 @@
   },
   "universal_boxes": [
     {
-      "id": "tiktok1",
+      "id": "box1",
       "enabled": true,
       "position": "page1",
       "type": "auto",
@@ -27,36 +27,20 @@
       "code": ""
     },
     {
-      "id": "shopee1",
-      "enabled": false,
-      "position": "page1",
-      "type": "auto",
-      "url": "",
-      "code": ""
-    },
-    {
-      "id": "youtube1",
-      "enabled": false,
-      "position": "page1",
-      "type": "auto",
-      "url": "",
-      "code": ""
-    },
-    {
-      "id": "adsense1",
-      "enabled": false,
-      "position": "page1",
-      "type": "adsense",
-      "url": "",
-      "code": ""
-    },
-    {
-      "id": "adsterra1",
-      "enabled": false,
+      "id": "box2",
+      "enabled": true,
       "position": "page2",
-      "type": "adsterra",
-      "url": "",
-      "code": "<script type='text/javascript' src='//www.highperformanceformat.com/xxxx.js'></script>"
+      "type": "auto",
+      "url": "https://www.tiktok.com/@babyshag20/video/7658519687138921746",
+      "code": ""
+    },
+    {
+      "id": "box3",
+      "enabled": true,
+      "position": "modal",
+      "type": "auto",
+      "url": "https://www.tiktok.com/@babyshag20/video/7658519687138921746",
+      "code": ""
     }
   ]
 }
