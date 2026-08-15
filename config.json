@@ -28,10 +28,10 @@
     },
     {
       "id": "shopee1",
-      "enabled": true,
+      "enabled": false,
       "position": "page1",
       "type": "auto",
-      "url": "https://shopee.ph/Ultra-Thin-Phone-Case-i.123456789",
+      "url": "",
       "code": ""
     },
     {
@@ -39,7 +39,7 @@
       "enabled": false,
       "position": "page1",
       "type": "auto",
-      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "url": "",
       "code": ""
     },
     {
@@ -48,7 +48,7 @@
       "position": "page1",
       "type": "adsense",
       "url": "",
-      "code": "<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script><ins class='adsbygoogle' style='display:block' data-ad-client='ca-pub-123456789' data-ad-slot='123456789' data-ad-format='auto'></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>"
+      "code": ""
     },
     {
       "id": "adsterra1",
