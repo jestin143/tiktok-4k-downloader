@@ -450,7 +450,6 @@ function showInstallInstructions() {
   const content = document.getElementById('installContent');
   const title = document.getElementById('installModalTitle');
 
-  // Mas mahigpit at siguradong detection para sa Mac at PC Desktop
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
   const isAndroid = /Android/.test(userAgent) && !/Macintosh|Windows/.test(userAgent);
   const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent) || (!isIOS && !isAndroid && navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
@@ -459,11 +458,11 @@ function showInstallInstructions() {
     title.textContent = "Save to Bookmarks on Mac / PC";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Pindutin ang shortcut na ito sa iyong keyboard para i-save ang site na ito:</p>
-        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:14px; font-weight:700; color:#7c3aed; border:1px solid #e5e7eb; margin-top:6px;">⌨️ Press Cmd + D (Mac) o Ctrl + D (PC)</div>
+        <p><b>Step 1:</b> Press this keyboard shortcut to bookmark this page:</p>
+        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:14px; font-weight:700; color:#7c3aed; border:1px solid #e5e7eb; margin-top:6px;">⌨️ Press Cmd + D (Mac) or Ctrl + D (PC)</div>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 2:</b> I-click ang <b>"Done"</b> o <b>"Add"</b> sa lumabas na pop-up ng browser mo para laging madaling mahanap.</p>
+        <p><b>Step 2:</b> Click <b>"Done"</b> or <b>"Add"</b> on your browser's pop-up to save it for quick access.</p>
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">⭐ Ready to use anytime!</div>
       </div>
     `;
@@ -521,7 +520,7 @@ function showInstallInstructions() {
     title.textContent = "Bookmark App (Desktop / PC)";
     content.innerHTML = `
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Quick Shortcut:</b> Pindutin ang <b style="color:#7c3aed">Ctrl + D</b> o <b style="color:#7c3aed">Cmd + D</b> para ma-bookmark ito.</p>
+        <p><b>Quick Shortcut:</b> Press <b style="color:#7c3aed">Ctrl + D</b> or <b style="color:#7c3aed">Cmd + D</b> to bookmark this page.</p>
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#374151; border:1px solid #e5e7eb;">⭐ Bookmark this tab</div>
       </div>
     `;
