@@ -450,7 +450,24 @@ function showInstallInstructions() {
   const content = document.getElementById('installContent');
   const title = document.getElementById('installModalTitle');
 
-  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+  // Mas mahigpit at siguradong detection para sa Mac at PC Desktop
+  const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(userAgent) && !/Macintosh|Windows/.test(userAgent);
+  const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent) || (!isIOS && !isAndroid && navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
+
+  if (isMac || (!isIOS && !isAndroid && /Mac|Win|Linux/.test(userAgent))) {
+    title.textContent = "Save to Bookmarks on Mac / PC";
+    content.innerHTML = `
+      <div class="step-box">
+        <p><b>Step 1:</b> Pindutin ang shortcut na ito sa iyong keyboard para i-save ang site na ito:</p>
+        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:14px; font-weight:700; color:#7c3aed; border:1px solid #e5e7eb; margin-top:6px;">⌨️ Press Cmd + D (Mac) o Ctrl + D (PC)</div>
+      </div>
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Step 2:</b> I-click ang <b>"Done"</b> o <b>"Add"</b> sa lumabas na pop-up ng browser mo para laging madaling mahanap.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">⭐ Ready to use anytime!</div>
+      </div>
+    `;
+  } else if (isIOS) {
     title.textContent = "Install on iPhone (Safari)";
     content.innerHTML = `
       <div class="step-box">
@@ -477,7 +494,7 @@ function showInstallInstructions() {
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Done! 🎉</div>
       </div>
     `;
-  } else {
+  } else if (isAndroid) {
     title.textContent = "Install on Android (Chrome)";
     content.innerHTML = `
       <div class="step-box">
@@ -498,6 +515,14 @@ function showInstallInstructions() {
       <div class="step-box" style="margin-bottom:0;">
         <p><b>Step 3:</b> Confirm the installation. Ready to use!</p>
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Ready to use! 🚀</div>
+      </div>
+    `;
+  } else {
+    title.textContent = "Bookmark App (Desktop / PC)";
+    content.innerHTML = `
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Quick Shortcut:</b> Pindutin ang <b style="color:#7c3aed">Ctrl + D</b> o <b style="color:#7c3aed">Cmd + D</b> para ma-bookmark ito.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#374151; border:1px solid #e5e7eb;">⭐ Bookmark this tab</div>
       </div>
     `;
   }
@@ -569,16 +594,14 @@ function openModal(type){
   const countTextEl = document.getElementById('countText');
   const progressEl = document.getElementById('progress');
   
-  // 1. Ilagay muna ang Jelly Glow sa Countdown Box habang nagbibilang
   if(type === '4k') {
     countBox.className = 'count-box gold-jelly-box';
-    dlBtn.className = 'dl-now gold-jelly'; // i-ready ang class pero di pa i-a-activate
+    dlBtn.className = 'dl-now gold-jelly';
   } else {
     countBox.className = 'count-box blue-jelly-box';
     dlBtn.className = 'dl-now blue-jelly';
   }
 
-  // Tanggalin muna ang jelly glow sa button habang nagco-countdown at i-disable
   dlBtn.classList.remove('gold-jelly', 'blue-jelly');
   dlBtn.disabled = true;
 
@@ -597,7 +620,6 @@ function openModal(type){
     
     if(s<=0){
       clearInterval(countdownInt);
-      // 2. Pagkatapos ng countdown: Tanggalin ang glow sa countdown box at ilipat sa Download Now button!
       countBox.className = 'count-box';
       if(currentType === '4k') {
         dlBtn.classList.add('gold-jelly');
