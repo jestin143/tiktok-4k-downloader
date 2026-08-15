@@ -9,9 +9,9 @@
 <meta property="og:url" content="https://tiktok-4k-downloader.vercel.app/">
 <meta property="og:type" content="website">
 
-<!-- Custom Logo & PWA App Icon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%239333ea'/%3E%3Cstop offset='50%25' stop-color='%23c084fc'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3ClinearGradient id='glass' x1='0%25' y1='0%25' x2='0%25' y2='60%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='0.6'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='128' fill='url(%23bg)'/%3E%3Crect width='512' height='256' rx='128' fill='url(%23glass)'/%3E%3Cpath d='M256 130v170m0 0l-65-65m65 65l65-65' stroke='%23ffffff' stroke-width='46' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='176' y='328' width='160' height='72' rx='36' fill='%23ffffff'/%3E%3Ctext x='256' y='378' font-family='Inter, sans-serif' font-weight='800' font-size='38' fill='%23111111' text-anchor='middle'%3E4K%3E%3C/text%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%239333ea'/%3E%3Cstop offset='50%25' stop-color='%23c084fc'/%3E%3Cstop offset='100%25' stop-color='%23ec4899'/%3E%3C/linearGradient%3E%3ClinearGradient id='glass' x1='0%25' y1='0%25' x2='0%25' y2='60%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='0.6'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='128' fill='url(%23bg)'/%3E%3Crect width='512' height='256' rx='128' fill='url(%23glass)'/%3E%3Cpath d='M256 130v170m0 0l-65-65m65 65l65-65' stroke='%23ffffff' stroke-width='46' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='176' y='328' width='160' height='72' rx='36' fill='%23ffffff'/%3E%3Ctext x='256' y='378' font-family='Inter, sans-serif' font-weight='800' font-size='38' fill='%23111111' text-anchor='middle'%3E4K%3E%3C/text%3E%3C/svg%3E">
+<!-- App Icons (PNG fix for iOS Safari) -->
+<link rel="icon" type="image/png" href="https://i.ibb.co/3m09w25/logo.png">
+<link rel="apple-touch-icon" href="https://i.ibb.co/3m09w25/logo.png">
 
 <!-- PWA Mobile App Meta Tags -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,7 +28,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .container{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:16px 16px 40px}
 .header{display:flex;justify-content:space-between;align-items:center;padding:12px 4px}
 .logo{font-weight:700;font-size:13px;color:#0a0a0a;display:flex;align-items:center;gap:8px}
-.logo img, .logo svg{width:24px;height:24px;border-radius:6px}
+.logo img{width:24px;height:24px;border-radius:6px}
 .pill{padding:6px 14px;background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.8);box-shadow:0 8px 32px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,1);border-radius:9999px;font-size:11px;font-weight:500;color:#374151}
 .headline{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0a0a0a;text-align:center;margin-top:48px}
 @media(max-width:600px){.headline{font-size:28px}}
@@ -43,7 +43,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .paste-btn{background:rgba(124,58,237,0.1);color:#7c3aed;border:none;padding:8px 12px;border-radius:9999px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;transition:0.2s}
 .paste-btn:hover{background:rgba(124,58,237,0.2)}
 
-/* 3D GLOSSY JELLY BUTTON (Page 1 Save Button) */
 .save-btn {
   position: relative;
   width: 100%;
@@ -69,7 +68,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .save-btn:hover { transform: translateY(-2px); }
 
-/* OPTION 3 NEON FIRE GOLD JELLY STYLE (4K Option) */
 .btn-gold {
   position: relative;
   width: 100%;
@@ -99,7 +97,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   100% { box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(255, 112, 67, 0.75); }
 }
 
-/* VIBRANT GLOWING JELLY BUTTON (720p Option) */
 .btn-white {
   position: relative;
   width: 100%;
@@ -147,7 +144,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   to { transform: rotate(360deg); }
 }
 
-/* ADD TO HOME SCREEN WITH JELLY GLOW */
 .install-app-btn {
   position: relative;
   width: 100%;
@@ -193,7 +189,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .close{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:9999px;background:rgba(0,0,0,.05);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#555}
 .modal-ad-big{height:260px!important;width:100%;margin-top:8px;transition:height.3s ease}
 
-/* COUNTDOWN JELLY BOX STYLING */
 .count-box {
   padding: 16px;
   border-radius: 20px;
@@ -231,7 +226,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .progress{height:4px;background:#e5e7eb;border-radius:9999px;margin-top:8px;overflow:hidden}
 .progress-inner{height:100%;background:linear-gradient(90deg,#9ca3af,#6b7280);width:100%;transition:width 1s linear}
 
-/* JELLY GLOW STYLES FOR THE MODAL DOWNLOAD BUTTON */
 .dl-now {
   position: relative;
   width: 100%;
@@ -249,14 +243,12 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .dl-now:not(:disabled):hover { transform: translateY(-2px); }
 
-/* Gold Jelly Theme for 4K Modal Button */
 .dl-now.gold-jelly {
   background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #ea580c, #ff7043, #fbbf24, #ea580c);
   animation: jellyColorFlow 5s ease infinite, goldPulse 2s ease-in-out infinite alternate;
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(255, 112, 67, 0.5);
 }
 
-/* Blue Jelly Theme for 720p Modal Button */
 .dl-now.blue-jelly {
   background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #3b82f6, #6366f1, #a855f7, #3b82f6);
   animation: jellyColorFlow 5s ease infinite, jellyPulse 2s ease-in-out infinite alternate;
@@ -271,7 +263,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   text-shadow: none;
 }
 
-/* Install Modal Styling */
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
 #installModal.active{display:flex}
 .install-card{background:#fff;border-radius:24px;max-width:360px;width:100%;padding:24px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
@@ -289,7 +280,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div id="page1">
 <div class="header">
   <div class="logo">
-    <svg viewBox="0 0 512 512"><defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9333ea"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#ec4899"/></linearGradient><linearGradient id="lgg" x1="0%" y1="0%" x2="0%" y2="60%"><stop offset="0%" stop-color="#fff" stop-opacity="0.6"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="128" fill="url(#lg)"/><rect width="512" height="256" rx="128" fill="url(#lgg)"/><path d="M256 130v170m0 0l-65-65m65 65l65-65" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><rect x="176" y="328" width="160" height="72" rx="36" fill="#fff"/><text x="256" y="378" font-family="Inter, sans-serif" font-weight="800" font-size="38" fill="#111" text-anchor="middle">4K</text></svg>
+    <img src="https://i.ibb.co/3m09w25/logo.png" alt="Logo">
     TikTok 4K Downloader.com
   </div>
   <div class="pill">No watermark • Fast • HD 4K</div>
@@ -327,7 +318,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 <div id="page2">
 <div class="header">
   <div class="logo" onclick="showPage1()" style="cursor:pointer">
-    <svg viewBox="0 0 512 512"><defs><linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9333ea"/><stop offset="50%" stop-color="#c084fc"/><stop offset="100%" stop-color="#ec4899"/></linearGradient><linearGradient id="lgg2" x1="0%" y1="0%" x2="0%" y2="60%"><stop offset="0%" stop-color="#fff" stop-opacity="0.6"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="512" height="512" rx="128" fill="url(#lg2)"/><rect width="512" height="256" rx="128" fill="url(#lgg2)"/><path d="M256 130v170m0 0l-65-65m65 65l65-65" stroke="#fff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round"/><rect x="176" y="328" width="160" height="72" rx="36" fill="#fff"/><text x="256" y="378" font-family="Inter, sans-serif" font-weight="800" font-size="38" fill="#111" text-anchor="middle">4K</text></svg>
+    <img src="https://i.ibb.co/3m09w25/logo.png" alt="Logo">
     ← TikTok 4K Downloader.com
   </div>
   <div class="pill">No watermark • Fast • HD 4K</div>
@@ -355,7 +346,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   </div>
 </div>
 
-<!-- Add to Home Screen Auto-Detect Modal -->
 <div id="installModal"><div class="install-card"><h3 id="installModalTitle" style="font-size:16px; font-weight:700; margin-bottom:12px; color:#111;">Add to Home Screen</h3><div id="installContent"></div><button onclick="closeInstallModal()" style="margin-top:15px; width:100%; background:#0a0a0a; color:#fff; border:none; padding:10px; border-radius:9999px; font-weight:700; cursor:pointer; font-size:13px;">Got it</button></div></div>
 
 <script>
