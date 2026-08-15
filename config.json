@@ -1,21 +1,8 @@
 {
   "ads": {
-    "page1": {
-      "enabled": true,
-      "code": "https://www.tiktok.com/@babyshag20/video/7658519687138921746?is_from_webapp=1&sender_device=pc",
-      "label": "Big Ad"
-    },
-    "page2": {
-      "enabled": true,
-      "code": "uguguggu",
-      "label": "Big Ad Page2"
-    },
-    "modal": {
-      "enabled": true,
-      "code": "iuyyiug",
-      "height_4k": 320,
-      "height_720": 260
-    }
+    "page1": { "code": "" },
+    "page2": { "code": "" },
+    "modal": { "code": "" }
   },
   "site": {
     "logo": "TikTok 4K Downloader.com",
@@ -29,5 +16,47 @@
     "btn720_label": "Download 720p • 5s ad",
     "countdown_4k": 10,
     "countdown_720": 5
-  }
+  },
+  "universal_boxes": [
+    {
+      "id": "tiktok1",
+      "enabled": true,
+      "position": "page1",
+      "type": "auto",
+      "url": "https://www.tiktok.com/@babyshag20/video/7658519687138921746",
+      "code": ""
+    },
+    {
+      "id": "shopee1",
+      "enabled": true,
+      "position": "page1",
+      "type": "auto",
+      "url": "https://shopee.ph/Ultra-Thin-Phone-Case-i.123456789",
+      "code": ""
+    },
+    {
+      "id": "youtube1",
+      "enabled": false,
+      "position": "page1",
+      "type": "auto",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "code": ""
+    },
+    {
+      "id": "adsense1",
+      "enabled": false,
+      "position": "page1",
+      "type": "adsense",
+      "url": "",
+      "code": "<script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script><ins class='adsbygoogle' style='display:block' data-ad-client='ca-pub-123456789' data-ad-slot='123456789' data-ad-format='auto'></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>"
+    },
+    {
+      "id": "adsterra1",
+      "enabled": false,
+      "position": "page2",
+      "type": "adsterra",
+      "url": "",
+      "code": "<script type='text/javascript' src='//www.highperformanceformat.com/xxxx.js'></script>"
+    }
+  ]
 }
