@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TikTok 4K Downloader - Save HD Videos Without Watermark Free 2026</title>
+<meta name="monetag" content="fa7ad9952348b099734428dc8a77ce2f">
 <meta name="description" content="Download TikTok videos in 4K HD without watermark FREE. Fast, no login, works on all devices. Best TikTok downloader 2026 trusted by 10M+ users worldwide.">
 <meta name="keywords" content="tiktok downloader, tiktok 4k downloader, download tiktok without watermark, tiktok hd downloader, save tiktok videos, tiktok no watermark">
 <meta name="author" content="TikTok 4K Downloader">
@@ -689,25 +690,18 @@ async function forceDownload(){
   }
 
   const btn = document.getElementById('dlBtn');
-  
-  // Awtomatikong i-detect kung iOS/iPhone device ang gamit
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-  if (isIOS) {
-    btn.innerHTML = `✅ Opening video...`;
-    window.location.href = fileUrl; 
-    setTimeout(() => {
-      btn.textContent = 'Download Now';
-      btn.disabled = false;
-      closeModal();
-      showPage1();
-    }, 1500);
-    return;
-  }
-
-  // Para sa Android, PC, at iba pang device (Blob Download)
   btn.disabled = true;
-  btn.innerHTML = `<div class="btn-spinner"></div> Downloading file...`;
+  
+  const downloadSteps = [
+    { text: "Connecting to server...", time: 0 },
+    { text: "Preparing video file...", time: 2000 },
+    { text: "Downloading to device...", time: 4000 }
+  ];
+
+  btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[0].text}`;
+
+  setTimeout(() => { btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[1].text}`; }, downloadSteps[1].time);
+  setTimeout(() => { btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[2].text}`; }, downloadSteps[2].time);
 
   try {
     const res = await fetch(fileUrl);
