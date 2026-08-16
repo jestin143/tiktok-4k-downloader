@@ -691,6 +691,25 @@ async function forceDownload(){
   const btn = document.getElementById('dlBtn');
   btn.disabled = true;
   
+  // Awtomatikong i-detect kung iOS/iPhone device ang gamit
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (isIOS) {
+    btn.innerHTML = `<div class="btn-spinner"></div> Opening video stream...`;
+    setTimeout(() => {
+      window.open(fileUrl, '_blank');
+      btn.innerHTML = `✅ Opened! Long-press video to save.`;
+      setTimeout(() => {
+        btn.textContent = 'Download Now';
+        btn.disabled = false;
+        closeModal();
+        showPage1();
+      }, 1500);
+    }, 1000);
+    return;
+  }
+
+  // Para sa Android, PC, at iba pang device (Blob Download)
   const downloadSteps = [
     { text: "Connecting to server...", time: 0 },
     { text: "Preparing video file...", time: 2000 },
