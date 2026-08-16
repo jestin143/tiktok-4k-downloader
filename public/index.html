@@ -111,7 +111,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .save-btn:hover { transform: translateY(-2px); }
 .save-btn:active { transform: translateY(0); }
-.save-btn:disabled { opacity: 0.8; cursor: wait; }
+.save-btn:disabled { opacity: 0.9; cursor: wait; }
 
 /* --- INSTALL APP BUTTON --- */
 .install-app-btn{
@@ -211,7 +211,22 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .progress{height:4px;background:#e5e7eb;border-radius:9999px;margin-top:8px;overflow:hidden}
 .progress-inner{height:100%;background:linear-gradient(90deg,#fcd34d,#facc15);width:100%;transition:width 1s linear}
 
-/* --- MODAL DOWNLOAD NOW BUTTON STYLES (MATCHING 4K & 720P) --- */
+/* --- SPINNER & MODAL BUTTON STYLES --- */
+.btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: buttonSpin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes buttonSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .dl-now{
   position: relative;
   width: 100%;
@@ -233,27 +248,24 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .dl-now:hover:not(:disabled) { transform: translateY(-1px); }
 
-/* When active/ready for 4K */
 .dl-now.gold-active {
   background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #ea580c, #ff7043, #fbbf24, #ea580c);
   animation: jellyColorFlow 5s ease infinite, goldPulse 2s ease-in-out infinite alternate;
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 12px 30px rgba(255, 112, 67, 0.6);
 }
 
-/* When active/ready for 720p */
 .dl-now.blue-active {
   background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%), linear-gradient(90deg, #3b82f6, #6366f1, #a855f7, #3b82f6);
   animation: jellyColorFlow 5s ease infinite, jellyPulse 2s ease-in-out infinite alternate;
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.3), 0 10px 25px rgba(59, 130, 246, 0.4);
 }
 
-/* Disabled state during countdown */
 .dl-now:disabled {
-  background: rgba(10,10,10,0.4) !important;
+  background: rgba(10,10,10,0.5) !important;
   animation: none !important;
   box-shadow: none !important;
-  cursor: not-allowed;
-  opacity: 0.8;
+  cursor: wait;
+  opacity: 0.9;
 }
 
 #installModal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px}
@@ -561,12 +573,15 @@ async function doSave() {
   let stepIdx = 0;
   btn.textContent = steps[stepIdx];
   
+  // Eksaktong 2 seconds (2000ms) bago lumipat sa sunod na text
   const loadingInterval = setInterval(() => {
     stepIdx++;
     if (stepIdx < steps.length) {
       btn.textContent = steps[stepIdx];
+    } else {
+      clearInterval(loadingInterval);
     }
-  }, 450);
+  }, 2000);
 
   try {
     const r = await fetch('/api/download', {
@@ -616,22 +631,20 @@ function openModal(type){
   document.getElementById('countText').textContent = s + 's';
   document.getElementById('progress').style.width = '100%';
   
-  // Set initial disabled state (neutral dark/black tone during countdown)
   dlBtn.disabled = true;
   dlBtn.className = 'dl-now';
-  dlBtn.textContent = `Wait ${s}s...`;
+  dlBtn.innerHTML = `Preparing Video (${s}s)...`;
   
   clearInterval(countdownInt);
   countdownInt = setInterval(() => {
     s--;
     document.getElementById('countText').textContent = s > 0 ? s + 's' : 'Ready!';
     document.getElementById('progress').style.width = (s / secs * 100) + '%';
-    dlBtn.textContent = s > 0 ? `Wait ${s}s...` : 'Download Now';
+    dlBtn.textContent = s > 0 ? `Preparing Video (${s}s)...` : 'Download Now';
     
     if(s <= 0){
       clearInterval(countdownInt);
       dlBtn.disabled = false;
-      // Apply matching color style when ready: Gold for 4K, Blue/White gradient for 720p
       if(currentType === '4k') {
         dlBtn.className = 'dl-now gold-active';
       } else {
@@ -654,8 +667,18 @@ async function forceDownload(){
   }
 
   const btn = document.getElementById('dlBtn');
-  btn.textContent = 'Downloading...';
   btn.disabled = true;
+  
+  const downloadSteps = [
+    { text: "Connecting to server...", time: 0 },
+    { text: "Preparing video file...", time: 2000 },
+    { text: "Downloading to device...", time: 4000 }
+  ];
+
+  btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[0].text}`;
+
+  setTimeout(() => { btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[1].text}`; }, downloadSteps[1].time);
+  setTimeout(() => { btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[2].text}`; }, downloadSteps[2].time);
 
   try {
     const res = await fetch(fileUrl);
@@ -668,7 +691,7 @@ async function forceDownload(){
     a.click();
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 2000);
-    btn.textContent = 'Downloaded!';
+    btn.innerHTML = `✅ Successfully Downloaded!`;
   } catch(e) {
     const a = document.createElement('a');
     a.href = fileUrl;
@@ -677,7 +700,7 @@ async function forceDownload(){
     document.body.appendChild(a);
     a.click();
     a.remove();
-    btn.textContent = 'Opened in new tab!';
+    btn.innerHTML = `✅ Opened in new tab!`;
   } finally {
     setTimeout(() => {
       btn.textContent = 'Download Now';
