@@ -476,18 +476,38 @@ function showInstallInstructions() {
 
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
   const isAndroid = /Android/.test(userAgent) && !/Macintosh|Windows/.test(userAgent);
-  const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent) || (!isIOS && !isAndroid && navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
+  const isMac = /Macintosh|MacIntel|MacPPC|Mac68K/.test(userAgent) || /Mac/.test(navigator.platform);
 
-  if (isMac || (!isIOS && !isAndroid && /Mac|Win|Linux/.test(userAgent))) {
-    title.textContent = "Save to Bookmarks on Mac / PC";
+  if (isMac) {
+    title.textContent = "Install App on Mac (Safari)";
     content.innerHTML = `
       <div class="step-box">
-        <p><b>Step 1:</b> Press this keyboard shortcut to bookmark this page:</p>
-        <div style="text-align:center; padding:12px; background:#fff; border-radius:8px; font-size:14px; font-weight:700; color:#7c3aed; border:1px solid #e5e7eb; margin-top:6px;">⌨️ Press Cmd + D (Mac) or Ctrl + D (PC)</div>
+        <p><b>Step 1:</b> Click <b>File</b> in the top menu bar of Safari.</p>
+        <div style="text-align:center; padding:10px; background:#1e1e1e; color:#fff; border-radius:8px; font-size:12px; font-weight:600;">File &gt; Share &gt; Add to Dock...</div>
+      </div>
+      <div class="step-box">
+        <p><b>Step 2:</b> Click <b>"Add to Dock..."</b> to save this website as an app.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">📌 Add to Dock...</div>
       </div>
       <div class="step-box" style="margin-bottom:0;">
-        <p><b>Step 2:</b> Click <b>"Done"</b> or <b>"Add"</b> on your browser's pop-up to save it for quick access.</p>
-        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:12px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">⭐ Ready to use anytime!</div>
+        <p><b>Step 3:</b> Click <b>"Add"</b> in the pop-up prompt. All done!</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Done! 🎉</div>
+      </div>
+    `;
+  } else if (!isIOS && !isAndroid) {
+    title.textContent = "Install App on Desktop (PC)";
+    content.innerHTML = `
+      <div class="step-box">
+        <p><b>Step 1:</b> Click the <b>3-dots menu (⋮)</b> in the top-right corner of your browser.</p>
+        <div style="text-align:center; padding:12px; background:#1e1e1e; border-radius:8px; color:#fff; font-size:16px; font-weight:bold;">⋮ Menu</div>
+      </div>
+      <div class="step-box">
+        <p><b>Step 2:</b> Select <b>"Install app"</b> or go to <b>Save and share > Create shortcut</b>.</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#7c3aed; border:1px solid #e5e7eb;">💻 Install App</div>
+      </div>
+      <div class="step-box" style="margin-bottom:0;">
+        <p><b>Step 3:</b> Click <b>"Install"</b> to confirm. Ready to use anytime!</p>
+        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Ready to use! 🚀</div>
       </div>
     `;
   } else if (isIOS) {
@@ -540,14 +560,6 @@ function showInstallInstructions() {
         <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#059669; border:1px solid #e5e7eb;">Ready to use! 🚀</div>
       </div>
     `;
-  } else {
-    title.textContent = "Bookmark App (Desktop / PC)";
-    content.innerHTML = `
-      <div class="step-box" style="margin-bottom:0;">
-        <p><b>Quick Shortcut:</b> Press <b style="color:#7c3aed">Ctrl + D</b> or <b style="color:#7c3aed">Cmd + D</b> to bookmark this page.</p>
-        <div style="text-align:center; padding:10px; background:#fff; border-radius:8px; font-size:13px; font-weight:600; color:#374151; border:1px solid #e5e7eb;">⭐ Bookmark this tab</div>
-      </div>
-    `;
   }
   modal.classList.add('active');
 }
@@ -573,7 +585,6 @@ async function doSave() {
   let stepIdx = 0;
   btn.textContent = steps[stepIdx];
   
-  // Eksaktong 2 seconds (2000ms) bago lumipat sa sunod na text
   const loadingInterval = setInterval(() => {
     stepIdx++;
     if (stepIdx < steps.length) {
