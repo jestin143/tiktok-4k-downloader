@@ -1,8 +1,8 @@
 {
   "ads": {
-    "page1": { "code": "<a href='https://s.shopee.ph/9V0glAfRB0' target='_blank' style='display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;text-decoration:none;color:inherit;'><div style='font-size:12px;font-weight:700;color:#7c3aed;margin-bottom:4px;'>✨ Featured Special Offer</div><div style='font-size:12px;color:#2563eb;text-decoration:underline;'>https://s.shopee.ph/9V0glAfRB0</div></a>" },
-    "page2": { "code": "<a href='https://s.shopee.ph/9V0glAfRB0' target='_blank' style='display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;text-decoration:none;color:inherit;'><div style='font-size:12px;font-weight:700;color:#7c3aed;margin-bottom:4px;'>✨ Featured Special Offer</div><div style='font-size:12px;color:#2563eb;text-decoration:underline;'>https://s.shopee.ph/9V0glAfRB0</div></a>" },
-    "modal": { "code": "<a href='https://s.shopee.ph/9V0glAfRB0' target='_blank' style='display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;text-decoration:none;color:inherit;'><div style='font-size:12px;font-weight:700;color:#7c3aed;margin-bottom:4px;'>✨ Featured Special Offer</div><div style='font-size:12px;color:#2563eb;text-decoration:underline;'>https://s.shopee.ph/9V0glAfRB0</div></a>" }
+    "page1": { "code": "" },
+    "page2": { "code": "" },
+    "modal": { "code": "" }
   },
   "site": {
     "logo": "TikTok 4K Downloader.com",
