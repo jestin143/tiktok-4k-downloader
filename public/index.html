@@ -689,37 +689,25 @@ async function forceDownload(){
   }
 
   const btn = document.getElementById('dlBtn');
-  btn.disabled = true;
   
   // Awtomatikong i-detect kung iOS/iPhone device ang gamit
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   if (isIOS) {
-    btn.innerHTML = `<div class="btn-spinner"></div> Opening video stream...`;
+    btn.innerHTML = `✅ Opening video...`;
+    window.location.href = fileUrl; 
     setTimeout(() => {
-      window.open(fileUrl, '_blank');
-      btn.innerHTML = `✅ Opened! Long-press video to save.`;
-      setTimeout(() => {
-        btn.textContent = 'Download Now';
-        btn.disabled = false;
-        closeModal();
-        showPage1();
-      }, 1500);
-    }, 1000);
+      btn.textContent = 'Download Now';
+      btn.disabled = false;
+      closeModal();
+      showPage1();
+    }, 1500);
     return;
   }
 
   // Para sa Android, PC, at iba pang device (Blob Download)
-  const downloadSteps = [
-    { text: "Connecting to server...", time: 0 },
-    { text: "Preparing video file...", time: 2000 },
-    { text: "Downloading to device...", time: 4000 }
-  ];
-
-  btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[0].text}`;
-
-  setTimeout(() => { btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[1].text}`; }, downloadSteps[1].time);
-  setTimeout(() => { btn.innerHTML = `<div class="btn-spinner"></div> ${downloadSteps[2].text}`; }, downloadSteps[2].time);
+  btn.disabled = true;
+  btn.innerHTML = `<div class="btn-spinner"></div> Downloading file...`;
 
   try {
     const res = await fetch(fileUrl);
