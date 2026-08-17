@@ -136,10 +136,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .install-app-btn:hover { transform: translateY(-2px); }
 
-.ad-big{margin:32px auto 0;max-width:680px;width:100%;height:280px;background:rgba(255,255,255,.45);backdrop-filter:blur(16px);border:2px dashed rgba(255,255,255,.8);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
-.ad-big-page2{height:360px;max-width:680px}
-.ad-label{font-size:10px;letter-spacing:.18em;color:#9ca3af;text-transform:uppercase;font-weight:700}
-.ad-prev{font-size:11px;color:#6b7280;margin-top:4px}
 .footer{text-align:center;margin-top:40px;font-size:11px;color:#9ca3af;font-weight:500}
 #page2{display:none}
 .video-card{max-width:380px;margin:32px auto 0;background:rgba(255,255,255,.8);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.95);box-shadow:0 20px 50px rgba(168,85,247,.12);border-radius:16px;padding:16px}
@@ -199,7 +195,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 .btn-white:hover { transform: translateY(-2px); }
 
-.ads-col{max-width:680px;margin:32px auto 0}
 #modal{display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.3);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:16px}
 #modal.active{display:flex}
 .modal-card{background:rgba(255,255,255,.9);backdrop-filter:blur(32px);border:1px solid rgba(255,255,255,1);box-shadow:0 30px 80px rgba(0,0,0,.15);border-radius:28px;max-width:440px;width:100%;padding:24px;position:relative}
@@ -207,7 +202,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .close{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:9999px;background:rgba(0,0,0,.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;color:#555;transition:all 0.2s ease}
 .close:hover{background:rgba(0,0,0,.12);color:#000}
 
-.modal-ad-big{height:260px!important;width:100%;margin-top:8px;transition:height.3s ease}
 .count{font-size:24px;font-weight:700;color:#f59e0b;text-align:center;margin-top:16px}
 .progress{height:4px;background:#e5e7eb;border-radius:9999px;margin-top:8px;overflow:hidden}
 .progress-inner{height:100%;background:linear-gradient(90deg,#fcd34d,#facc15);width:100%;transition:width 1s linear}
@@ -279,7 +273,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 .seo-box h2{color:#0a0a0a;font-size:15px;margin:18px 0 8px}
 .footer-links{text-align:center;margin-top:30px;padding:20px 10px;font-size:11px;color:#9ca3af;line-height:1.8}
 .footer-links a{color:#7c3aed;text-decoration:none;margin:0 8px;font-weight:500}
-@media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.install-app-btn{max-width:340px}.ad-big{height:220px;max-width:360px}.ad-big-page2{height:300px}.modal-ad-big{height:220px!important}}
+@media(max-width:600px){.paste-bar{max-width:340px;height:52px}.save-btn{max-width:340px}.install-app-btn{max-width:340px}}
 </style>
 </head>
 <body>
@@ -314,7 +308,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
 </div>
-<div class="ad-big"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Your ad here — Big Card</div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 
 <div class="seo-box">
@@ -345,14 +338,12 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <button class="btn-gold" onclick="openModal('4k')">Download 4K HD • 10s ad</button>
   <button class="btn-white" onclick="openModal('720')">Download 720p • 5s ad</button>
 </div>
-<div class="ads-col"><div class="ad-big ad-big-page2"><div class="ad-label">AD</div><div class="ad-prev">728x90 — Big Ad Card — Page 2</div></div></div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 </div>
 </div>
 <div id="modal">
   <div class="modal-card">
     <button class="close" onclick="closeModal()">✕</button>
-    <div class="ad-big modal-ad-big"><div class="ad-label">AD</div><div class="ad-prev">Your ad here — Big Modal Ad</div></div>
     <div class="count" id="countText">10s</div>
     <div class="progress"><div class="progress-inner" id="progress"></div></div>
     <button class="dl-now" id="dlBtn" disabled onclick="forceDownload()">Download Now</button>
@@ -399,15 +390,16 @@ async function loadConfig(){
     injectAds(cfg.ads);
   }catch(e){}}
 
-function setAdContent(element, htmlCode) {
-  if(!element || !htmlCode) return;
-  element.innerHTML = htmlCode;
-  const scripts = element.querySelectorAll('script');
+function injectScriptCode(codeString) {
+  if(!codeString) return;
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = codeString;
+  const scripts = tempDiv.querySelectorAll('script');
   scripts.forEach(oldScript => {
     const newScript = document.createElement('script');
     Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-    oldScript.parentNode.replaceChild(newScript, oldScript);
+    if(oldScript.innerHTML) newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+    document.body.appendChild(newScript);
   });
 }
 
@@ -417,20 +409,10 @@ function injectAds(ads){
   if(local&&local.ads) ads=local.ads; 
   if(!ads)return;
   
-  const p1=document.querySelector('#page1 .ad-big');
-  if(p1&&ads.page1&&ads.page1.code) setAdContent(p1, ads.page1.code);
-
-  const p2=document.querySelector('.ad-big-page2');
-  if(p2&&ads.page2&&ads.page2.code) setAdContent(p2, ads.page2.code);
-
-  const m=document.querySelector('.modal-ad-big');
-  if(m&&ads.modal&&ads.modal.code) setAdContent(m, ads.modal.code); 
-
-  const modalAd=document.querySelector('.modal-ad-big'); 
-  if(modalAd&&ads.modal){ 
-    if(ads.modal.height_4k) modalAd.dataset.h4k=ads.modal.height_4k; 
-    if(ads.modal.height_720) modalAd.dataset.h720=ads.modal.height_720; 
-  }
+  // Babasahin pa rin nito ang config.json para i-execute ang mga ad scripts (tulad ng Social Bar) sa background nang hindi na kailangan ng HTML visual boxes
+  if(ads.page1 && ads.page1.code) injectScriptCode(ads.page1.code);
+  if(ads.page2 && ads.page2.code) injectScriptCode(ads.page2.code);
+  if(ads.modal && ads.modal.code) injectScriptCode(ads.modal.code);
 }
 
 initGreeting();loadConfig();
@@ -637,13 +619,6 @@ function showPage1(){document.getElementById('page2').style.display='none';docum
 
 function openModal(type){
   currentType = type;
-  const modalAd = document.querySelector('.modal-ad-big');
-  if(modalAd){
-    const h4k = (SITE_CFG && SITE_CFG.ads && SITE_CFG.ads.modal && SITE_CFG.ads.modal.height_4k) || 320;
-    const h720 = (SITE_CFG && SITE_CFG.ads && SITE_CFG.ads.modal && SITE_CFG.ads.modal.height_720) || 260;
-    modalAd.style.height = (type === '4k' ? h4k : h720) + 'px';
-  }
-  
   const secs = (SITE_CFG && SITE_CFG.downloads) ? (type === '4k' ? (SITE_CFG.downloads.countdown_4k || 10) : (SITE_CFG.downloads.countdown_720 || 5)) : (type === '4k' ? 10 : 5);
   
   const modal = document.getElementById('modal');
