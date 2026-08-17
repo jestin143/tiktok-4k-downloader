@@ -307,6 +307,9 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   </div>
   <button class="save-btn" onclick="doSave()">Save HD Video</button>
   <button class="install-app-btn" onclick="showInstallInstructions()">📱 Add App to Home Screen</button>
+  
+  <!-- DITO ANG MALAKING ESPASYO AT CONTAINER PARA SA PAGE 1 ADS -->
+  <div id="page1-ad-space" style="margin-top: 35px; min-height: 280px; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;"></div>
 </div>
 <div class="footer">Trusted by 10M+ downloads worldwide</div>
 
@@ -390,25 +393,25 @@ async function loadConfig(){
     injectAds(cfg.ads);
   }catch(e){}}
 
-function injectScriptCode(codeString) {
+function injectScriptCode(codeString, targetContainerId = null) {
   if(!codeString) return;
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = codeString;
   
-  // Ilalagay muna ang mga HTML elements (tulad ng ad container div) sa body
+  const target = targetContainerId ? document.getElementById(targetContainerId) : document.body;
+
   Array.from(tempDiv.children).forEach(child => {
     if (child.tagName !== 'SCRIPT') {
-      document.body.appendChild(child);
+      target.appendChild(child);
     }
   });
   
-  // Susunod na ie-execute ang mga scripts
   const scripts = tempDiv.querySelectorAll('script');
   scripts.forEach(oldScript => {
     const newScript = document.createElement('script');
     Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
     if(oldScript.innerHTML) newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-    document.body.appendChild(newScript);
+    target.appendChild(newScript);
   });
 }
 
@@ -418,7 +421,7 @@ function injectAds(ads){
   if(local&&local.ads) ads=local.ads; 
   if(!ads)return;
   
-  if(ads.page1 && ads.page1.code) injectScriptCode(ads.page1.code);
+  if(ads.page1 && ads.page1.code) injectScriptCode(ads.page1.code, 'page1-ad-space');
   if(ads.page2 && ads.page2.code) injectScriptCode(ads.page2.code);
   if(ads.modal && ads.modal.code) injectScriptCode(ads.modal.code);
 }
