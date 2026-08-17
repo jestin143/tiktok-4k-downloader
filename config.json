@@ -1,9 +1,4 @@
 {
-  "ads": {
-    "page1": { "" },
-    "page2": { "code": "" }
-    "modal": { "code": "" }
-  },
   "site": {
     "logo": "TikTok 4K Downloader.com",
     "pill": "No watermark • Fast • HD 4K",
@@ -17,5 +12,15 @@
     "countdown_4k": 10,
     "countdown_720": 5
   },
-  "universal_boxes": []
+  "ads": {
+    "page1": {
+      "code": "<script src='https://pl30883787.effectivecpmnetwork.com/1a/bd/e8/1abde849097a5b709fdb2244286c16ce.js'></script>"
+    },
+    "page2": {
+      "code": ""
+    },
+    "modal": {
+      "code": ""
+    }
+  }
 }
