@@ -1,6 +1,6 @@
 {
   "ads": {
-    "page1": { "code": "" },
+    "page1": { "code": "<script>atOptions = {'key' : 'ec046bb49b4c671fff9d7a430811bbfa', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {}};\\u003c/script>\\u003cscript src=\"https://www.highperformanceformat.com/ec046bb49b4c671fff9d7a430811bbfa/invoke.js\"></script>" },
     "page2": { "code": "" },
     "modal": { "code": "" }
   },
