@@ -1,7 +1,7 @@
 {
   "ads": {
-    "page1": { "code": "<script src=\"https://pl30883787.effectivecpmnetwork.com/1a/bd/e8/1abde849097a5b709fdb2244286c16ce.js\"></script>" },
-    "page2": { "code": "<script>atOptions = {'key' : '72687e061d80ef931d3a59c38c6fa3af', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {}};\\u003c/script>\\u003cscript src=\"https://www.highperformanceformat.com/72687e061d80ef931d3a59c38c6fa3af/invoke.js\"></script>" }
+    "page2": { "code": "<script>atOptions = {'key' : '72687e061d80ef931d3a59c38c6fa3af', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {}};\\u003c/script>\\u003cscript src=\"https://www.highperformanceformat.com/72687e061d80ef931d3a59c38c6fa3af/invoke.js\"></script>" },
+    "page2": { "code": "" }
     "modal": { "code": "" }
   },
   "site": {
