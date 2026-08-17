@@ -394,6 +394,15 @@ function injectScriptCode(codeString) {
   if(!codeString) return;
   const tempDiv = document.createElement('div');
   tempDiv.innerHTML = codeString;
+  
+  // Ilalagay muna ang mga HTML elements (tulad ng ad container div) sa body
+  Array.from(tempDiv.children).forEach(child => {
+    if (child.tagName !== 'SCRIPT') {
+      document.body.appendChild(child);
+    }
+  });
+  
+  // Susunod na ie-execute ang mga scripts
   const scripts = tempDiv.querySelectorAll('script');
   scripts.forEach(oldScript => {
     const newScript = document.createElement('script');
@@ -409,7 +418,6 @@ function injectAds(ads){
   if(local&&local.ads) ads=local.ads; 
   if(!ads)return;
   
-  // Babasahin pa rin nito ang config.json para i-execute ang mga ad scripts (tulad ng Social Bar) sa background nang hindi na kailangan ng HTML visual boxes
   if(ads.page1 && ads.page1.code) injectScriptCode(ads.page1.code);
   if(ads.page2 && ads.page2.code) injectScriptCode(ads.page2.code);
   if(ads.modal && ads.modal.code) injectScriptCode(ads.modal.code);
