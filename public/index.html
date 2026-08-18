@@ -73,13 +73,10 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 }
 
 .pill{padding:6px 14px;background:rgba(255,255,255,.65);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.8);box-shadow:0 8px 32px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,1);border-radius:9999px;font-size:11px;font-weight:500;color:#374151}
-.headline{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0a0a0a;text-align:center;margin-top:48px}
+.headline{font-size:34px;font-weight:700;line-height:1.1;letter-spacing:-0.02em;color:#0a0a0a;text-align:center;margin-top:24px}
 @media(max-width:600px){.headline{font-size:28px}}
-.sub{font-size:13px;color:#6b7280;text-align:center;margin-top:12px;font-weight:500}
-.social-proof{text-align:center;font-size:12px;color:#7c3aed;margin-top:8px;font-weight:600}
-.greet-wrap{display:flex;justify-content:center;margin-top:20px}
-#greeting{padding:6px 16px;background:rgba(255,255,255,.7);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.8);box-shadow:0 4px 15px rgba(0,0,0,.03);border-radius:9999px;font-size:12px;font-weight:500;color:#1f2937}
-.paste-wrap{margin-top:20px;display:flex;flex-direction:column;align-items:center;width:100%}
+
+.paste-wrap{margin-top:16px;display:flex;flex-direction:column;align-items:center;width:100%}
 .paste-bar{width:100%;max-width:380px;height:54px;padding:0 6px 0 20px;background:rgba(255,255,255,.8);backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,.95);box-shadow:inset 0 2px 4px rgba(0,0,0,.02),0 12px 35px rgba(168,85,247,.12);border-radius:9999px;display:flex;align-items:center}
 .paste-bar input{flex:1;border:none;outline:none;background:transparent;font-size:14px;color:#111;font-weight:500}
 .paste-bar input::placeholder{color:#9ca3af}
@@ -92,7 +89,7 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   position: relative;
   width: 100%;
   max-width: 380px;
-  margin-top: 16px;
+  margin-top: 14px;
   padding: 16px;
   font-size: 14px;
   font-weight: 700;
@@ -298,9 +295,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
   <div class="pill">No watermark • Fast • HD 4K</div>
 </div>
 <div class="headline">Download TikTok Videos in 4K</div>
-<div class="sub">Paste link below and save HD videos without watermark</div>
-<div class="social-proof">🔥 <span id="counter">14,285</span> videos downloaded today</div>
-<div class="greet-wrap"><div id="greeting">How are you, friend</div></div>
 <div class="paste-wrap">
   <div class="paste-bar">
     <input id="urlInput" placeholder="Paste TikTok link here...">
@@ -356,9 +350,6 @@ body{background:linear-gradient(135deg,#f3e8ff 0%,#fce7f3 50%,#e0f2fe 100%);min-
 
 <script>
 let videoData=null,currentType='4k',countdownInt=null,SITE_CFG=null,deferredPrompt=null;
-const greetMap={PH:{flag:'🇵🇭',text:'Kumusta kaibigan'},US:{flag:'🇺🇸',text:'How are you, friend'},GB:{flag:'🇬🇧',text:'How are you, friend'},JP:{flag:'🇯🇵',text:'こんにちは友達'},KR:{flag:'🇰🇷',text:'안녕하세요 친구'},ES:{flag:'🇪🇸',text:'¿Cómo estás, amigo?'},MX:{flag:'🇲🇽',text:'¡Hola amigo!'},BR:{flag:'🇧🇷',text:'Olá amigo!'},FR:{flag:'🇫🇷',text:'Bonjour ami!'},DE:{flag:'🇩🇪',text:'Hallo Freund!'},IN:{flag:'🇮🇳',text:'नमस्ते दोस्त!'},SA:{flag:'🇸🇦',text:'مرحبا صديقي!'},ID:{flag:'🇮🇩',text:'Apa kabar, teman'}};
-
-async function initGreeting(){try{const r=await fetch('/api/geo');const j=await r.json();let country=(j.country||j.country_code||'US').toUpperCase();const map=greetMap[country]||greetMap['US'];document.getElementById('greeting').textContent=`${map.flag} ${map.text}`;}catch(e){document.getElementById('greeting').textContent='🇺🇸 How are you, friend'}}
 
 async function loadConfig(){
   try{
@@ -381,7 +372,6 @@ async function loadConfig(){
       }
       if(cfg.site.pill) document.querySelector('.pill').textContent=cfg.site.pill; 
       if(cfg.site.headline) document.querySelector('.headline').textContent=cfg.site.headline; 
-      if(cfg.site.sub) document.querySelector('.sub').textContent=cfg.site.sub; 
       if(cfg.site.footer) document.querySelectorAll('.footer').forEach(f=>f.textContent=cfg.site.footer); 
     } 
     if(cfg.downloads){
@@ -422,7 +412,7 @@ function injectAds(ads){
   if(ads.modal && ads.modal.code) injectScriptCode(ads.modal.code);
 }
 
-initGreeting();loadConfig();
+loadConfig();
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
@@ -441,14 +431,6 @@ async function autoPaste() {
     alert('Please long-press the input box and paste manually.');
   }
 }
-
-setInterval(() => {
-  const counterEl = document.getElementById('counter');
-  if(counterEl) {
-    let currentVal = parseInt(counterEl.textContent.replace(/,/g, '')) + Math.floor(Math.random() * 4) + 1;
-    counterEl.textContent = currentVal.toLocaleString();
-  }
-}, 6000);
 
 function showInstallInstructions() {
   if (deferredPrompt) {
